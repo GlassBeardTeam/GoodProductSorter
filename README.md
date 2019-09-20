@@ -6,9 +6,13 @@ Versión 0.1
 ### Glass Beard
 
 Adrián Poza Guillermo
+
 Víctor González Rivera
+
 Álvaro Ramírez Miguez
+
 EmeAG
+
 Miguel
 
 ### Descripción del juego
