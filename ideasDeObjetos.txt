@@ -1,3 +1,12 @@
+----Categorias: 
+1 matar o sexual
+2 organico o inorganico
+3 ignifugo o inflamable
+4 comunista o capitalista
+5
+
+
+----Objetos:
 1 barra de pan: comunista, organico, matar, ignifugo.
 2 arma de fuego: capitalista, inorganico, matar. 
 3 melon cuadrado transgenico: capitalista, organico, sexual.
