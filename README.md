@@ -8,7 +8,7 @@ Versión 0.1
 - Adrián Poza Guillermo
 - Víctor González Rivera
 - Álvaro Ramírez Miguez
-- Manuel Aguado
+- Manuel Aguado Salguero
 - Miguel Ángel Arcones Ríos
 
 ### Descripción del juego
