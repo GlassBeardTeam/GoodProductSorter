@@ -3,7 +3,10 @@
 2 organico o inorganico
 3 ignifugo o inflamable
 4 comunista o capitalista
-5
+
+5 Mafia o gobierno
+6 Ciudad o Pueblo
+7 Comestible o no comestible
 
 
 ----Objetos:
