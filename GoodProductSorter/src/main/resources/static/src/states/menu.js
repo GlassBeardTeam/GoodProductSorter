@@ -1,5 +1,5 @@
 GoodProductSorter.menuState = function(game) {
-
+	this.startGameKey;
 }
 
 GoodProductSorter.menuState.prototype = {
@@ -10,6 +10,7 @@ GoodProductSorter.menuState.prototype = {
 		{
 			console.log("[DEBUG] Entering **MENU** state");
 		}
+		this.startGameKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	},
 
 	preload : function() {
@@ -17,10 +18,18 @@ GoodProductSorter.menuState.prototype = {
 	},
 
 	create : function() {
-		game.state.start("gameState");
+		this.startGameKey.onDown.add(()=>
+		{
+			let message= {
+				event: "INIT_GAME"
+			}
+			game.global.socket.send(JSON.stringify(message));
+		}, this);
 	},
 
 	update : function() {
 
+			//game.state.start("gameState");
 	}
+
 }
