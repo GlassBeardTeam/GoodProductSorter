@@ -14,7 +14,7 @@ Versión 0.1
 ### Descripción del juego
 *Nombre del Juego* es un juego en el que hay que clasificar objetos que van llegando por una cinta transportadora.
 ### Plataforma
-El juego estará adaptado para cualquier dispositivo con navegador Chrome o Firefox (Pc, móvil, tablet...).
+El juego estará adaptado para cualquier dispositivo con navegador Chrome o Firefox (Pc, móvil, tablet...) y para Facebook.
 ### Propósito y público objetivo
 El público objetivo será adulto, teniendo en cuenta el tipo de bromas que se hacen en el juego.
 ## Mecánicas
