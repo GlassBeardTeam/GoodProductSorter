@@ -11,8 +11,10 @@ Versión 0.1
 - Manuel Aguado Salguero
 - Miguel Ángel Arcones Ríos
 
-### Descripción del juego
+### Pitch
 *Nombre del Juego* es un juego en el que hay que clasificar objetos que van llegando por una cinta transportadora.
+Es un juego de gestión con toques de humor que consiste en clasificar en cajas objetos que vienen de una cinta transportadora.
+Los criterios de clasificacións y la temática de los objetos cambian en cada nivel.
 ### Plataforma
 El juego estará adaptado para cualquier dispositivo con navegador Chrome o Firefox (Pc, móvil, tablet...) y para Facebook.
 ### Propósito y público objetivo
