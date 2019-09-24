@@ -74,7 +74,7 @@ window.onload = function() {
 	game.state.add('bootState', GoodProductSorter.bootState)
 	game.state.add('preloadState', GoodProductSorter.preloadState)
 	game.state.add('menuState', GoodProductSorter.menuState)
-	game.state.add('gameState', GoodProductSorter.menuState)
+	game.state.add('gameState', GoodProductSorter.gameState)
 	game.state.start('bootState')
 
 }
