@@ -20,17 +20,20 @@ El público objetivo estará formado por jugadores casuales o habituales que le 
 ## Mecánicas
 La mecánica principal del juego consiste en clasificar productos en distintas categorias, teniendo en cuenta las directrices propuestas en cada nivel.  
 ### Jugabilidad
-Para clasificar objetos hay que pulsar en su caja correspondiente en pc, y arrastrando en dispositivos táctiles.
+Para clasificar objetos hay que arrastrarlos a su caja correspondiente en dispositivos táctiles, y hacer objeto y después en la caja en PC.
 ### Reglas Básicas
-Si se acierta a la hora de clasificar un objeto se obtiene puntuación y se acelera la cinta transportadora.
+Si se acierta a la hora de clasificar un objeto se obtiene puntuación y se acelera la cinta transportadora, si se deja pasar se reduce la velocidad y si se coloca en la caja equivocada se resta puntuación.
 ### Fin de partida y Objetivo
-La partida acaba después de 60 segundos y el objetivo es clasificar correctamente el mayor número de productos para alcanzar el mínimo de puntos necesarios para pasar al siguiente nivel.
+La partida acaba después de 120 segundos y el objetivo es clasificar correctamente el mayor número de productos para alcanzar el mínimo de puntos necesarios para pasar al siguiente nivel.
 ### Puntuación
 En el juego se llaman Puntos Positivos (a partir de ahora PP), se obtienen al enviar una caja con los productos correctos y se pierden si las cajas contienen productos mal clasificados. Dependiendo de los PP que se obtengan al finalizar el nivel se obtendrá de 0 a 3 estrellas. Cada nivel necesita un mínimo de estrellas para desbloquearlo.
 ## Interfaz
-
+El Diagrama de flujo es el siguiente:
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/FlowChartProductSorter.png)
 ## Arte
-Estilo cartoon semejante a la animación de los años 30 en cuanto a estética. 
+Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambientación será actual, con escenarios deteriorados y decorado absurdo.
 ### Música y Sonido
-
+La música será cómica.
+Crear deseo de volver a jugar en los menús.
+Generar urgencia en el jugador en los distintos niveles.
 © 2019 GitHub, Inc.
