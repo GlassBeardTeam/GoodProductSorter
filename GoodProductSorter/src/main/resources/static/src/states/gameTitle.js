@@ -27,10 +27,10 @@ GoodProductSorter.gameTitleState.prototype = {
 
 	update : function() {
 		
-		if(game.input.activePointer.leftButton.isDown)
-		{
+		/*if(game.input.activePointer.leftButton.isDown)
+		{*/
 			game.state.start('menuState');
-		}
+		/*}*/
 		
 	}
 }
