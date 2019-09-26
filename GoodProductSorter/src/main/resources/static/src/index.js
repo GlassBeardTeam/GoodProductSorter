@@ -1,6 +1,6 @@
 window.onload = function() {
 
-	game = new Phaser.Game(1024, 600, Phaser.AUTO, 'gameDiv')
+	game = new Phaser.Game(600, 1024, Phaser.AUTO, 'gameDiv')
 
 	// GLOBAL VARIABLES
 	game.global = {
@@ -10,15 +10,7 @@ window.onload = function() {
 	}
 	
 	// Se le pide el nombre al jugador
-	var name = prompt("Enter your name");
-
-	/*
-	if (name == null || name == "") {
-	  game.global.myPlayer.name.text = "player"+ game.global.myPlayer.id
-	} else {
-	  
-	}
-	*/
+	//var name = prompt("Enter your name");
 
 	// WEBSOCKET CONFIGURATOR
 	game.global.socket = new WebSocket("ws://" + window.location.host + "/GoodProductSorter")
@@ -39,17 +31,26 @@ window.onload = function() {
 		var msg = JSON.parse(message.data)
 		
 		switch (msg.event) {
+		case 'CONNECTED':
+		if (game.global.DEBUG_MODE) {
+			console.log('[DEBUG] CONNECTED message recieved')
+		}
+			break;
+
 		case 'JOIN':
 			if (game.global.DEBUG_MODE) {
 				console.log('[DEBUG] JOIN message recieved')
-				console.dir(msg.info)
 			}
 			break
+
+			case 'INIT_GAME':
+			console.log("Mensaje del servidor de empezar el juego!!");
+			game.state.start("gameState");
+			break;
 
 		case 'GAME STATE UPDATE' :
 			if (game.global.DEBUG_MODE) {
 				console.log('[DEBUG] GAME STATE UPDATE message recieved')
-				console.dir(msg)
 			}
 			break;
 
@@ -73,7 +74,10 @@ window.onload = function() {
 	// PHASER SCENE CONFIGURATOR
 	game.state.add('bootState', GoodProductSorter.bootState)
 	game.state.add('preloadState', GoodProductSorter.preloadState)
+	game.state.add('gameTitleState', GoodProductSorter.gameTitleState)
 	game.state.add('menuState', GoodProductSorter.menuState)
+	game.state.add('worldsState', GoodProductSorter.worldsState)
+	game.state.add('world1State', GoodProductSorter.world1State)
 	game.state.add('gameState', GoodProductSorter.gameState)
 	game.state.start('bootState')
 

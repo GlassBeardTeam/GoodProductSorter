@@ -5,9 +5,11 @@ function textButton(x, y, image, textString, style, callback, paramObj, context)
 	{
 		//callback(paramObj, this.x)
 	}, context);
-	let text = game.add.text(x + button.width/2, y + button.height/2, textString, style);
-	text.anchor.x = 0.5;
-	text.anchor.y = 0.5;
+	
+	button.anchor.setTo(0.5, 0.5);
+	//let text = game.add.text(x + button.width/2, y + button.height/2, textString, style);
+	let text = game.add.text(x, y, textString, style);
+	text.anchor.setTo(0.5, 0.5);
 
 	let textButton = {button, text};
 	button.onInputDown.add(function()
@@ -30,6 +32,7 @@ GoodProductSorter.bootState.prototype = {
 		if (game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
+		game.input.mouse.capture = true;
 	},
 
 	preload : function() {

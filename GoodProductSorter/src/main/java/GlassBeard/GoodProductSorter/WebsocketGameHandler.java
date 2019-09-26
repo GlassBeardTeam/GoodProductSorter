@@ -16,9 +16,11 @@ public class WebsocketGameHandler  extends TextWebSocketHandler {
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) 
+	public void afterConnectionEstablished(WebSocketSession session) throws IOException 
 	{
-		//ObjectNode msg = mapper.createObjectNode();
+		ObjectNode msg = mapper.createObjectNode();
+		msg.put("event","CONNECTED");
+		//session.sendMessage(new TextMessage(msg.toString()));
 	}
 	
 	@Override
@@ -29,12 +31,12 @@ public class WebsocketGameHandler  extends TextWebSocketHandler {
 		switch(node.get("event").asText())
 		{
 			case "JOIN":
-				msg.put("event","JOIN");
-				msg.put("debug", "Joined to server!");
-				session.sendMessage(new TextMessage(msg.asText()));
+	
 				break;
 				
 			case "INIT_GAME":
+				msg.put("event", "INIT_GAME");		
+				session.sendMessage(new TextMessage(msg.toString()));
 				break;
 				
 			case "":
