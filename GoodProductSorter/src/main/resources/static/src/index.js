@@ -1,6 +1,6 @@
 window.onload = function() {
-
-	game = new Phaser.Game(1920, 1080, Phaser.AUTO, 'gameDiv')
+	var game = new Phaser.Game(192, 100, Phaser.CANVAS, 'Vaqueros vs Piratas');
+	
 
 	// GLOBAL VARIABLES
 	game.global = {
@@ -13,7 +13,7 @@ window.onload = function() {
 	//var name = prompt("Enter your name");
 
 	// WEBSOCKET CONFIGURATOR
-	game.global.socket = new WebSocket("ws://" + window.location.host + "/GoodProductSorter")
+/*	game.global.socket = new WebSocket("ws://" + window.location.host + "/GoodProductSorter")
 
 	game.global.socket.onopen = () => {
 		if (game.global.DEBUG_MODE) {
@@ -68,17 +68,17 @@ window.onload = function() {
 			break
 		}
 	}
-
-	
+*/
 
 	// PHASER SCENE CONFIGURATOR
-	game.state.add('bootState', GoodProductSorter.bootState)
-	game.state.add('preloadState', GoodProductSorter.preloadState)
-	game.state.add('gameTitleState', GoodProductSorter.gameTitleState)
-	game.state.add('menuState', GoodProductSorter.menuState)
-	game.state.add('worldsState', GoodProductSorter.worldsState)
-	game.state.add('world1State', GoodProductSorter.world1State)
-	game.state.add('gameState', GoodProductSorter.gameState)
-	game.state.start('bootState')
+	game.state.add('bootState', GoodProductSorter.bootState);
+	game.state.add('preloadState', GoodProductSorter.preloadState);
+	game.state.add('gameTitleState', GoodProductSorter.gameTitleState);
+	game.state.add('menuState', GoodProductSorter.menuState);
+	game.state.add('worldsState', GoodProductSorter.worldsState);
+	game.state.add('world1State', GoodProductSorter.world1State);
+	game.state.add('gameState', GoodProductSorter.gameState);
+	game.state.start('bootState');		
 
-}
+};
+

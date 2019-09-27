@@ -1,4 +1,5 @@
-var GoodProductSorter = {}
+var GoodProductSorter ={};
+/*function textButton(x, y, image, textString, style, callback, paramObj, context)*/
 function textButton(x, y, image, textString, style, callback, paramObj, context)
 {
 	let button = game.add.button(x, y, image, function()
@@ -20,33 +21,31 @@ function textButton(x, y, image, textString, style, callback, paramObj, context)
 	return textButton;
 }
 
-
-GoodProductSorter.bootState = function(game) {
-
-}
+GoodProductSorter.bootState = function(game){
+	
+};
 
 
 GoodProductSorter.bootState.prototype = {
-
-	init : function() {
-		if (game.global.DEBUG_MODE) {
+	init:function(){
+		if (this.game.global.DEBUG_MODE) {
 			console.log("[DEBUG] Entering **BOOT** state");
 		}
-		game.input.mouse.capture = true;
+		this.input.maxpointer=1;
+		this.stage.disableVisibilityChange = true;
+		//resize
+		this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 	},
-
-	preload : function() {
-		this.game.renderer.renderSession.roundPixels = true
-		this.time.desiredFps = game.global.FPS
+	
+	preload:function(){
+		/*this.load.image('preloader_fondo','assets/Backgrounds/FondoPreload.png');
+		this.load.image('preloader_bar','assets/Backgrounds/BarraCarga.png');*/
 	},
-
-	create : function() {
-
-	},
-
-	update : function() {
-		if (typeof game.global.socket !== 'undefined') {
-			game.state.start('preloadState')
+	
+	create:function(){
+		if (typeof this.game.global.socket !== 'undefined') {
+			this.game.physics.startSystem(Phaser.Physics.ARCADE);
+			this.state.start('preloadState');
 		}
 	}
-}
+};

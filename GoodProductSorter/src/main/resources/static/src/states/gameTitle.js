@@ -5,7 +5,7 @@ GoodProductSorter.gameTitleState = function(game) {
 GoodProductSorter.gameTitleState.prototype = {
 
 	init : function() {
-		if(game.global.DEBUG_MODE)
+		if(this.game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **gameTitle** state");
 		}
@@ -20,17 +20,16 @@ GoodProductSorter.gameTitleState.prototype = {
 			font: "bold 32px Arial",
 			fill: "#fff"
 		}
-		let iniText = game.add.text(game.world.centerX, game.world.centerY, "Press left click to continue...", style);
+		let iniText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Press left click to continue...", style);
 		iniText.anchor.setTo(0.5, 0.5);
 		
 	},
 
 	update : function() {
 		
-		/*if(game.input.activePointer.leftButton.isDown)
+		/*if(this.game.input.activePointer.leftButton.isDown)
 		{*/
-			game.state.start('menuState');
+			this.game.state.start('menuState');
 		/*}*/
-		
 	}
 }
