@@ -12,11 +12,17 @@ GoodProductSorter.preloadState.prototype = {
 	},
 
 	preload : function() {
-
+		//Cargar imagenes Menu
+		game.load.image("fondoMenu", 'assets/characters/boss.png');
+		game.load.image("landscape", 'assets/landscape.png');
+		
+		game.load.spritesheet('band', 'assets/images/scenario/BandSpriteSheet.png', 197, 712, 2);
+		game.load.image('background1_1', 'assets/images/scenario/background1_1.png');
+		game.load.image('buttonBackground', "assets/images/interface/buttonBackground.png");
 	},
 
 	create : function() {
-		game.state.start("menuState");
+		game.state.start('gameTitleState');
 	},
 
 	update : function() {

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: GoodProductSorter
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: PochitoMan
+Built-By: Miguel-sobremesa
 Implementation-Vendor-Id: GlassBeard
 Build-Jdk: 1.8.0_191
 Implementation-URL: http://maven.apache.org
