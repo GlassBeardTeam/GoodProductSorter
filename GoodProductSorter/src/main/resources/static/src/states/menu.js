@@ -5,12 +5,12 @@ GoodProductSorter.menuState = function(game){
 GoodProductSorter.menuState.prototype ={
 
 	init : function() {
-	/*	console.log("bug");
+		console.log("bug");
 		if(game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **MENU** state");
 		}
-		this.startGameKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);*/
+		this.startGameKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 	},
 	
 	preload : function() {
@@ -20,7 +20,7 @@ GoodProductSorter.menuState.prototype ={
 	create:function(){
         var style = {	font: "Acme",
 						fill: "Black",
-						fontSize: "50pt",
+						fontSize: "100pt",
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};
@@ -31,8 +31,12 @@ GoodProductSorter.menuState.prototype ={
 		//imagen mala orientacion
 		this.image_turn =this.add.image(0, 0, "landscape");		
 		
+		//Boton selector de idioma
+		this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
+		
+		//Botones del menu
 		this.button_inicio = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
-		this.button_inicio.stage='Mundos';
+		this.button_inicio.stage='worldsState';
 		this.button_ajustes = this.add.button(this.world.centerX, 300, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_ajustes.stage='Casa';
 		this.button_tutorial = this.add.button(this.world.centerX, 400, 'botonTipo', this.click_button, this, 2, 0, 0);
@@ -56,6 +60,15 @@ GoodProductSorter.menuState.prototype ={
 		*/
 
 	},
+	
+	cambiar_idioma:function(){
+		if(this.game.global.IDIOMA=='ESP'){
+			this.game.global.IDIOMA='ENG';
+		}else{
+			this.game.global.IDIOMA='ESP';
+		}
+	},
+	
 	
 	update:function(){
 		if (this.scale.isLandscape && window.screen.availHeight<=1000){
@@ -96,37 +109,43 @@ GoodProductSorter.menuState.prototype ={
 	resize: function () {
 		this.num_botones=3;//numero de botones, para asignar el porcentaje de la pantalla
 		this.porcentaje_logo_juego=15;//espacio de la pantalla que se reserva al titulo del juego
-		multiplicador_escala=1.75;//valor por el que se escalaran los botones, depende del tamaño de la pantalla
+		multiplicador_escala=0.75;//valor por el que se escalaran los botones, depende del tamaño de la pantalla
 
 		this.background.height = this.world.height;
 		this.background.width = this.world.width;
- 
-		this.scaleSprite(this.button_inicio, this.world.width, this.world.height / 10, 50, multiplicador_escala);
+
+		//Boton idioma
+		this.scaleSprite(this.button_idioma, this.world.width, this.world.height / 1, 50, 0.1);
+		this.button_idioma.x = this.world.width- this.button_idioma.width-10;
+		this.button_idioma.y = 0;//0 es la posicion
+		
+		//Botones Menu
+		this.scaleSprite(this.button_inicio, this.world.width, this.world.height / 3, 50, multiplicador_escala);
 		this.button_inicio.x = this.world.centerX- this.button_inicio.width / 2;
 		this.button_inicio.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;//0 es la posicion
 		//this.text1.x=this.button_inicio.x;
 		//this.text1.y=this.button_inicio.y;
-		this.text1.setTextBounds(0, this.button_inicio.y+40, this.game.world.width,100);
+		this.text1.setTextBounds(0, this.button_inicio.y+80, this.game.world.width,100);
  
-		this.scaleSprite(this.button_ajustes, this.world.width, this.world.height / 10, 50, multiplicador_escala);
+		this.scaleSprite(this.button_ajustes, this.world.width, this.world.height / 3, 50, multiplicador_escala);
 		this.button_ajustes.x = this.world.centerX- this.button_ajustes.width / 2;
 		this.button_ajustes.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*1;//1 es la posicion
 		//this.text2.x=this.button_ajustes.x;
 		//this.text2.y=this.button_ajustes.y;
-		this.text2.setTextBounds(0, this.button_ajustes.y+40, this.game.world.width,100);
+		this.text2.setTextBounds(0, this.button_ajustes.y+80, this.game.world.width,100);
 		
-		this.scaleSprite(this.button_tutorial, this.world.width, this.world.height / 10, 50, multiplicador_escala);
+		this.scaleSprite(this.button_tutorial, this.world.width, this.world.height / 3, 50, multiplicador_escala);
 		this.button_tutorial.x = this.world.centerX - this.button_tutorial.width / 2;
 		this.button_tutorial.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*2;//2 es la posicion
 		//this.text3.x=this.button_tutorial.x;
 		//this.text3.y=this.button_tutorial.y;
-		this.text3.setTextBounds(0, this.button_tutorial.y+40, this.game.world.width,100);
+		this.text3.setTextBounds(0, this.button_tutorial.y+80, this.game.world.width,100);
 	},
 
 
 	
 	render:function() {
-		this.game.debug.text(this.game.width ,40,50,"white");
+		this.game.debug.text(this.game.global.IDIOMA ,40,50,"white");
 		//this.game.debug.text(this.telon.y ,40,50,"white");
 	}
 };

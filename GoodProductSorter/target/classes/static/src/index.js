@@ -1,5 +1,5 @@
 window.onload = function() {
-	game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'Vaqueros vs Piratas');
+	var game = new Phaser.Game(192, 100, Phaser.CANVAS, 'Vaqueros vs Piratas');
 	
 
 	// GLOBAL VARIABLES
@@ -7,7 +7,6 @@ window.onload = function() {
 		FPS : 30,
 		DEBUG_MODE : true,
 		socket : null,
-		IDIOMA: 'ESP',
 	}
 	
 	// Se le pide el nombre al jugador
