@@ -51,4 +51,6 @@ La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. De
 - Crear deseo de volver a jugar en los menús.
 
 - Generar urgencia en el jugador y ajustarse a la temática en los distintos niveles.
+
+
 © 2019 GitHub, Inc.
