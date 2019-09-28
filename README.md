@@ -42,15 +42,22 @@ Bocetos:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/boss.png)
 
-El Jefe.
+(El Jefe).
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
-Pantalla de juego.
+(Pantalla de juego).
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
 
 - Crear deseo de volver a jugar en los menús.
 
 - Generar urgencia en el jugador y ajustarse a la temática en los distintos niveles.
+
+Además se crearán sonidos para:
+- aceptar y cancelar opciones 
+- introducir el producto en la caja correcta
+- introducir el objeto en la caja incorrecta
+- Dejar pasar el objeto
+- Diálogos
 
 
 © 2019 GitHub, Inc.
