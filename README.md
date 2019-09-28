@@ -1,4 +1,4 @@
-# PRODUCT SORTER
+# GOOD PRODUCT SORTER
 
 ## Documento de diseño
 Versión 0.1
@@ -11,7 +11,7 @@ Versión 0.1
 - Manuel Aguado Salguero - Artista
 - Miguel Ángel Arcones Ríos - Programador 
 ### Pitch
-_Product Sorter_ es un juego de gestión con toques de humor en el que debes clasificar productos que van llegando a través de una cinta transportadora. Los productos y su clasificación van variando según se avanza en el juego, al igual que la dificultad.  
+_Good Product Sorter_ es un juego de gestión con toques de humor en el que debes clasificar productos que van llegando a través de una cinta transportadora. Los productos y su clasificación van variando según se avanza en el juego, al igual que la dificultad.  
 ### Plataforma
 El juego estará adaptado para cualquier dispositivo con navegador Chrome o Firefox (Pc, móvil, tablet...) y Facebook.
 ### Propósito y público objetivo
@@ -32,8 +32,7 @@ El Diagrama de flujo es el siguiente:
 ## Arte
 Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambientación será actual, con escenarios deteriorados y decorado absurdo.
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/boss.png)
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/BocetoCaja1.png)
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/SueloFabricaBoceto.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
 ### Música y Sonido
 La música será cómica.
 Crear deseo de volver a jugar en los menús.
