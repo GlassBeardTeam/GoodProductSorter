@@ -25,9 +25,15 @@ GoodProductSorter.preloadState.prototype={
 		//Menu Images
 		this.game.load.onLoadComplete.addOnce(this.loadComplete,this);
 		this.load.image("fondoMenu", 'assets/images/scenario/background1_1.png');
+		this.load.image("background1_1", 'assets/images/scenario/background1_1.png');
 		this.load.image("landscape", 'assets/landscape.png');
 		this.load.image("botonTipo", 'assets/images/interface/buttonBackground.png');
 		this.load.image("idioma1", 'assets/images/interface/idioma1.png');
+		this.load.image("idioma2", 'assets/images/interface/idioma2.png');
+
+		//Game Images
+		this.load.image("band", 'assets/images/scenario/Eslabon_v1.png');
+
 
         /*this.background = this.add.image(0, 0, "preloader_fondo");
         this.background.height = this.game.height;

@@ -42,9 +42,16 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_volver.stage='worldsState';
 		
-		//texto botones
-		this.text1=this.game.add.text(0, 0, "Nivel 1",style);
-		this.text3=this.game.add.text(0, 0, "Volver",style);
+		//Texto botones y Boton selector de idioma
+		if(this.game.global.IDIOMA=='ESP'){
+			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0)
+			this.text1=this.game.add.text(0, 0, "Nivel 1",style);
+			this.text3=this.game.add.text(0, 0, "Volver",style);
+		}else{
+			this.button_idioma = this.add.button(this.game.width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
+			this.text1=this.game.add.text(0, 0, "Level 1",style);
+			this.text3=this.game.add.text(0, 0, "Return",style);
+		}
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
 		this.text3.setTextBounds(0, 400, this.game.world.width,100);
 
@@ -57,8 +64,14 @@ GoodProductSorter.world1State.prototype = {
 	cambiar_idioma:function(){
 		if(this.game.global.IDIOMA=='ESP'){
 			this.game.global.IDIOMA='ENG';
+			this.button_idioma.loadTexture('idioma2');
+			this.text1.setText("Level 1");
+			this.text3.setText('Return');
 		}else{
 			this.game.global.IDIOMA='ESP';
+			this.button_idioma.loadTexture('idioma1');
+			this.text1.setText("Nivel 1");
+			this.text3.setText('Volver');
 		}
 	},
 
@@ -115,6 +128,6 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver.height=this.world.height*0.12;
 		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
 		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
-		this.text3.setTextBounds(0, this.button_volver.y+100, this.game.world.width,100);
+		this.text3.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
 	}
 }

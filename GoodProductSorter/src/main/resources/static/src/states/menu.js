@@ -31,9 +31,6 @@ GoodProductSorter.menuState.prototype ={
 		//imagen mala orientacion
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
-		//Boton selector de idioma
-		this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
-
 		//Botones del menu
 		this.button_inicio = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_inicio.stage='worldsState';
@@ -41,10 +38,19 @@ GoodProductSorter.menuState.prototype ={
 		this.button_casa.stage='Casa';
 		this.button_ajustes = this.add.button(this.world.centerX, 400, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_ajustes.stage='Ajustes';
-		//Texto botones
-		this.text1=this.game.add.text(0, 0, "Mundos",style);
-		this.text2=this.game.add.text(0, 0, "Casa",style);
-		this.text3=this.game.add.text(0, 0, "Ajustes",style);
+		
+		//Texto botones y Boton selector de idioma
+		if(this.game.global.IDIOMA=='ESP'){
+			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
+			this.text1=this.game.add.text(0, 0, "Mundos",style);
+			this.text2=this.game.add.text(0, 0, "Casa",style);
+			this.text3=this.game.add.text(0, 0, "Ajustes",style);
+		}else{
+			this.button_idioma = this.add.button(this.game.width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
+			this.text1=this.game.add.text(0, 0, "Worlds",style);
+			this.text2=this.game.add.text(0, 0, "Home",style);
+			this.text3=this.game.add.text(0, 0, "Settings",style);
+		}
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
 		this.text2.setTextBounds(0, 300, this.game.world.width,100);
 		this.text3.setTextBounds(0, 400, this.game.world.width,100);
@@ -60,12 +66,20 @@ GoodProductSorter.menuState.prototype ={
 		*/
 
 	},
-	
+
 	cambiar_idioma:function(){
 		if(this.game.global.IDIOMA=='ESP'){
 			this.game.global.IDIOMA='ENG';
+			this.button_idioma.loadTexture('idioma2');
+			this.text1.setText('Worlds');
+			this.text2.setText('Home');
+			this.text3.setText('Settings');
 		}else{
 			this.game.global.IDIOMA='ESP';
+			this.button_idioma.loadTexture('idioma1');
+			this.text1.setText('Mundos');
+			this.text2.setText('Casa');
+			this.text3.setText('Ajustes');
 		}
 	},
 	
