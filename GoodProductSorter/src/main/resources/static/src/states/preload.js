@@ -30,12 +30,13 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("botonTipo", 'assets/images/interface/buttonBackground.png');
 		this.load.image("idioma1", 'assets/images/interface/idioma1.png');
 		this.load.image("idioma2", 'assets/images/interface/idioma2.png');
-		this.load.image("SueloFabrica", 'assets/images/scenario/SueloFabricaBoceto.png');
 		this.load.image("BandSpriteSheet", 'assets/images/scenario/BandSpriteSheet.png');
-		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 
 		//Game Images
 		this.load.image("band", 'assets/images/scenario/Eslabon_v1.png');
+		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
+		this.load.image("SueloFabrica", 'assets/images/scenario/SueloFabricaBoceto.png');
+		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 
 
         /*this.background = this.add.image(0, 0, "preloader_fondo");
