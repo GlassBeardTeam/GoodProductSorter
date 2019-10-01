@@ -2,14 +2,14 @@ GoodProductSorter.gameState = function(game) {
 
 this.aKey;
 this.dKey;
+
 //Game objects
 this.background;
 this.band;
 this.velocity=50;
-
-this.varx=0;
-this.vary=0;
-this.sobre=false;
+this.cajaIz;
+this.cajaDer;
+this.baby;
 }
 
 GoodProductSorter.gameState.prototype = {
@@ -21,47 +21,18 @@ GoodProductSorter.gameState.prototype = {
 			console.log("[DEBUG] Entering **GAME** state");
 		}
 		this.band = new Item("Banda");
-		this.CajaIz = new Item("BocetoCaja");
-		this.CajaDer = new Item("BocetoCaja");
-		this.background = new Item("background1_1");
-		
-	//	this.objeto1 = new Item("bebe");
-		
-		
+		this.cajaIz = new Item("BocetoCaja");
+		this.cajaDer = new Item("BocetoCaja");
+		this.background = game.add.image(0, 0, "SueloFabrica");
+
 		
 		this.dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 		this.aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	},
 
 	preload : function() {
-		//Background
-        this.background = this.add.image(0, 0, "SueloFabrica");
-        this.background.height = this.game.height;
-        this.background.width = this.game.width;
-		
-		//Banda transportadora
-		this.band.setItemImage(game.add.sprite(game.world.centerX, game.world.centerY, 'BandSpriteSheet'));
-		//this.band.image.animations.add('move');
-		//this.band.playItemAnimation('move', 2, true);
-		this.CajaIz.setItemImage(game.add.sprite(game.world.width*0.15, game.world.centerY, 'BocetoCaja'));
-		//this.CajaDer.setItemImage(game.add.sprite(game.world.width-(game.world.width*0.15), game.world.centerY, 'BocetoCaja'));
-		//this.CajaDer.inputEnabled = true;
-		this.CajaDer = game.add.sprite(game.world.width-(game.world.width*0.15), game.world.centerY, 'BocetoCaja');
-		this.CajaDer.inputEnabled = true;
-		
-		
-		
-	//	this.objeto1.setItemImage(game.add.sprite(game.world.centerX, 0-100, 'bebe'));
-		this.objeto1 = game.add.sprite(0, 0, 'bebe');
-		this.objeto1.y = -this.objeto1.height;
-		this.objeto1.x = this.game.world.centerX - this.objeto1.width;
-		this.game.physics.enable(this.objeto1, Phaser.Physics.ARCADE);
-		this.objeto1.body.velocity.y=this.velocity;
-		this.objeto1.inputEnabled = true;
-		this.objeto1.input.enableDrag(true);
-		this.objeto1.events.onDragStart.add(this.onDragStart, this);
-		this.objeto1.events.onDragStop.add(this.onDragStop, this);
-		
+	
+
 
 	},
 	resize: function () {
@@ -76,27 +47,65 @@ GoodProductSorter.gameState.prototype = {
 		this.band.image.y=game.world.centerY;
 		
 		//Caja Izquierda
-		this.CajaIz.image.width=this.world.width*0.3;
-		this.CajaIz.image.height=this.world.height*0.2;
-		this.CajaIz.image.x=game.world.width*0.15;
-		this.CajaIz.image.y=game.world.centerY;
+		this.cajaIz.image.width=this.world.width*0.3;
+		this.cajaIz.image.height=this.world.height*0.2;
+		this.cajaIz.image.x= this.cajaIz.image.width/2;
+		this.cajaIz.image.y= this.background.height/2;
 		
 		//Caja Derecha
-		this.CajaDer.width=this.world.width*0.3;
-		this.CajaDer.height=this.world.height*0.2;
-		this.CajaDer.x=game.world.width-(game.world.width*0.15)-this.CajaDer.width/2;
-		this.CajaDer.y=game.world.centerY-this.CajaDer.height/2;
-		this.CajaDer.events.onInputOver﻿﻿.add(this.OnOver, this);
-		this.CajaDer.events.onInputOut.add(this.OnOut, this)
-		
+		this.cajaDer.image.width = this.world.width*0.3;
+		this.cajaDer.image.height = this.world.height*0.2;
+		this.cajaDer.image.x = this.background.width - this.cajaDer.image.width/2;
+		this.cajaDer.image.y = this.background.height/2;
+
 		//Objeto
-		this.objeto1.width=this.world.width*0.2;
-		this.objeto1.height=this.world.height*0.1;
-		//this.objeto1.image.x=game.world.width-(game.world.width*0.15);
-		//this.objeto1.image.y=game.world.centerY;
+		this.baby.width=this.world.width*0.2;
+		this.baby.height=this.world.height*0.1;
 	},
 
 	create: function() {
+		//Background
+        this.background.height = this.game.height;
+        this.backgroundwidth = this.game.width;
+		
+		//Banda transportadora
+		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet');
+		//this.band.image.animations.add('move');
+		//this.band.playItemAnimation('move', 2, true);
+		this.cajaIz.setItemImage(game.world.width*0.15, game.world.centerY, 'BocetoCaja');
+
+		//this.cajaDer.setItemImage(game.add.sprite(this.cajaIz.image.x + this.cajaIz.image.width, this.cajaIz.image.y, 'BocetoCaja'));
+		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja');
+		
+		//Objetos
+		this.baby = new Item("bebe");
+		this.baby.setItemImage(this.background.width/2, 0, 'bebe');
+		alert("baby image pos: " + "(" + this.baby.image.x + ", " + this.baby.image.y + ")");
+		alert("baby boardimage pos: " + "(" + this.baby.boardImage.x + ", " + this.baby.boardImage.y + ")");
+
+		this.baby.image.x -= this.baby.image.width/2;
+		this.baby.boardImage.x -= this.baby.boardImage.width/2;
+		//this.game.physics.enable(this.baby.image, Phaser.Physics.ARCADE);
+		enablePhaserPhysics(this.baby);
+		this.baby.image.body.velocity.y = this.velocity;
+		this.baby.boardImage.body.velocity.y = this.velocity;// this.baby.image.body.velocity.y;
+		this.baby.image.inputEnabled = true;
+		this.baby.image.input.enableDrag(true);
+
+
+		let paramsOnDragStart = {
+			testing: "hola mi amor, estas viendo porno solo en serio?"
+		}
+
+		addOnDragStartCallback(this.onItemDragStart, this.baby, paramsOnDragStart);
+
+		let paramsOnDragStop = {
+			testing: "Porque no me ves a mi?"
+		}
+
+		addOnDragStopCallback(this.onItemDragStop, this.baby, paramsOnDragStop);
+		
+
 	},
 
 
@@ -105,7 +114,23 @@ GoodProductSorter.gameState.prototype = {
 	},
 	
 	OnOut: function(){
-		this.sobre=false;
+	},
+
+	onItemDragStart: function(item, params)
+	{
+		item.image.body.velocity.x = 0;
+		item.image.body.velocity.y = 0;
+		item.boardImage.alpha = 0.5;
+		//item.boardImage.body.velocity.y=0;
+	},
+
+	onItemDragStop: function(item, params)
+	{
+		item.image.x = item.boardImage.x;
+		item.image.y = item.boardImage.y;
+		item.image.body.velocity.x = item.boardImage.body.velocity.x;
+		item.image.body.velocity.y = item.boardImage.body.velocity.y;
+		item.boardImage.alpha = 0.0;
 	},
 
 	onDragStart: function(sprite, pointer) {
@@ -130,10 +155,13 @@ GoodProductSorter.gameState.prototype = {
 			if(this.band.image.animations.getAnimation('move').speed < 10)
 				this.band.image.animations.getAnimation('move').speed +=1;
 		}
+
+		//Velocidad de board de los objetos--> esto no para de aumentar
+		
 	},
 
 	render: function() {
-		game.debug.text('a', 10, 20);
+		game.debug.text(this.background.width, 10, 20);
 	}
 
 }

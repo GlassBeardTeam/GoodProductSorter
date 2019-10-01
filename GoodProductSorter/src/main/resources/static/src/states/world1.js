@@ -32,7 +32,7 @@ GoodProductSorter.world1State.prototype = {
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Boton selector de idioma
-		this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
+		//this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 
 		//Boton mundos
 		this.button_world1 = this.add.button(0, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
