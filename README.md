@@ -10,8 +10,24 @@ Versión 0.5
 - Álvaro Ramírez Miguez - Diseñador, programador, sonido
 - Manuel Aguado Salguero - Artista
 - Miguel Ángel Arcones Ríos - Programador 
+
+### Índice
+[Pitch](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#pitch)
+  * [Propósito y público objetivo](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#prop%C3%B3sito-y-p%C3%BAblico-objetivo)
+  * [Plataforma](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#plataforma)
+  
+[Mecánicas](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#mec%C3%A1nicas)
+  * [Puntuación](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#puntuaci%C3%B3n)
+  * [Controles](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#controles)
+  
+[Interfaz](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#interfaz)
+
+[Arte](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#arte)
+  * [Historia](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#historia)
+  * [Estética](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#est%C3%A9tica)
+  * [Música y Sonido](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#m%C3%BAsica-y-sonido)
 ## Pitch
-_Good Product Sorter_ es un juego de gestión con toques de humor en el que debes clasificar productos que van llegando a través de una cinta transportadora. Los productos y su clasificación van variando según se avanza en el juego, al igual que la dificultad.  
+__Good Product Sorter__ es un juego de gestión con toques de humor en el que debes clasificar productos que van llegando a través de una cinta transportadora. Los productos y su clasificación van variando según se avanza en el juego, al igual que la dificultad.  
 ### Propósito y público objetivo
 El proposito es crear un juego de gestión más accesible, con controles sencillos y partidas de corta duración.
 El público objetivo estará formado tanto por jugadores casuales como habituales a los que les interesen los juegos de gestión. 
@@ -30,7 +46,7 @@ El Diagrama de flujo es el siguiente:
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/FlowChartProductSorter.png)
 ## Arte
 ### Historia
-En _Good Product Sorter_ eres un trabajador precario con un piso pequeño y descuidado. 
+En __Good Product Sorter__ eres un trabajador precario con un piso pequeño y descuidado. 
 Al comienzo del juego te llamará el jefe con un nuevo trabajo para ti. Cuando llegas te explica que de ahora en adelante te dedicarás a clasificar productos de empresas que os subcontraten, aunque no podrás cobrar porque se ha gastado todo en una cinta transportadora. Para compensar te dará puntos positivos como recompensa en caso de que hagas un buen trabajo, con los que podrás llegar a ser empleado del mes.
 
 - Protagonista: Se trata de un avatar que no hará falta dibujar ya que no aparecerá en pantalla. En su piso guarda objetos extraños que consigue en el trabajo.
@@ -40,10 +56,8 @@ Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambien
 Bocetos:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/boss.png)
-
 (El Jefe).
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
-
 (Pantalla de juego).
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
