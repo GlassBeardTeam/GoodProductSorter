@@ -24,14 +24,13 @@ La partida acaba después de 120 segundos y el objetivo es clasificar correctame
 ### Puntuación
 En el juego se llaman Puntos Positivos (a partir de ahora PP), se obtienen al enviar una caja con los productos correctos y se pierden si las cajas contienen productos mal clasificados. Dependiendo de los PP que se obtengan al finalizar el nivel se obtendrá de 0 a 3 estrellas. Cada nivel necesita un mínimo de estrellas para desbloquearlo.
 ### Controles
-Para clasificar los objetos habrá que arrastrarlos a su caja correspondiente en dispositivos táctiles.
-En pc habrá que hacer click en el producto y después en la caja.
+Para clasificar los objetos habrá que arrastrarlos o lanzarlos a su caja correspondiente, utilizando exclusivamente la pantalla táctil o el ratón dependiendo del dispositivo.
 ## Interfaz
 El Diagrama de flujo es el siguiente:
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/FlowChartProductSorter.png)
 ## Arte
 ### Historia
-En Good Product Sorter eres un trabajador precario con un piso pequeño y descuidado. 
+En _Good Product Sorter_ eres un trabajador precario con un piso pequeño y descuidado. 
 Al comienzo del juego te llamará el jefe con un nuevo trabajo para ti. Cuando llegas te explica que de ahora en adelante te dedicarás a clasificar productos de empresas que os subcontraten, aunque no podrás cobrar porque se ha gastado todo en una cinta transportadora. Para compensar te dará puntos positivos como recompensa en caso de que hagas un buen trabajo, con los que podrás llegar a ser empleado del mes.
 
 - Protagonista: Se trata de un avatar que no hará falta dibujar ya que no aparecerá en pantalla. En su piso guarda objetos extraños que consigue en el trabajo.
@@ -44,6 +43,7 @@ Bocetos:
 
 (El Jefe).
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
+
 (Pantalla de juego).
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
