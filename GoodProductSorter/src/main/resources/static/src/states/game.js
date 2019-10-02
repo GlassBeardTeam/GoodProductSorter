@@ -10,6 +10,7 @@ this.velocity=50;
 this.cajaIz;
 this.cajaDer;
 this.baby;
+this.Durpartida=60;
 
 //Mi maquina
 this.boardMachine;
@@ -79,6 +80,14 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	create: function() {
+		//Control Tiempo
+		cuenta_atras=this.time.create();
+		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
+		cuenta_atras.start();		
+		this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
+
+		
+		
 		//Background
         this.background.height = this.game.height;
         this.backgroundwidth = this.game.width;
@@ -115,6 +124,9 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	update : function() {
+		segundos="0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
+		this.text_cuenta_atras.text=segundos.substr(-2);
+		
 		this.resize();		
 	},
 
