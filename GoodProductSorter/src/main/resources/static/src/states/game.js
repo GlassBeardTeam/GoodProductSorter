@@ -10,6 +10,9 @@ this.velocity=50;
 this.cajaIz;
 this.cajaDer;
 this.baby;
+
+//Mi maquina
+this.boardMachine;
 }
 
 GoodProductSorter.gameState.prototype = {
@@ -31,10 +34,13 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	preload : function() {
-	
-
-
+		//Callback para resize
+		window.addEventListener("resize", this.displayWindowSize);
+		//Posicion x,y & max items diferentes -->HAY QUE METERLE EL NOMBRE DE SU SPRITE
+		this.boardMachine = new BoardMachine(50, 50, 'bebe', 20)
 	},
+
+
 	resize: function () {
 
 		this.background.height = this.world.height;
@@ -61,6 +67,15 @@ GoodProductSorter.gameState.prototype = {
 		//Objeto
 		this.baby.width=this.world.width*0.2;
 		this.baby.height=this.world.height*0.1;
+
+		//Info
+		// Get width and height of the window excluding scrollbars
+		var w = document.documentElement.clientWidth;
+		var h = document.documentElement.clientHeight;
+		//La altura funciona, la anchura se mantiene
+			  
+		// Display result inside a div element
+		console.log("Width: " + w + ", " + "Height: " + h);
 	},
 
 	create: function() {
@@ -69,52 +84,18 @@ GoodProductSorter.gameState.prototype = {
         this.backgroundwidth = this.game.width;
 		
 		//Banda transportadora
-		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet');
-		//this.band.image.animations.add('move');
-		//this.band.playItemAnimation('move', 2, true);
-		this.cajaIz.setItemImage(game.world.width*0.15, game.world.centerY, 'BocetoCaja');
-
-		//this.cajaDer.setItemImage(game.add.sprite(this.cajaIz.image.x + this.cajaIz.image.width, this.cajaIz.image.y, 'BocetoCaja'));
-		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja');
+		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.boardMachine.getPhysicsGroup());
+		//Caja izquierda
+		this.cajaIz.setItemImage(game.world.width*0.15, game.world.centerY, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
+		//Caja derecha
+		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
 		
-		//Objetos
-		this.baby = new Item("bebe");
-		this.baby.setItemImage(this.background.width/2, 0, 'bebe');
-		alert("baby image pos: " + "(" + this.baby.image.x + ", " + this.baby.image.y + ")");
-		alert("baby boardimage pos: " + "(" + this.baby.boardImage.x + ", " + this.baby.boardImage.y + ")");
-
-		this.baby.image.x -= this.baby.image.width/2;
-		this.baby.boardImage.x -= this.baby.boardImage.width/2;
-		//this.game.physics.enable(this.baby.image, Phaser.Physics.ARCADE);
-		enablePhaserPhysics(this.baby);
-		this.baby.image.body.velocity.y = this.velocity;
-		this.baby.boardImage.body.velocity.y = this.velocity;// this.baby.image.body.velocity.y;
-		this.baby.image.inputEnabled = true;
-		this.baby.image.input.enableDrag(true);
-
-
-		let paramsOnDragStart = {
-			testing: "hola mi amor, estas viendo porno solo en serio?"
-		}
-
-		addOnDragStartCallback(this.onItemDragStart, this.baby, paramsOnDragStart);
-
-		let paramsOnDragStop = {
-			testing: "Porque no me ves a mi?"
-		}
-
-		addOnDragStopCallback(this.onItemDragStop, this.baby, paramsOnDragStop);
-		
-
-	},
-
-
-	OnOver: function(){
-		this.sobre=true;
-	},
+		//OBJETOS
+		this.CreateItemsWorld1_level1();
 	
-	OnOut: function(){
+
 	},
+
 
 	onItemDragStart: function(item, params)
 	{
@@ -133,35 +114,36 @@ GoodProductSorter.gameState.prototype = {
 		item.boardImage.alpha = 0.0;
 	},
 
-	onDragStart: function(sprite, pointer) {
-		this.varx = sprite.x;
-		this.vary = sprite.y;
-		sprite.body.velocity.y=0;
-	},
-	
-	onDragStop: function(sprite, pointer) {
-		if(this.sobre){
-			alert();
-		}
-		sprite.x=this.varx;
-		sprite.y=this.vary;
-		sprite.body.velocity.y=this.velocity;
-	},
-
 	update : function() {
-		this.resize();
-		if(this.dKey.isDown)
-		{
-			if(this.band.image.animations.getAnimation('move').speed < 10)
-				this.band.image.animations.getAnimation('move').speed +=1;
-		}
-
-		//Velocidad de board de los objetos--> esto no para de aumentar
-		
+		this.resize();		
 	},
 
 	render: function() {
-		game.debug.text(this.background.width, 10, 20);
+	},
+
+	CreateItemsWorld1_level1: function()
+	{
+
+		this.baby = new Item("bebe");
+		this.baby.setItemImage(this.background.width/2, 0, 'bebe', this.boardMachine.getPhysicsGroup());
+
+		this.baby.image.x -= this.baby.image.width/2;
+		this.baby.boardImage.x -= this.baby.boardImage.width/2;
+		//this.game.physics.enable(this.baby.image, Phaser.Physics.ARCADE);
+		enablePhaserPhysics(this.baby);
+		this.baby.image.body.velocity.y = this.velocity;
+		this.baby.boardImage.body.velocity.y = this.velocity;// this.baby.image.body.velocity.y;
+		this.baby.image.inputEnabled = true;
+		this.baby.image.input.enableDrag(true);
+
+		addOnDragStartCallback(this.onItemDragStart, this.baby, null);
+		addOnDragStopCallback(this.onItemDragStop, this.baby, null);
+
+		//Añado el objeto al nivel
+		this.boardMachine.addItemToLevel(this.baby);
+		
 	}
+
+
 
 }
