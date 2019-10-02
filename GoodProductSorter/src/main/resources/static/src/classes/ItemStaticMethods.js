@@ -74,11 +74,10 @@ var BoardMachine = function(x, y, name, maxItems)
 		let item = this.itemSpawner.GiveRandomItem();
 		let itemCopy = new Item(item.name);//Creamos el item
 		//Generamos todos los valores como su item padre
-		itemCopy.setItemImage(xcoord, ycoord, item.name);//Set de la imagen
-		itemCopy.myPhysicsGroup = item.myPhysicsGroup;
+		itemCopy.CreateImageInPhysicsGroup(xcoord, ycoord, item.name, this.getPhysicsGroup());//Set de la imagen
 		itemCopy.image.body.setCircle(20); //Hitbox circular
 		itemCopy.image.body.angularVelocity = 0; //ESTO PUEDE QUE ESTE MAL
-		itemCopy.image.body.angularDamping=0;
+		itemCopy.image.body.angularDamping = 0;
 		itemCopy.image.body.kinematic=true;
 		//game.physics.p2.createCollisionGroup();
 
