@@ -56,10 +56,8 @@ Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambien
 Bocetos:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/boss.png)
-
 (El Jefe).
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
-
 (Pantalla de juego).
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
