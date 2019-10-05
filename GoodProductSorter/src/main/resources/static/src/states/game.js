@@ -10,7 +10,10 @@ this.velocity=50;
 this.cajaIz;
 this.cajaDer;
 this.baby;
-this.Durpartida=60;
+this.Durpartida=5;
+puntuacion=0;
+nivel=1;
+mundo=1;
 
 //Mi maquina
 this.boardMachine;
@@ -80,6 +83,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	create: function() {
+		
 		//Control Tiempo
 		cuenta_atras=this.time.create();
 		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
@@ -105,7 +109,11 @@ GoodProductSorter.gameState.prototype = {
 
 	},
 
-
+	finTiempo: function(){
+		alert(this.puntuacion + " " + this.nivel + " " + this.mundo)
+		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
+	},
+	
 	onItemDragStart: function(item, params)
 	{
 		item.image.body.velocity.x = 0;
