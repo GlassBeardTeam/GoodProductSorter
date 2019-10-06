@@ -37,6 +37,8 @@ El juego estará adaptado para cualquier dispositivo con navegador Chrome o Fire
 La mecánica principal del juego consiste en clasificar productos en distintas categorias, teniendo en cuenta las directrices propuestas en cada nivel (Por ejemplo, utilizar guantes para evitar contaminar ciertos productos). 
 Si se acierta a la hora de clasificar un objeto se obtiene puntuación y se acelera la cinta transportadora, si se deja pasar se reduce la velocidad y si se coloca en la caja equivocada se resta puntuación.
 La partida acaba después de 120 segundos y el objetivo es clasificar correctamente el mayor número de productos para alcanzar el mínimo de puntos necesarios para pasar al siguiente nivel.
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
+(Pantalla de juego).
 ### Puntuación
 En el juego se llaman Puntos Positivos (a partir de ahora PP), se obtienen al enviar una caja con los productos correctos y se pierden si las cajas contienen productos mal clasificados. Dependiendo de los PP que se obtengan al finalizar el nivel se obtendrá de 0 a 3 estrellas. Cada nivel necesita un mínimo de estrellas para desbloquearlo.
 ### Controles
@@ -55,10 +57,10 @@ Al comienzo del juego te llamará el jefe con un nuevo trabajo para ti. Cuando l
 Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambientación será actual, con escenarios deteriorados y decorado absurdo. Se busca que los productos se distingan con facilidad del escenario teniendo en cuenta la velocidad a la que espera jugar, aunque se podrán diseñar objetos similares que requieran que el jugador preste mayor atención.
 Bocetos:
 
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/boss.png)
-(El Jefe).
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
-(Pantalla de juego).
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Jefe2.png)
+
+("El Jefe").
+
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
 
