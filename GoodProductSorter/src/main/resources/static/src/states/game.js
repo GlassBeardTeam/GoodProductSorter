@@ -18,7 +18,7 @@ this.machineSpeed = 200;
 this.foo = 0;
 
 //Timer
-this.Durpartida=60;
+this.Durpartida=15;
 puntuacion=0;
 nivel=1;
 mundo=1;
