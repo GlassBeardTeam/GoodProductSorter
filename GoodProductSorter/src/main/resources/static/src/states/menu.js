@@ -36,7 +36,7 @@ GoodProductSorter.menuState.prototype ={
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Botones del menu
-		this.button_inicio = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_inicio = this.add.button(this.world.centerX, 200, 'botonEnable', this.click_button, this, 2, 0, 0);
 		this.button_inicio.stage='worldsState';
 		this.button_casa = this.add.button(this.world.centerX, 300, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_casa.stage='Casa';
@@ -126,27 +126,30 @@ GoodProductSorter.menuState.prototype ={
 
 		this.background.height = this.world.height;
 		this.background.width = this.world.width;
+		
+		this.Botonera.height = this.world.height;
+		this.Botonera.width = this.world.width;
 
 		//Boton idioma
-		this.button_idioma.width=this.world.width*0.05;
+		this.button_idioma.width=this.world.width*0.08;
 		this.button_idioma.height=this.world.height*0.05;
 		this.button_idioma.x = this.world.width- this.button_idioma.width-10;
 		this.button_idioma.y = 0;//0 es la posicion
 		
 		//Botones Menu
-		this.button_inicio.width=this.world.width*0.3;
+		this.button_inicio.width=this.world.width*0.6;
 		this.button_inicio.height=this.world.height*0.2;
 		this.button_inicio.x = this.world.centerX- this.button_inicio.width / 2;
 		this.button_inicio.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;//0 es la posicion
 		this.text1.setTextBounds(0, this.button_inicio.y+this.button_inicio.height/3, this.game.world.width,100);
  
-		this.button_casa.width=this.world.width*0.3;
+		this.button_casa.width=this.world.width*0.6;
 		this.button_casa.height=this.world.height*0.2;
 		this.button_casa.x = this.world.centerX- this.button_casa.width / 2;
 		this.button_casa.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*1;//1 es la posicion
 		this.text2.setTextBounds(0, this.button_casa.y+this.button_casa.height/3, this.game.world.width,100);
 		
-		this.button_ajustes.width=this.world.width*0.3;
+		this.button_ajustes.width=this.world.width*0.6;
 		this.button_ajustes.height=this.world.height*0.2;
 		this.button_ajustes.x = this.world.centerX - this.button_ajustes.width / 2;
 		this.button_ajustes.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*2;//2 es la posicion
@@ -156,6 +159,7 @@ GoodProductSorter.menuState.prototype ={
 
 	
 	render:function() {
+		//alert(this.game.width);
 		//this.game.debug.text(this.game.global.IDIOMA ,40,50,"white");
 		//this.game.debug.text(this.telon.y ,40,50,"white");
 	}
