@@ -27,6 +27,10 @@ GoodProductSorter.menuState.prototype ={
         this.background = this.add.image(0, 0, "fondoMenu");
         this.background.height = this.game.height;
         this.background.width = this.game.width;
+		
+        this.Botonera = this.add.image(0, 0, "Botonera");
+        this.Botonera.height = this.game.height;
+        this.Botonera.width = this.game.width;
 
 		//imagen mala orientacion
 		this.image_turn =this.add.image(0, 0, "landscape");		

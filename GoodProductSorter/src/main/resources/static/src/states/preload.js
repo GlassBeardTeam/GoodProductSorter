@@ -25,11 +25,11 @@ GoodProductSorter.preloadState.prototype={
 		//Menu Images
 		this.game.load.onLoadComplete.addOnce(this.loadComplete,this);
 		this.load.image("fondoMenu", 'assets/images/interface/BocetoFondoMenu.png');
-		this.load.image("background1_1", 'assets/images/interface/BocetoFondoMenu.png');
+		this.load.image("Botonera", 'assets/images/interface/Botonera.png');
 		this.load.image("landscape", 'assets/landscape.png');
 		this.load.image("botonTipo", 'assets/images/interface/BotonGenerico.png');
-		this.load.image("idioma1", 'assets/images/interface/idioma1.png');
-		this.load.image("idioma2", 'assets/images/interface/idioma2.png');
+		this.load.image("idioma1", 'assets/images/interface/FlagSpain.png');
+		this.load.image("idioma2", 'assets/images/interface/FlagUK.png');
 		this.load.image("BandSpriteSheet", 'assets/images/scenario/BandSpriteSheet.png');
 
 		//Game Images

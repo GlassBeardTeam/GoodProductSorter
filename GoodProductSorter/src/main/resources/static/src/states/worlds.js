@@ -27,6 +27,9 @@ GoodProductSorter.worldsState.prototype = {
         this.background = this.add.image(0, 0, "fondoMenu");
         this.background.height = this.game.height;
         this.background.width = this.game.width;
+        this.Botonera = this.add.image(0, 0, "Botonera");
+        this.Botonera.height = this.game.height;
+        this.Botonera.width = this.game.width;
 
 		//imagen mala orientacion
 		this.image_turn =this.add.image(0, 0, "landscape");		
@@ -125,13 +128,13 @@ GoodProductSorter.worldsState.prototype = {
 
 		//Botones Menu
 		this.button_world1.width=this.world.width*0.32;
-		this.button_world1.height=this.world.height*0.12;
+		this.button_world1.height=this.world.height*0.15;
 		this.button_world1.x =0+this.world.width*0.10;
 		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
 		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
 
 		this.button_world2.width=this.world.width*0.32;
-		this.button_world2.height=this.world.height*0.12;
+		this.button_world2.height=this.world.height*0.15;
 		this.button_world2.x =this.world.width-this.world.width*0.10-this.button_world2.width;
 		this.button_world2.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
 		this.text2.setTextBounds(this.button_world2.x+this.button_world2.width/3, this.button_world2.y+this.button_world2.height, this.button_world1.x,100);
