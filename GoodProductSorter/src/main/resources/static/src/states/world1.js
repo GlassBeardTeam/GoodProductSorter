@@ -28,10 +28,6 @@ GoodProductSorter.world1State.prototype = {
         this.background.height = this.game.height;
         this.background.width = this.game.width;
 
-        this.Botonera = this.add.image(0, 0, "Botonera");
-        this.Botonera.height = this.game.height;
-        this.Botonera.width = this.game.width;
-
 		//imagen mala orientacion
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
@@ -39,7 +35,7 @@ GoodProductSorter.world1State.prototype = {
 		//this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_world1 = this.add.button(0, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_world1.stage='gameState';
 		
 		//Boton Volver
@@ -114,11 +110,8 @@ GoodProductSorter.world1State.prototype = {
 		this.background.height = this.world.height;
 		this.background.width = this.world.width;
 
-		this.Botonera.height = this.world.height;
-		this.Botonera.width = this.world.width;
-		
 		//Boton idioma
-		this.button_idioma.width=this.world.width*0.08;
+		this.button_idioma.width=this.world.width*0.05;
 		this.button_idioma.height=this.world.height*0.05;
 		this.button_idioma.x = this.world.width- this.button_idioma.width-10;
 		this.button_idioma.y = 0;//0 es la posicion
@@ -126,7 +119,7 @@ GoodProductSorter.world1State.prototype = {
 		//Botones Menu
 		this.button_world1.width=this.world.width*0.32;
 		this.button_world1.height=this.world.height*0.12;
-		this.button_world1.x =0+this.world.width*0.15;
+		this.button_world1.x =0+this.world.width*0.10;
 		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
 		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
 

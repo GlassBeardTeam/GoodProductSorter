@@ -5,6 +5,7 @@ function Item(name)
 	this.image,
 	this.boardImage,
 	this.myPhysicsGroup,
+	this.myBoardPhysicsGroup,
 	this.animationsFPS,
 
 	this.setItemImage = function(x, y, name, group)
@@ -18,18 +19,7 @@ function Item(name)
 		this.boardImage.anchor.setTo(0.5, 0.5);
 		this.boardImage.alpha = 0.0;
 	},
-	
-	this.CreateImageInPhysicsGroup = function(x, y, name, group)
-	{
-		this.name = name;
-		this.myPhysicsGroup = group;
-		this.image = this.myPhysicsGroup.create(x,y,name);
-		this.image.anchor.setTo(0.5, 0.5);
 
-		this.boardImage =this.myPhysicsGroup.create(x,y,name);
-		this.boardImage.anchor.setTo(0.5, 0.5);
-		this.boardImage.alpha = 0.0;
-	}
 
 	this.getAnimation = function(name)
 	{

@@ -11,12 +11,20 @@ this.cajaIz;
 this.cajaDer;
 this.baby;
 this.Durpartida=60;
+
+//Mi maquina
+this.boardMachine;
+this.machineSpeed = 200;
+this.foo = 0;
+
+//Timer
+this.Durpartida=60;
 puntuacion=0;
 nivel=1;
 mundo=1;
 
-//Mi maquina
-this.boardMachine;
+//Puntero a lvlitems
+this.myLvlItems = [];
 }
 
 GoodProductSorter.gameState.prototype = {
@@ -40,8 +48,23 @@ GoodProductSorter.gameState.prototype = {
 	preload : function() {
 		//Callback para resize
 		window.addEventListener("resize", this.displayWindowSize);
-		//Posicion x,y & max items diferentes -->HAY QUE METERLE EL NOMBRE DE SU SPRITE
-		this.boardMachine = new BoardMachine(50, 50, 'bebe', 20)
+
+		//Iniciamos fisicas ARCADE
+		/*
+		game.physics.startSystem(Phaser.Physics.ARCADE);
+		game.physics.arcade.gravity.y = 0;
+		*/
+
+		//Iniciamos fisicas P2
+		game.physics.startSystem(Phaser.Physics.P2JS);
+		game.input.mouse.enabled = true;
+		//game.physics.p2.setImpactEvents(false);
+		//game.physics.p2.updateBoundsCollisionGroup();
+		//game.physics.p2.restitution = 1.0;
+
+
+		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
+		this.boardMachine = new BoardMachine(game.world._width/2+100, 200, 'BocetoCaja', 20, this.machineSpeed)
 	},
 
 
@@ -79,18 +102,16 @@ GoodProductSorter.gameState.prototype = {
 		//La altura funciona, la anchura se mantiene
 			  
 		// Display result inside a div element
-		console.log("Width: " + w + ", " + "Height: " + h);
+		//console.log("Width: " + w + ", " + "Height: " + h);
 	},
 
 	create: function() {
-		//Control Tiempo
-		cuenta_atras=this.time.create();
-		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
-		cuenta_atras.start();		
-		this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
-
-		
-		
+			//Control Tiempo
+			cuenta_atras=this.time.create();
+			final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
+			cuenta_atras.start();		
+			this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
+	
 		//Background
         this.background.height = this.game.height;
         this.backgroundwidth = this.game.width;
@@ -102,15 +123,18 @@ GoodProductSorter.gameState.prototype = {
 		//Caja derecha
 		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
 		
+		
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 	
 
+	
 	},
-
 	finTiempo: function(){
 		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
 	},
+
+
 
 	onItemDragStart: function(item, params)
 	{
@@ -132,8 +156,14 @@ GoodProductSorter.gameState.prototype = {
 	update : function() {
 		segundos="0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
-		
-		this.resize();		
+
+		this.resize();
+		//Check if  machine has to spawn something
+		if(this.foo <= 0){
+			this.boardMachine.SpawnRandomItem();
+			//console.log("item x: " + item.image.x  + "y: " + item.image.y);
+			this.foo++;
+		}
 	},
 
 	render: function() {
@@ -141,24 +171,27 @@ GoodProductSorter.gameState.prototype = {
 
 	CreateItemsWorld1_level1: function()
 	{
-
+		
 		this.baby = new Item("bebe");
-		this.baby.setItemImage(this.background.width/2, 0, 'bebe', this.boardMachine.getPhysicsGroup());
+		this.boardMachine.addItemToLevel(this.baby);
+		//this.baby.setItemImage(this.background.width/2, 0, 'bebe', this.boardMachine.getPhysicsGroup());
 
-		this.baby.image.x -= this.baby.image.width/2;
-		this.baby.boardImage.x -= this.baby.boardImage.width/2;
+		//this.baby.image.x -= this.baby.image.width/2;
+		//this.baby.boardImage.x -= this.baby.boardImage.width/2;
 		//this.game.physics.enable(this.baby.image, Phaser.Physics.ARCADE);
-		enablePhaserPhysics(this.baby);
+		/*
 		this.baby.image.body.velocity.y = this.velocity;
 		this.baby.boardImage.body.velocity.y = this.velocity;// this.baby.image.body.velocity.y;
 		this.baby.image.inputEnabled = true;
 		this.baby.image.input.enableDrag(true);
-
+		*/
+		/*
 		addOnDragStartCallback(this.onItemDragStart, this.baby, null);
 		addOnDragStopCallback(this.onItemDragStop, this.baby, null);
+		*/
 
 		//Añado el objeto al nivel
-		this.boardMachine.addItemToLevel(this.baby);
+
 		
 	}
 
