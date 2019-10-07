@@ -174,24 +174,6 @@ GoodProductSorter.gameState.prototype = {
 		
 		this.baby = new Item("bebe");
 		this.boardMachine.addItemToLevel(this.baby);
-		//this.baby.setItemImage(this.background.width/2, 0, 'bebe', this.boardMachine.getPhysicsGroup());
-
-		//this.baby.image.x -= this.baby.image.width/2;
-		//this.baby.boardImage.x -= this.baby.boardImage.width/2;
-		//this.game.physics.enable(this.baby.image, Phaser.Physics.ARCADE);
-		/*
-		this.baby.image.body.velocity.y = this.velocity;
-		this.baby.boardImage.body.velocity.y = this.velocity;// this.baby.image.body.velocity.y;
-		this.baby.image.inputEnabled = true;
-		this.baby.image.input.enableDrag(true);
-		*/
-		/*
-		addOnDragStartCallback(this.onItemDragStart, this.baby, null);
-		addOnDragStopCallback(this.onItemDragStop, this.baby, null);
-		*/
-
-		//Añado el objeto al nivel
-
 		
 	}
 
