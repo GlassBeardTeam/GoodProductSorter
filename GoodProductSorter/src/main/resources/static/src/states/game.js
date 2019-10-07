@@ -11,6 +11,9 @@ this.cajaIz;
 this.cajaDer;
 this.baby;
 this.Durpartida=60;
+puntuacion=0;
+nivel=1;
+mundo=1;
 
 //Mi maquina
 this.boardMachine;
@@ -105,6 +108,9 @@ GoodProductSorter.gameState.prototype = {
 
 	},
 
+	finTiempo: function(){
+		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
+	},
 
 	onItemDragStart: function(item, params)
 	{
