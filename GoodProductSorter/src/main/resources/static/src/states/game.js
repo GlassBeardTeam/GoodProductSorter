@@ -114,7 +114,7 @@ GoodProductSorter.gameState.prototype = {
 	
 		//Background
         this.background.height = this.game.height;
-        this.backgroundwidth = this.game.width;
+        this.background.width = this.game.width;
 		
 		//Banda transportadora
 		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.boardMachine.getPhysicsGroup());

@@ -79,6 +79,7 @@ window.onload = function() {
 	game.state.add('worldsState', GoodProductSorter.worldsState);
 	game.state.add('world1State', GoodProductSorter.world1State);
 	game.state.add('gameState', GoodProductSorter.gameState);
+	game.state.add('endGameState', GoodProductSorter.endGameState);
 	game.state.start('bootState');		
 
 };
