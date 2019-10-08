@@ -46,7 +46,6 @@ var ItemSpawner = function(maxItems)
 
 	this.levelItems = [],
 	this.maxItems = maxItems,
-	this.currentNItems = 0,
 
 	//Asigna probabilidades a cada item
 	this.probOfItems = [],
@@ -104,16 +103,23 @@ var mouseP2 = function()
 	this.addBody = function(image)
 	{
 		this.bodies.push(image.body);
+	},
+	this.getBodies = function()
+	{
+		return this.bodies;
 	}
 }
 
 
 
-var BoardMachine = function(x, y, name, maxItems, speed)
+var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 {
-	this.image = game.add.image(x, y, name),
+	this.machineGroup = game.add.group();
+	this.image = this.machineGroup.create(x, y, name);
+	//this.image = game.add.image(x, y, name),
 	this.image.anchor.setTo(0.5, 0.5);
 	this.boardSpeed = speed,
+	this.minSpeedOfDraggedImage = minSpeed,
 	
 	this.itemSpawner = new ItemSpawner(maxItems),
 	this.mouseP2 = new mouseP2();
@@ -124,11 +130,9 @@ var BoardMachine = function(x, y, name, maxItems, speed)
 
 
 	this.addItemToLevel = function(item, showProb)
-	{
-		
+	{		
 		this.itemSpawner.levelItems.push(item)
 		this.itemSpawner.probOfItems.push(showProb);
-		this.itemSpawner.currentNItems++;
 	},
 
 	this.SpawnRandomItem = function()
@@ -163,7 +167,8 @@ var BoardMachine = function(x, y, name, maxItems, speed)
 		game.physics.enable(itemCopy.image, Phaser.Physics.P2JS);
  		//Hitbox circular
 		itemCopy.image.body.setCircle(200);
-		itemCopy.image.body.angularDamping = 0;
+		itemCopy.image.body.angularDamping = 1;
+		itemCopy.image.body.fixedRotation = true;
 		//Añadimos la imagen a un collision group
 		itemCopy.image.body.setCollisionGroup(this.itemSpawner.itemCollisionGroup);
 		itemCopy.image.body.collideWorldBounds = true;
@@ -186,10 +191,11 @@ var BoardMachine = function(x, y, name, maxItems, speed)
 		itemCopy.boardImage.body.setCollisionGroup(this.itemSpawner.boardItemCollisionGroup);
 		itemCopy.boardImage.body.collideWorldBounds = true;
 		itemCopy.boardImage.body.damping = 0;
+		//itemCopy.boardImage.body.setCircle(100);
 		//P2 PHYSICS/
 
 		itemCopy.boardImage.anchor.setTo(0.5, 0.5);
-		itemCopy.boardImage.alpha = 0.0;
+		itemCopy.boardImage.alpha = 0.5;
 
 		//Se añade velocidad a los objetos
 		itemCopy.image.body.velocity.y = this.boardSpeed;
@@ -197,10 +203,37 @@ var BoardMachine = function(x, y, name, maxItems, speed)
 		
 		//itemCopy.boardImage.body.collides([]); asi no colisiona con nada, se supone
 
-		//Añadimos las callbacks
+		//Añadimos las callbacks de drag and drop
 		addOnDragStartCallback(this.ItemOnDragStartCallback, itemCopy, null);
-		addOnDragStopCallback(this.ItemOnDragStopCallback, itemCopy, null);
+		addOnDragStopCallback(this.ItemOnDragStopCallback, itemCopy, this.minSpeedOfDraggedImage);
 
+		//Callbacks de colisiones con el escenario y cajas
+		itemCopy.image.body.onBeginContact.add(function(body1, body2, shape1, shape2, equation)
+		{
+			let obj1_body= equation[0].bodyA.parent;
+			let obj2_body = equation[0].bodyB.parent;
+			//Si  ninguno es null(no hay colision con bounds)
+			if(obj1_body != null && obj2_body != null)
+			{
+				//Comprobar con que caja hay colision
+				
+				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
+			}else{ //Hay colision con bounds
+
+			}
+
+		},this);
+
+		itemCopy.boardImage.body.onBeginContact.add(function(body1, body2, shape1, shape2, equation)
+		{
+			let obj1_body= equation[0].bodyA.parent;
+			let obj2_body = equation[0].bodyB.parent;
+			//Si alguno de los dos es null, uno son los bounds
+			if(obj1_body == null || obj2_body == null)
+			{
+				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
+			}
+		},this);
 
 		return itemCopy;
 	},
@@ -219,29 +252,54 @@ var BoardMachine = function(x, y, name, maxItems, speed)
 	{
 		item.image.body.velocity.x = 0;
 		item.image.body.velocity.y = 0;
-		item.boardImage.alpha = 0.5;
-		
-		//game.physics.p2.enable(item.image, false);
-		//Disable physics
-	
-
 	},
 
-	this.ItemOnDragStopCallback = function(item)
+	this.ItemOnDragStopCallback = function(item, minSpeed)
 	{
-		/*
-		//console.log("image: (x,y): " + item.image.x);
-		item.image.body.x = item.boardImage.body.x;
-		item.image.body.y = item.boardImage.body.y;
-		//Sentido contrario de la velocidad en P2
-		item.image.body.velocity.x = item.boardImage.body.velocity.x;
-		item.image.body.velocity.y = item.boardImage.body.velocity.y;
-		item.boardImage.alpha = 0.0;
-
-		//Enable physics
-		//item.image.body.static = false;
-		//game.physics.p2.enable(item.image, true);
-		*/
+		attatchToBoardImage(item, minSpeed);
 	}
 
+}
+
+function removeSpawnedItemFromGame(itemCopy, mouseP2)
+{
+	//Borramos el body de image del raton P2
+	for(let i = 0; i< mouseP2.bodies.length; i++)
+	{
+		if(mouseP2.bodies[i] === itemCopy.image.body)
+		{
+			mouseP2.bodies.splice(i, 1);
+		}
+	}
+	//Borramos image de su grupo
+	itemCopy.myPhysicsGroup.remove(itemCopy.image);
+	//Borramos el objeto del grupo de colisiones
+
+	//Borramos boardImage de su grupo
+	itemCopy.myBoardPhysicsGroup.remove(itemCopy.boardImage);
+	//Borramos el objeto del grupo de colisiones
+
+	//¿Como borramos el Item?
+	delete itemCopy;
+	if(game.global.DEBUG_MODE){
+		console.log("[DEBUG] image removed from P2 mouse bodies collision array");
+		console.log("[DEBUG] image removed from physics group");
+		console.log("[DEBUG] boardImage removed from board physics group");
+		console.log("[DEBUG] item removed from cache");
+	}
+}
+
+function attatchToBoardImage(item, minSpeed)
+{
+	let magnitude = Math.sqrt(Math.pow(item.image.body.velocity.x, 2) + Math.pow(item.image.body.velocity.y, 2))
+	console.log(magnitude);
+	if(magnitude < minSpeed)
+	{
+	//console.log("image: (x,y): " + item.image.x);
+	item.image.body.x = item.boardImage.body.x;
+	item.image.body.y = item.boardImage.body.y;
+	//Sentido contrario de la velocidad en P2
+	item.image.body.velocity.x = item.boardImage.body.velocity.x;
+	item.image.body.velocity.y = item.boardImage.body.velocity.y;
+	}	
 }

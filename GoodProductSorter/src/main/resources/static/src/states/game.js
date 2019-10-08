@@ -4,21 +4,22 @@ this.aKey;
 this.dKey;
 
 //Game objects
+
 this.background;
 this.band;
 this.velocity=50;
 this.cajaIz;
 this.cajaDer;
 this.baby;
-this.Durpartida=60;
 
 //Mi maquina
 this.boardMachine;
-this.machineSpeed = 200;
+this.machineSpeed = 400;
+this.minSpeedOfDraggedImage = 1000;
 this.foo = 0;
 
 //Timer
-this.Durpartida=15;
+this.Durpartida=60;
 puntuacion=0;
 nivel=1;
 mundo=1;
@@ -58,13 +59,14 @@ GoodProductSorter.gameState.prototype = {
 		//Iniciamos fisicas P2
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.input.mouse.enabled = true;
-		//game.physics.p2.setImpactEvents(false);
-		//game.physics.p2.updateBoundsCollisionGroup();
+		game.physics.p2.setImpactEvents(true);
+		game.physics.p2.updateBoundsCollisionGroup();
 		//game.physics.p2.restitution = 1.0;
 
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
-		this.boardMachine = new BoardMachine(game.world._width/2+100, 200, 'BocetoCaja', 20, this.machineSpeed)
+		this.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage);
+		this.boardMachine.image.y += this.boardMachine.image.width;
 	},
 
 
@@ -124,6 +126,11 @@ GoodProductSorter.gameState.prototype = {
 		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
 		
 		
+		//Layer order
+		game.world.bringToTop(this.boardMachine.machineGroup);
+		game.world.bringToTop(this.boardMachine.getBoardPhysicsGroup());
+		game.world.bringToTop(this.boardMachine.getPhysicsGroup());
+
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 	
@@ -173,7 +180,8 @@ GoodProductSorter.gameState.prototype = {
 	{
 		
 		this.baby = new Item("bebe");
-		this.boardMachine.addItemToLevel(this.baby);
+		this.boardMachine.addItemToLevel(new Item("bebe"));
+
 		
 	}
 
