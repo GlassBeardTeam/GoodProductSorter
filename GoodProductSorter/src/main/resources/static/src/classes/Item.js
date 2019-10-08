@@ -2,6 +2,7 @@
 function Item(name)
 {
 	this.name = name,
+	this.id,
 	this.image,
 	this.boardImage,
 	this.myPhysicsGroup,

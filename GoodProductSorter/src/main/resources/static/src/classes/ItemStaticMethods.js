@@ -120,6 +120,9 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 	this.image.anchor.setTo(0.5, 0.5);
 	this.boardSpeed = speed,
 	this.minSpeedOfDraggedImage = minSpeed,
+
+	this.boxesGroup,
+	this.boxesCollisionGroup,
 	
 	this.itemSpawner = new ItemSpawner(maxItems),
 	this.mouseP2 = new mouseP2();
@@ -171,6 +174,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 		itemCopy.image.body.fixedRotation = true;
 		//Añadimos la imagen a un collision group
 		itemCopy.image.body.setCollisionGroup(this.itemSpawner.itemCollisionGroup);
+		itemCopy.image.body.collides([this.boxesCollisionGroup]);
 		itemCopy.image.body.collideWorldBounds = true;
 		itemCopy.image.body.damping = 0;
 		//FISICAS P2/
@@ -215,9 +219,33 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 			//Si  ninguno es null(no hay colision con bounds)
 			if(obj1_body != null && obj2_body != null)
 			{
-				//Comprobar con que caja hay colision
-				
+				//Buscamos la caja en los dos bodies
+				let box_sprite;
+				//Si tiene un id es una caja
+				if(obj1_body.id != undefined)
+				{
+					//si la la imagen de la caja tiene el mismo id que el body encontramos nuestra caja
+					this.boxesGroup.forEach(function(box_image)
+					{
+						if(box_image.id === obj1_body.id)
+						{
+							box_sprite = obj1_body.sprite;
+						}
+					});
+
+				}else if(obj2_body.id != undefined)
+				{
+					this.boxesGroup.forEach(function(box_image)
+					{
+						if(box_image.id === obj2_body.id)
+						{
+							box_sprite = obj1_body.sprite;
+						}
+					});
+
+				}
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
+
 			}else{ //Hay colision con bounds
 				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
 				console.log("Colision con bounds: vuelta a la cinta");

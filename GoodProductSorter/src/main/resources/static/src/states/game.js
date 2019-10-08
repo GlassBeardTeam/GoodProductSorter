@@ -12,6 +12,7 @@ this.band;
 this.scenario = {
 	boardMachine: undefined,
 	boxesGroup: undefined,
+	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
 };
@@ -72,6 +73,12 @@ GoodProductSorter.gameState.prototype = {
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage);
 		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width;
+
+		this.scenario.boxesCollisionGroup = game.physics.p2.createCollisionGroup();
+
+		//Añadir a boardMachine el grupo de colisiones cajas y el grupo de fisicas
+		this.scenario.boardMachine.boxesCollisionGroup = this.scenario.boxesCollisionGroup;
+		this.scenario.boardMachine.boxesGroup = this.scenario.boxesGroup;
 	},
 
 
@@ -130,13 +137,26 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.myPhysicsGroup = this.scenario.boxesGroup;
 		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
+		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
 		this.scenario.leftBox.image.body.setCircle(200);
+		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
+		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
+		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 		//Caja derecha
 		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width - this.scenario.leftBox.image.width/2, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
 		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
-		
+		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
+		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
+		this.scenario.rightBox.image.body.static = true;
+		this.scenario.rightBox.image.body.setCircle(200);
+		this.scenario.rightBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
+		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
+		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
+
+	
+
 		//Layer order
 		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
@@ -145,7 +165,7 @@ GoodProductSorter.gameState.prototype = {
 
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
-	
+		
 
 	
 	},
@@ -177,8 +197,6 @@ GoodProductSorter.gameState.prototype = {
 	CreateItemsWorld1_level1: function()
 	{
 		this.scenario.boardMachine.addItemToLevel(new Item("bebe"));
-
-		
 	}
 
 
