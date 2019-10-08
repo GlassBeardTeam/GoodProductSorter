@@ -3,17 +3,20 @@ GoodProductSorter.gameState = function(game) {
 this.aKey;
 this.dKey;
 
+
 //Game objects
 
 this.background;
 this.band;
-this.velocity=50;
-this.cajaIz;
-this.cajaDer;
-this.baby;
+
+this.scenario = {
+	boardMachine: undefined,
+	boxesGroup: undefined,
+	leftBox: undefined,
+	rightBox: undefined,
+};
 
 //Mi maquina
-this.boardMachine;
 this.machineSpeed = 400;
 this.minSpeedOfDraggedImage = 1000;
 this.foo = 0;
@@ -37,8 +40,10 @@ GoodProductSorter.gameState.prototype = {
 			console.log("[DEBUG] Entering **GAME** state");
 		}
 		this.band = new Item("Banda");
-		this.cajaIz = new Item("BocetoCaja");
-		this.cajaDer = new Item("BocetoCaja");
+		this.scenario.leftBox = new Item("BocetoCaja");
+		this.scenario.rightBox = new Item("BocetoCaja");
+		this.scenario.boxesGroup = game.add.group();
+	
 		this.background = game.add.image(0, 0, "SueloFabrica");
 
 		
@@ -65,8 +70,8 @@ GoodProductSorter.gameState.prototype = {
 
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
-		this.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage);
-		this.boardMachine.image.y += this.boardMachine.image.width;
+		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage);
+		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width;
 	},
 
 
@@ -82,20 +87,20 @@ GoodProductSorter.gameState.prototype = {
 		this.band.image.y=game.world.centerY;
 		
 		//Caja Izquierda
-		this.cajaIz.image.width=this.world.width*0.3;
-		this.cajaIz.image.height=this.world.height*0.2;
-		this.cajaIz.image.x= this.cajaIz.image.width/2;
-		this.cajaIz.image.y= this.background.height/2;
+		this.scenario.leftBox.image.width=this.world.width*0.3;
+		this.scenario.leftBox.image.height=this.world.height*0.2;
+		this.scenario.leftBox.image.x= this.scenario.leftBox.image.width/2;
+		this.scenario.leftBox.image.y= this.background.height/2;
 		
 		//Caja Derecha
-		this.cajaDer.image.width = this.world.width*0.3;
-		this.cajaDer.image.height = this.world.height*0.2;
-		this.cajaDer.image.x = this.background.width - this.cajaDer.image.width/2;
-		this.cajaDer.image.y = this.background.height/2;
+		this.scenario.rightBox.image.width = this.world.width*0.3;
+		this.scenario.rightBox.image.height = this.world.height*0.2;
+		this.scenario.rightBox.image.x = this.background.width - this.scenario.rightBox.image.width/2;
+		this.scenario.rightBox.image.y = this.background.height/2;
 
 		//Objeto
-		this.baby.width=this.world.width*0.2;
-		this.baby.height=this.world.height*0.1;
+		//this.baby.width=this.world.width*0.2;
+		//this.baby.height=this.world.height*0.1;
 
 		//Info
 		// Get width and height of the window excluding scrollbars
@@ -119,17 +124,24 @@ GoodProductSorter.gameState.prototype = {
         this.background.width = this.game.width;
 		
 		//Banda transportadora
-		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.boardMachine.getPhysicsGroup());
+		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
-		this.cajaIz.setItemImage(game.world.width*0.15, game.world.centerY, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
+		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
+		this.scenario.leftBox.myPhysicsGroup = this.scenario.boxesGroup;
+		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
+		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
+		this.scenario.leftBox.image.body.static = true;
+		this.scenario.leftBox.image.body.setCircle(200);
 		//Caja derecha
-		this.cajaDer.setItemImage(this.cajaIz.image.x, this.cajaIz.image.y, 'BocetoCaja', this.boardMachine.getPhysicsGroup());
-		
+		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width - this.scenario.leftBox.image.width/2, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
+		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
+		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
 		
 		//Layer order
-		game.world.bringToTop(this.boardMachine.machineGroup);
-		game.world.bringToTop(this.boardMachine.getBoardPhysicsGroup());
-		game.world.bringToTop(this.boardMachine.getPhysicsGroup());
+		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
+		game.world.bringToTop(this.scenario.boxesGroup);
+		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
+		game.world.bringToTop(this.scenario.boardMachine.getPhysicsGroup());
 
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
@@ -138,26 +150,13 @@ GoodProductSorter.gameState.prototype = {
 	
 	},
 	finTiempo: function(){
+		this.removeAllItems();
 		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
 	},
 
-
-
-	onItemDragStart: function(item, params)
+	removeAllItems: function()
 	{
-		item.image.body.velocity.x = 0;
-		item.image.body.velocity.y = 0;
-		item.boardImage.alpha = 0.5;
-		//item.boardImage.body.velocity.y=0;
-	},
 
-	onItemDragStop: function(item, params)
-	{
-		item.image.x = item.boardImage.x;
-		item.image.y = item.boardImage.y;
-		item.image.body.velocity.x = item.boardImage.body.velocity.x;
-		item.image.body.velocity.y = item.boardImage.body.velocity.y;
-		item.boardImage.alpha = 0.0;
 	},
 
 	update : function() {
@@ -167,8 +166,7 @@ GoodProductSorter.gameState.prototype = {
 		this.resize();
 		//Check if  machine has to spawn something
 		if(this.foo <= 0){
-			this.boardMachine.SpawnRandomItem();
-			//console.log("item x: " + item.image.x  + "y: " + item.image.y);
+			let item = this.scenario.boardMachine.SpawnRandomItem();
 			this.foo++;
 		}
 	},
@@ -178,9 +176,7 @@ GoodProductSorter.gameState.prototype = {
 
 	CreateItemsWorld1_level1: function()
 	{
-		
-		this.baby = new Item("bebe");
-		this.boardMachine.addItemToLevel(new Item("bebe"));
+		this.scenario.boardMachine.addItemToLevel(new Item("bebe"));
 
 		
 	}
