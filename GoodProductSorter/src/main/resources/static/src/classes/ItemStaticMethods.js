@@ -219,7 +219,9 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 				
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}else{ //Hay colision con bounds
-
+				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
+				console.log("Colision con bounds: vuelta a la cinta");
+				attatchToBoardImage(itemCopy);
 			}
 
 		},this);
@@ -250,13 +252,15 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 
 	this.ItemOnDragStartCallback = function(item)
 	{
+		console.log("StartDrag");
 		item.image.body.velocity.x = 0;
 		item.image.body.velocity.y = 0;
+		
 	},
 
 	this.ItemOnDragStopCallback = function(item, minSpeed)
 	{
-		attatchToBoardImage(item, minSpeed);
+		item.image.update = () =>checkAttatchToBoardImage(item, minSpeed);
 	}
 
 }
@@ -289,17 +293,23 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2)
 	}
 }
 
-function attatchToBoardImage(item, minSpeed)
+function checkAttatchToBoardImage(item, minSpeed)
 {
 	let magnitude = Math.sqrt(Math.pow(item.image.body.velocity.x, 2) + Math.pow(item.image.body.velocity.y, 2))
 	console.log(magnitude);
 	if(magnitude < minSpeed)
 	{
-	//console.log("image: (x,y): " + item.image.x);
-	item.image.body.x = item.boardImage.body.x;
-	item.image.body.y = item.boardImage.body.y;
-	//Sentido contrario de la velocidad en P2
-	item.image.body.velocity.x = item.boardImage.body.velocity.x;
-	item.image.body.velocity.y = item.boardImage.body.velocity.y;
+		attatchToBoardImage(item);
 	}	
+}
+
+function attatchToBoardImage(item)
+{
+		//console.log("image: (x,y): " + item.image.x);
+		item.image.body.x = item.boardImage.body.x;
+		item.image.body.y = item.boardImage.body.y;
+		//Sentido contrario de la velocidad en P2
+		item.image.body.velocity.x = item.boardImage.body.velocity.x;
+		item.image.body.velocity.y = item.boardImage.body.velocity.y;
+		item.image.update = ()=>{};
 }
