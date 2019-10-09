@@ -54,8 +54,7 @@ function lasvegas(seed)
 		console.log("foo: " + foo);
 		while(r >= w)
 		{
-			r = Math.trunc(randomLCM(c) / Math.trunc((this.lcm.c.M / W)));
-			r = Math.trunc(this.lcm.randomLCM(this.lcm.c) / Math.trunc((this.lcm.c.M / W)));
+			r = Math.trunc(this.lcm.randomLCM(this.lcm.c) / Math.trunc(this.lcm.c.M / W));
 			r = r+l;
 		}
 		return r;

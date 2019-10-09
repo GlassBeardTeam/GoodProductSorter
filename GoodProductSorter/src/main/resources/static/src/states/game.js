@@ -15,13 +15,13 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
-	seed: 9999
+	seed: 1234
 };
 
 //Mi maquina
 this.machineSpeed = 400;
 this.minSpeedOfDraggedImage = 1000;
-this.foo = 0;
+this.foo = 3;
 
 //Timer
 this.Durpartida=10;
@@ -187,9 +187,9 @@ GoodProductSorter.gameState.prototype = {
 
 		//this.resize();
 		//Check if  machine has to spawn something
-		if(this.foo <= 0){
+		if(this.foo > 0){
 			let item = this.scenario.boardMachine.SpawnRandomItem();
-			this.foo++;
+			this.foo--;
 		}
 	},
 
