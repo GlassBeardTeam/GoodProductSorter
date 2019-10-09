@@ -34,7 +34,15 @@ GoodProductSorter.bootState.prototype = {
 		this.input.maxpointer=1;
 		this.stage.disableVisibilityChange = true;
 		//resize
+		
+		
+		this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+		this.game.scale.setShowAll();
+		window.addEventListener('resize', function () {  this.game.scale.refresh();});
+		this.game.scale.refresh();
+
 		this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+
 	},
 	
 	preload:function(){
