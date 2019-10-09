@@ -191,7 +191,7 @@ GoodProductSorter.gameState.prototype = {
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 
-		//this.resize();
+		this.resize();
 		//Check if  machine has to spawn something
 		if(this.foo > 0){
 			let item = this.scenario.boardMachine.SpawnRandomItem();

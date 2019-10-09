@@ -159,7 +159,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		//FISICAS P2
 		game.physics.enable(itemCopy.image, Phaser.Physics.P2JS);
  		//Hitbox circular
-		itemCopy.image.body.setCircle(100);
+		itemCopy.image.body.setCircle(itemCopy.image.width);
 		itemCopy.image.body.angularDamping = 1;
 		itemCopy.image.body.fixedRotation = true;
 		//Añadimos la imagen a un collision group

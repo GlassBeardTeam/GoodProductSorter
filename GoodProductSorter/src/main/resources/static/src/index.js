@@ -2,7 +2,9 @@ window.onload = function() {
 	let game_canvas_width = window.screen.width;
 	let game_canvas_height = window.screen.height;
 
-	game = new Phaser.Game(game_canvas_width, game_canvas_height, Phaser.CANVAS, 'Vaqueros vs Piratas');
+	let aspectRatio = 9/17;//9 width x 17 height
+	game_canvas_width = game_canvas_height * aspectRatio;
+	game = new Phaser.Game(game_canvas_width, game_canvas_height, Phaser.CANVAS, 'GoodProductSorter');
 	
 
 	// GLOBAL VARIABLES
