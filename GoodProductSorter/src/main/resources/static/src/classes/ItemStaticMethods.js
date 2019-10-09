@@ -14,24 +14,16 @@ function addOnOverCallback(callback, item, params)
 	this.image.input.onInputOver.add(()=>callback(item, params), this);
 }
 
-/*
-function enablePhaserPhysics(item)
-{
-	this.game.physics.enable(item.image, Phaser.Physics.P2JS);
-	this.game.physics.enable(item.boardImage, Phaser.Physics.P2JS);
-}
-*/
-
 var RandomNumberBetween = function(min, max)
 {
 	let randomNumber = 	game.rnd.integerInRange(min, max);
 	return randomNumber;
 }
 
-var ItemSpawner = function(maxItems)
+var ItemSpawner = function(maxItems, seed)
 {
 	//Grupo de fisicas
-	
+	this.lasvegas = new lasvegas(seed);
 	this.itemPhysicsGroup = game.add.group();
 	this.itemPhysicsGroup.enableBody=true;
 	this.itemPhysicsGroup.physicsBodyType= Phaser.Physics.P2JS;
@@ -52,10 +44,11 @@ var ItemSpawner = function(maxItems)
 
 	this.GiveRandomItem = function()
 	{
-		let randomNumber = RandomNumberBetween(0, 1);
+		let randomNumber = this.lasvegas.randomLasVegas(0, this.levelItems.length);
+		console.log("Index del objeto: " + randomNumber);
 		//Buscamos por probabilidad el objeto que este por debajo de ella con el algoritmo de busqueda binaria 
 		//let item = this.levenlItems[];
-		return this.levelItems[0];
+		return this.levelItems[randomNumber];
 	}
 }
 
@@ -110,13 +103,10 @@ var mouseP2 = function()
 	}
 }
 
-
-
-var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
+var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 {
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
-	//this.image = game.add.image(x, y, name),
 	this.image.anchor.setTo(0.5, 0.5);
 	this.boardSpeed = speed,
 	this.minSpeedOfDraggedImage = minSpeed,
@@ -124,7 +114,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 	this.boxesGroup,
 	this.boxesCollisionGroup,
 	
-	this.itemSpawner = new ItemSpawner(maxItems),
+	this.itemSpawner = new ItemSpawner(maxItems, seed),
 	this.mouseP2 = new mouseP2();
 	this.MaxSpawnXCoords = [this.image.x,(this.image.x + this.image.width/2)],
 	this.MaxSpawnYCoords = [0 ,(this.image.y + this.image.height/2)],
@@ -244,7 +234,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 					});
 
 				}
-				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
+				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 
 			}else{ //Hay colision con bounds
 				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
@@ -293,7 +283,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed)
 
 }
 
-function removeSpawnedItemFromGame(itemCopy, mouseP2)
+function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardItemCollisionGroup)
 {
 	//Borramos el body de image del raton P2
 	for(let i = 0; i< mouseP2.bodies.length; i++)
@@ -306,11 +296,11 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2)
 	//Borramos image de su grupo
 	itemCopy.myPhysicsGroup.remove(itemCopy.image);
 	//Borramos el objeto del grupo de colisiones
-
+	itemCopy.image.body.clearCollision(true,true);
 	//Borramos boardImage de su grupo
 	itemCopy.myBoardPhysicsGroup.remove(itemCopy.boardImage);
 	//Borramos el objeto del grupo de colisiones
-
+	itemCopy.boardImage.body.clearCollision(true,true);
 	//¿Como borramos el Item?
 	delete itemCopy;
 	if(game.global.DEBUG_MODE){

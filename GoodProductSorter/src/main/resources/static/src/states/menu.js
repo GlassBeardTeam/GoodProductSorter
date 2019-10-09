@@ -99,7 +99,7 @@ GoodProductSorter.menuState.prototype ={
 				this.image_turn.visible=false;
 			}
 		}
-		this.resize();
+		//this.resize();
 	},
 
 	click_button:function(button){

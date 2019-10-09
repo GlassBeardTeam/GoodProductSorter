@@ -38,6 +38,11 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/SueloFabricaBoceto.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
+		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
+		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
+		this.load.image("condon", 'assets/items/hosptal/condon.png');
+		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
+		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
 
 
         /*this.background = this.add.image(0, 0, "preloader_fondo");
@@ -76,7 +81,8 @@ GoodProductSorter.preloadState.prototype={
         	console.log('Fonts Loaded');
     	}
         this.fontsReady = true;
-    },
+	},
+	
     //Comunica que se han cargado los assets
     loadComplete: function() {
     	if(this.game.global.DEBUG_MODE)

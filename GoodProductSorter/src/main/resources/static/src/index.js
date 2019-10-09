@@ -1,5 +1,8 @@
 window.onload = function() {
-	game = new Phaser.Game(1920, 1080, Phaser.CANVAS, 'Vaqueros vs Piratas');
+	let game_canvas_width = window.screen.width;
+	let game_canvas_height = window.screen.height;
+
+	game = new Phaser.Game(game_canvas_width, game_canvas_height, Phaser.CANVAS, 'Vaqueros vs Piratas');
 	
 
 	// GLOBAL VARIABLES

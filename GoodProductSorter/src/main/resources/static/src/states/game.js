@@ -15,6 +15,7 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
+	seed: 9999
 };
 
 //Mi maquina
@@ -23,7 +24,7 @@ this.minSpeedOfDraggedImage = 1000;
 this.foo = 0;
 
 //Timer
-this.Durpartida=60;
+this.Durpartida=10;
 puntuacion=0;
 nivel=1;
 mundo=1;
@@ -71,7 +72,7 @@ GoodProductSorter.gameState.prototype = {
 
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
-		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage);
+		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage, this.scenario.seed);
 		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width;
 
 		this.scenario.boxesCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -166,24 +167,25 @@ GoodProductSorter.gameState.prototype = {
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 		
-
-	
-	},
-	finTiempo: function(){
-		this.removeAllItems();
-		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
 	},
 
 	removeAllItems: function()
 	{
-
+		return true;
 	},
+
+	finTiempo: function(){
+		this.removeAllItems;
+		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
+	},
+
+	
 
 	update : function() {
 		segundos="0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 
-		this.resize();
+		//this.resize();
 		//Check if  machine has to spawn something
 		if(this.foo <= 0){
 			let item = this.scenario.boardMachine.SpawnRandomItem();
@@ -197,6 +199,11 @@ GoodProductSorter.gameState.prototype = {
 	CreateItemsWorld1_level1: function()
 	{
 		this.scenario.boardMachine.addItemToLevel(new Item("bebe"));
+		this.scenario.boardMachine.addItemToLevel(new Item("alcohol"));
+		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio"));
+		this.scenario.boardMachine.addItemToLevel(new Item("condon"));
+		this.scenario.boardMachine.addItemToLevel(new Item("calavera"));
+		this.scenario.boardMachine.addItemToLevel(new Item("corazon"));
 	}
 
 
