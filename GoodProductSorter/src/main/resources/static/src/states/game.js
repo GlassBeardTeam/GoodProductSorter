@@ -21,7 +21,7 @@ this.scenario = {
 //Mi maquina
 this.machineSpeed = 400;
 this.minSpeedOfDraggedImage = 1000;
-this.foo = 3;
+this.foo = 1;
 
 //Timer
 this.Durpartida=10;
@@ -140,7 +140,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
 		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
-		this.scenario.leftBox.image.body.setCircle(200);
+		this.scenario.leftBox.image.body.setCircle(100);
 		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
@@ -151,7 +151,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;
-		this.scenario.rightBox.image.body.setCircle(200);
+		this.scenario.rightBox.image.body.setCircle(100);
 		this.scenario.rightBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
@@ -162,14 +162,6 @@ GoodProductSorter.gameState.prototype = {
 		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
 		game.world.bringToTop(this.scenario.boardMachine.getPhysicsGroup());
 
-		/*
-		for(let i = 0; i < 10; i++)
-		{
-			let rnd_number = this.scenario.boardMachine.itemSpawner.lasvegas.randomLasVegas(0, 10);
-			console.log("random number: " + rnd_number);
-		}
-		*/
-		
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 		

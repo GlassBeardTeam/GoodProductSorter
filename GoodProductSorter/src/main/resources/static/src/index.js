@@ -2,10 +2,11 @@ window.onload = function() {
 	let game_canvas_width = window.screen.width;
 	let game_canvas_height = window.screen.height;
 
+	/*
 	let aspectRatio = 9/17;//9 width x 17 height
-	game_canvas_width = game_canvas_height * aspectRatio;
+	game_canvas_width = Math.trunc(game_canvas_height * aspectRatio);
+	*/
 	game = new Phaser.Game(game_canvas_width, game_canvas_height, Phaser.CANVAS, 'GoodProductSorter');
-	
 
 	// GLOBAL VARIABLES
 	game.global = {
@@ -14,7 +15,14 @@ window.onload = function() {
 		socket : null,
 		IDIOMA: 'ESP',
 	}
-	
+	/*
+	if(game.global.DEBUG_MODE)
+	{
+		console.log("[DEBUG] screen width: " + game_canvas_width);
+		console.log("[DEBUG] screen height: " + game_canvas_height);
+	}
+	*/
+
 	// Se le pide el nombre al jugador
 	//var name = prompt("Enter your name");
 

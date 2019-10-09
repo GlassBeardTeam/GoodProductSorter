@@ -54,7 +54,6 @@ var ItemSpawner = function(maxItems, seed)
 
 var mouseP2 = function()
 {
-	console.log("P2 mouse created");
 	this.mouseBody = new p2.Body();
 	game.physics.p2.world.addBody(this.mouseBody);
 	this.mouseConstraint;
@@ -270,7 +269,6 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 
 	this.ItemOnDragStartCallback = function(item)
 	{
-		console.log("StartDrag");
 		item.image.body.velocity.x = 0;
 		item.image.body.velocity.y = 0;
 		
@@ -314,7 +312,6 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardI
 function checkAttatchToBoardImage(item, minSpeed)
 {
 	let magnitude = Math.sqrt(Math.pow(item.image.body.velocity.x, 2) + Math.pow(item.image.body.velocity.y, 2))
-	console.log(magnitude);
 	if(magnitude < minSpeed)
 	{
 		attatchToBoardImage(item);
@@ -323,7 +320,6 @@ function checkAttatchToBoardImage(item, minSpeed)
 
 function attatchToBoardImage(item)
 {
-		//console.log("image: (x,y): " + item.image.x);
 		item.image.body.x = item.boardImage.body.x;
 		item.image.body.y = item.boardImage.body.y;
 		//Sentido contrario de la velocidad en P2
