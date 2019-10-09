@@ -147,7 +147,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
 		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
-		this.scenario.leftBox.image.body.setCircle(100);
+		this.scenario.leftBox.image.body.setCircle(this.scenario.leftBox.image.body.width/2);
 		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
@@ -164,7 +164,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;
-		this.scenario.rightBox.image.body.setCircle(100);
+		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width/2);
 		this.scenario.rightBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
@@ -209,12 +209,12 @@ GoodProductSorter.gameState.prototype = {
 
 	CreateItemsWorld1_level1: function()
 	{
-		this.scenario.boardMachine.addItemToLevel(new Item("bebe"), 0.2);
-		this.scenario.boardMachine.addItemToLevel(new Item("alcohol"),0.2);
-		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio"),0.2);
-		this.scenario.boardMachine.addItemToLevel(new Item("condon"), 0.2);
-		this.scenario.boardMachine.addItemToLevel(new Item("calavera"), 0.2);
-		this.scenario.boardMachine.addItemToLevel(new Item("corazon"), 0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("bebe", 0.2));
+		this.scenario.boardMachine.addItemToLevel(new Item("alcohol", 0.2));
+		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio", 0.2));
+		this.scenario.boardMachine.addItemToLevel(new Item("condon", 0.2));
+		this.scenario.boardMachine.addItemToLevel(new Item("calavera", 0.2));
+		this.scenario.boardMachine.addItemToLevel(new Item("corazon", 0.2));
 	}
 
 
