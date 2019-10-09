@@ -15,7 +15,7 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
-	seed: 1234
+	seed: 32748372
 };
 
 //Mi maquina
@@ -121,11 +121,11 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	create: function() {
-			//Control Tiempo
-			cuenta_atras=this.time.create();
-			final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
-			cuenta_atras.start();		
-			this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
+		//Control Tiempo
+		cuenta_atras=this.time.create();
+		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
+		cuenta_atras.start();		
+		this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
 	
 		//Background
         this.background.height = this.game.height;
@@ -156,14 +156,20 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
-	
-
 		//Layer order
 		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
 		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
 		game.world.bringToTop(this.scenario.boardMachine.getPhysicsGroup());
 
+		/*
+		for(let i = 0; i < 10; i++)
+		{
+			let rnd_number = this.scenario.boardMachine.itemSpawner.lasvegas.randomLasVegas(0, 10);
+			console.log("random number: " + rnd_number);
+		}
+		*/
+		
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 		
@@ -182,7 +188,7 @@ GoodProductSorter.gameState.prototype = {
 	
 
 	update : function() {
-		segundos="0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
+		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 
 		//this.resize();

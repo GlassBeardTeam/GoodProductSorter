@@ -23,7 +23,8 @@
 	//Lo que hay que llamar
 	this.randomLCM = function(c)
 	{
-		r = (c.M * c.X) % c.M;
+		console.log("c.a: " + c.A + " c.x: " + c.X + " c.M:"  + c.M);
+		r = (c.A * c.X) % c.M;
 		r = this.moduloSum(r, c.C, c.M);
 		c.X = r;
 		return c.X;
@@ -49,9 +50,7 @@ function lasvegas(seed)
 	{
 		W = this.calculateW(l, u);
 		let w = u - l;
-		let foo = Math.trunc(this.lcm.c.M / W);
 		let r = Math.trunc(this.lcm.randomLCM(this.lcm.c) / Math.trunc(this.lcm.c.M / W));
-		console.log("foo: " + foo);
 		while(r >= w)
 		{
 			r = Math.trunc(this.lcm.randomLCM(this.lcm.c) / Math.trunc(this.lcm.c.M / W));
