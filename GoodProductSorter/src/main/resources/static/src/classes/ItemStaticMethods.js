@@ -141,6 +141,17 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		itemCopy.myPhysicsGroup = this.getPhysicsGroup();
 		itemCopy.image = itemCopy.myPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
 
+		//Escalamos el objeto para que ocupa el porcentaje que marca item.scale
+		/*
+		let widthScale = itemCopy.image.width/game.world._width;
+		let heightScale = itemCopy.image.height/game.world._height;
+		itemCopy.image.width *= item.scale/widthScale;
+		itemCopy.image.height *= item.scale/heightScale * 17/9;
+		*/
+		let scale = itemCopy.image.width/game.world._width;
+		itemCopy.image.width *= item.scale/scale;
+		itemCopy.image.height *= item.scale/scale;
+		
 		//ARCADE PHYSICS
 		/*
 		itemCopy.image = game.add.sprite(xcoord, ycoord, itemCopy.name);

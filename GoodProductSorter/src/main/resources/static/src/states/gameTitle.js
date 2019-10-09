@@ -16,6 +16,7 @@ GoodProductSorter.gameTitleState.prototype = {
 	},
 
 	create : function() {
+
 		let style ={
 			font: "bold 32px Arial",
 			fill: "#fff"

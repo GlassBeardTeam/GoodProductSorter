@@ -83,7 +83,7 @@ GoodProductSorter.world1State.prototype = {
 		if (this.scale.isLandscape && window.screen.availHeight<=1000){
 			this.image_turn.height = this.game.height;
 			this.image_turn.width = this.game.width;
-			this.image_turn.visible=true;
+			this.image_turn.visible=false;
 			this.image_turn.bringToTop();
 		}else{
 			if (this.image_turn.visible === true){

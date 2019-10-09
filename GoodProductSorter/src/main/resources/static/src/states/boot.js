@@ -41,7 +41,7 @@ GoodProductSorter.bootState.prototype = {
 		window.addEventListener('resize', function () {  this.game.scale.refresh();});
 		this.game.scale.refresh();
 
-		this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
+		//this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
 
 	},
 	

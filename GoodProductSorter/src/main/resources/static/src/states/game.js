@@ -55,7 +55,7 @@ GoodProductSorter.gameState.prototype = {
 
 	preload : function() {
 		//Callback para resize
-		window.addEventListener("resize", this.displayWindowSize);
+		//window.addEventListener("resize", this.displayWindowSize);
 
 		//Iniciamos fisicas ARCADE
 		/*
@@ -73,7 +73,16 @@ GoodProductSorter.gameState.prototype = {
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage, this.scenario.seed);
+
+		//Escalamos la IA
+		this.scenario.boardMachine.scale = 0.3;
+		let machineProp = this.scenario.boardMachine.image.width/game.world._width;
+		this.scenario.boardMachine.image.width *= this.scenario.boardMachine.scale/machineProp;
+		this.scenario.boardMachine.image.height *= this.scenario.boardMachine.scale/machineProp;
+
+		//ajustar posicion
 		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width;
+
 
 		this.scenario.boxesCollisionGroup = game.physics.p2.createCollisionGroup();
 
@@ -106,18 +115,11 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.x = this.background.width - this.scenario.rightBox.image.width/2;
 		this.scenario.rightBox.image.y = this.background.height/2;
 
-		//Objeto
-		//this.baby.width=this.world.width*0.2;
-		//this.baby.height=this.world.height*0.1;
-
 		//Info
 		// Get width and height of the window excluding scrollbars
 		var w = document.documentElement.clientWidth;
 		var h = document.documentElement.clientHeight;
-		//La altura funciona, la anchura se mantiene
-			  
-		// Display result inside a div element
-		//console.log("Width: " + w + ", " + "Height: " + h);
+	
 	},
 
 	create: function() {
@@ -135,6 +137,11 @@ GoodProductSorter.gameState.prototype = {
 		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
+		this.scenario.leftBox.scale = 0.15;
+		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
+		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
+		this.scenario.leftBox.image.height *= this.scenario.leftBox.scale/leftBoxProp;
+
 		this.scenario.leftBox.myPhysicsGroup = this.scenario.boxesGroup;
 		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
@@ -146,6 +153,12 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 		//Caja derecha
 		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width - this.scenario.leftBox.image.width/2, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
+
+		this.scenario.rightBox.scale = 0.15;
+		let rightBoxProp = this.scenario.rightBox.image.width/game.world._width;
+		this.scenario.rightBox.image.width *= this.scenario.rightBox.scale/rightBoxProp;
+		this.scenario.rightBox.image.height *= this.scenario.rightBox.scale/rightBoxProp;
+
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
 		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
@@ -183,7 +196,7 @@ GoodProductSorter.gameState.prototype = {
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 
-		this.resize();
+		//this.resize();
 		//Check if  machine has to spawn something
 		if(this.foo > 0){
 			let item = this.scenario.boardMachine.SpawnRandomItem();
@@ -196,12 +209,12 @@ GoodProductSorter.gameState.prototype = {
 
 	CreateItemsWorld1_level1: function()
 	{
-		this.scenario.boardMachine.addItemToLevel(new Item("bebe"));
-		this.scenario.boardMachine.addItemToLevel(new Item("alcohol"));
-		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio"));
-		this.scenario.boardMachine.addItemToLevel(new Item("condon"));
-		this.scenario.boardMachine.addItemToLevel(new Item("calavera"));
-		this.scenario.boardMachine.addItemToLevel(new Item("corazon"));
+		this.scenario.boardMachine.addItemToLevel(new Item("bebe"), 0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("alcohol"),0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio"),0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("condon"), 0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("calavera"), 0.2);
+		this.scenario.boardMachine.addItemToLevel(new Item("corazon"), 0.2);
 	}
 
 

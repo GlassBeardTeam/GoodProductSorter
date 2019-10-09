@@ -1,12 +1,25 @@
 window.onload = function() {
-	let game_canvas_width = window.screen.width;
-	let game_canvas_height = window.screen.height;
+	let ww = window.innerWidth;
+	let wh = window.innerHeight;
+	console.log("window inner width: " + ww);
+	console.log("window inner height: " + wh);
 
-	/*
-	let aspectRatio = 9/17;//9 width x 17 height
-	game_canvas_width = Math.trunc(game_canvas_height * aspectRatio);
-	*/
-	game = new Phaser.Game(game_canvas_width, game_canvas_height, Phaser.CANVAS, 'GoodProductSorter');
+	let window_aspect_ratio = ww/wh;
+	let desired_aspect_ratio = 17/9;
+	let w;
+	let h;
+
+	if(window_aspect_ratio >= desired_aspect_ratio)
+	{
+		w = ww;
+		h = w * desired_aspect_ratio;
+	}else
+	{
+		h = wh;
+		w  = h * (1/desired_aspect_ratio);
+	}
+
+	game = new Phaser.Game(w, h, Phaser.CANVAS, 'GoodProductSorter');
 
 	// GLOBAL VARIABLES
 	game.global = {
@@ -14,14 +27,9 @@ window.onload = function() {
 		DEBUG_MODE : true,
 		socket : null,
 		IDIOMA: 'ESP',
+		ASPECT_RATIO: desired_aspect_ratio,
 	}
-	/*
-	if(game.global.DEBUG_MODE)
-	{
-		console.log("[DEBUG] screen width: " + game_canvas_width);
-		console.log("[DEBUG] screen height: " + game_canvas_height);
-	}
-	*/
+
 
 	// Se le pide el nombre al jugador
 	//var name = prompt("Enter your name");

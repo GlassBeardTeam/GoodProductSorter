@@ -1,6 +1,7 @@
 
-function Item(name)
+function Item(name, scale)
 {
+	this.scale = scale,
 	this.name = name,
 	this.id,
 	this.image,
