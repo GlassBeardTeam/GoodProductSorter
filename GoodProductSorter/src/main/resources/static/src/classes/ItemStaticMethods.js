@@ -139,6 +139,8 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		//Generamos todos los valores como su item padre
 		itemCopy.myBoardPhysicsGroup = this.getBoardPhysicsGroup();
 		itemCopy.myPhysicsGroup = this.getPhysicsGroup();
+
+		//Creamos la imagen
 		itemCopy.image = itemCopy.myPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
 
 		//Escalamos el objeto para que ocupa el porcentaje que marca item.scale
@@ -197,21 +199,29 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		let boardItemScale = itemCopy.boardImage.width/game.world._width;
 		itemCopy.boardImage.width *= item.scale/boardItemScale;
 		itemCopy.boardImage.height *= item.scale/boardItemScale;
-		
-		itemCopy.boardImage.body.setCollisionGroup(this.itemSpawner.boardItemCollisionGroup);
-		itemCopy.boardImage.body.collideWorldBounds = true;
-		itemCopy.boardImage.body.damping = 0;
-		itemCopy.boardImage.body.setCircle(itemCopy.boardImage.body.width * 0.5);
-		//P2 PHYSICS/
 
 		itemCopy.boardImage.anchor.setTo(0.5, 0.5);
 		itemCopy.boardImage.alpha = 0.5;
+		
+		//P2 PHYSICS
+		game.physics.enable(itemCopy.boardImage, Phaser.Physics.P2JS);
+		//Hitbox circular
+		itemCopy.boardImage.body.setCircle(itemCopy.boardImage.width * 0.5);
+		itemCopy.boardImage.body.angularDamping = 1;
+		itemCopy.boardImage.body.fixedRotation = true;
+		//Añadimos la imagen a un colision group
+		itemCopy.boardImage.body.setCollisionGroup(this.itemSpawner.boardItemCollisionGroup);
+		//itemCopy.boardImage.body.collides([]); asi no colisiona con nada, se supone
+		itemCopy.boardImage.body.collideWorldBounds = true;
+		itemCopy.boardImage.body.damping = 0;
+		//P2 PHYSICS/
+
 
 		//Se añade velocidad a los objetos
 		itemCopy.image.body.velocity.y = this.boardSpeed;
 		itemCopy.boardImage.body.velocity.y = this.boardSpeed;
 		
-		//itemCopy.boardImage.body.collides([]); asi no colisiona con nada, se supone
+
 
 		//Añadimos las callbacks de drag and drop
 		addOnDragStartCallback(this.ItemOnDragStartCallback, itemCopy, null);
@@ -254,7 +264,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 
 			}else{ //Hay colision con bounds
 				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
-				console.log("Colision con bounds: vuelta a la cinta");
+				console.log("Colision de image con bounds: vuelta a la cinta");
 				attatchToBoardImage(itemCopy);
 			}
 
@@ -262,11 +272,13 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 
 		itemCopy.boardImage.body.onBeginContact.add(function(body1, body2, shape1, shape2, equation)
 		{
+			console.log("OnbeginContat de boardImage");
 			let obj1_body= equation[0].bodyA.parent;
 			let obj2_body = equation[0].bodyB.parent;
 			//Si alguno de los dos es null, uno son los bounds
 			if(obj1_body == null || obj2_body == null)
 			{
+				console.log("remove item from game because u didnt clicked it");
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
 		},this);

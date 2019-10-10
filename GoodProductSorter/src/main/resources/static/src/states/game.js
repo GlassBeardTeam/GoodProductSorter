@@ -65,6 +65,7 @@ GoodProductSorter.gameState.prototype = {
 
 		//Iniciamos fisicas P2
 		game.physics.startSystem(Phaser.Physics.P2JS);
+		game.world.setBounds(0, 0, game.world._width, game.world._height);
 		game.input.mouse.enabled = true;
 		game.physics.p2.setImpactEvents(true);
 		game.physics.p2.updateBoundsCollisionGroup();
@@ -195,7 +196,6 @@ GoodProductSorter.gameState.prototype = {
 	update : function() {
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
-
 		//this.resize();
 		//Check if  machine has to spawn something
 		if(this.foo > 0){
