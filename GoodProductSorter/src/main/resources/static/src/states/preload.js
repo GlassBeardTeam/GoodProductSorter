@@ -34,9 +34,9 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BandSpriteSheet", 'assets/images/scenario/BandSpriteSheet.png');
 
 		//Game Images
-		this.load.image("band", 'assets/images/scenario/Eslabon_v1.png');
+		this.load.image("band", 'assets/images/scenario/Eslabon_v4.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
-		this.load.image("SueloFabrica", 'assets/images/scenario/SueloFabricaBoceto.png');
+		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');

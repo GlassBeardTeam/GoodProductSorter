@@ -19,7 +19,18 @@ this.scenario = {
 	leftBox: undefined,
 	rightBox: undefined,
 	gameTime: 60,
-	seed: 32748372
+	seed: 32748372,
+	eslabonesGroup: undefined,
+	eslabon_0: undefined,
+	eslabon_1: undefined,
+	eslabon_2: undefined,
+	eslabon_3: undefined,
+	eslabon_4: undefined,
+	eslabon_5: undefined,
+	eslabon_6: undefined,
+	eslabon_7: undefined,
+	eslabon_8: undefined,
+	eslabon_9: undefined
 };
 
 puntuacion=0;
@@ -41,7 +52,19 @@ GoodProductSorter.gameState.prototype = {
 		this.band = new Item("Banda");
 		this.scenario.leftBox = new Item("BocetoCaja");
 		this.scenario.rightBox = new Item("BocetoCaja");
+		this.scenario.eslabon_0 = new Item("band");
+		this.scenario.eslabon_1 = new Item("band");
+		this.scenario.eslabon_2 = new Item("band");
+		this.scenario.eslabon_3 = new Item("band");
+		this.scenario.eslabon_4 = new Item("band");
+		this.scenario.eslabon_5 = new Item("band");
+		this.scenario.eslabon_6 = new Item("band");
+		this.scenario.eslabon_7 = new Item("band");
+		this.scenario.eslabon_8 = new Item("band");
+		this.scenario.eslabon_9 = new Item("band");
+		this.scenario.eslabon_10 = new Item("band");
 		this.scenario.boxesGroup = game.add.group();
+		this.scenario.eslabonesGroup = game.add.group();
 	
 		this.background = game.add.image(0, 0, "SueloFabrica");
 
@@ -72,7 +95,7 @@ GoodProductSorter.gameState.prototype = {
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 
 		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.scenario.machineSpeed,
-								 this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
+		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		//Escalamos la IA
 		this.scenario.boardMachine.scale = 0.3;
@@ -91,6 +114,14 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.boardMachine.boxesGroup = this.scenario.boxesGroup;
 	},
 
+	resize_eslab: function (eslabon,num){
+		eslabon.anchor.setTo(0.5, 0);
+		eslabon.width=this.world.width*0.4;
+		eslabon.height=this.world.height*0.1;
+		eslabon.x=game.world.centerX;
+		eslabon.y=this.scenario.eslabon_0.image.height*num;
+		eslabon.body.velocity.y = this.scenario.machineSpeed;
+	},
 
 	resize: function () {
 
@@ -98,10 +129,10 @@ GoodProductSorter.gameState.prototype = {
 		this.background.width = this.world.width;
 
 		//Banda transportadora
-		this.band.image.width=this.world.width*0.4;
+		/*this.band.image.width=this.world.width*0.4;
 		this.band.image.height=this.world.height;
 		this.band.image.x=game.world.centerX;
-		this.band.image.y=game.world.centerY;
+		this.band.image.y=game.world.centerY;*/
 		
 		//Caja Izquierda
 		this.scenario.leftBox.image.width=this.world.width*0.3;
@@ -120,9 +151,47 @@ GoodProductSorter.gameState.prototype = {
 		var w = document.documentElement.clientWidth;
 		var h = document.documentElement.clientHeight;
 	
+		//Eslabones
+		this.resize_eslab(this.scenario.eslabon_0.image,0);
+		this.resize_eslab(this.scenario.eslabon_1.image,1);
+		this.resize_eslab(this.scenario.eslabon_2.image,2);
+		this.resize_eslab(this.scenario.eslabon_3.image,3);
+		this.resize_eslab(this.scenario.eslabon_4.image,4);
+		this.resize_eslab(this.scenario.eslabon_5.image,5);
+		this.resize_eslab(this.scenario.eslabon_6.image,6);
+		this.resize_eslab(this.scenario.eslabon_7.image,7);
+		this.resize_eslab(this.scenario.eslabon_8.image,8);
+		this.resize_eslab(this.scenario.eslabon_9.image,9);
+		this.resize_eslab(this.scenario.eslabon_10.image,10);
 	},
 
 	create: function() {
+		
+		//Eslabones bandas transportadoras
+		this.scenario.eslabon_0.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_0.name);
+		game.physics.enable(this.scenario.eslabon_0.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_1.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_1.name);
+		game.physics.enable(this.scenario.eslabon_1.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_2.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_2.name);
+		game.physics.enable(this.scenario.eslabon_2.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_3.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_3.name);
+		game.physics.enable(this.scenario.eslabon_3.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_4.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_4.name);
+		game.physics.enable(this.scenario.eslabon_4.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_5.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_5.name);
+		game.physics.enable(this.scenario.eslabon_5.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_6.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_6.name);
+		game.physics.enable(this.scenario.eslabon_6.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_7.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_7.name);
+		game.physics.enable(this.scenario.eslabon_7.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_8.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_8.name);
+		game.physics.enable(this.scenario.eslabon_8.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_9.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_9.name);
+		game.physics.enable(this.scenario.eslabon_9.image, Phaser.Physics.ARCADE);
+		this.scenario.eslabon_10.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_10.name);
+		game.physics.enable(this.scenario.eslabon_10.image, Phaser.Physics.ARCADE);
+
+		
 		//Control Tiempo
 		cuenta_atras=this.time.create();
 		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo);
@@ -134,7 +203,7 @@ GoodProductSorter.gameState.prototype = {
         this.background.width = this.game.width;
 		
 		//Banda transportadora
-		this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
+		//this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
 		this.scenario.leftBox.scale = 0.15;
@@ -170,6 +239,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
 		//Layer order
+		game.world.bringToTop(this.scenario.eslabonesGroup);
 		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
 		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
@@ -177,6 +247,7 @@ GoodProductSorter.gameState.prototype = {
 
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
+		this.resize();
 		
 	},
 
@@ -190,10 +261,17 @@ GoodProductSorter.gameState.prototype = {
 		game.state.start('endGameState',this.puntuacion,this.nivel,this.mundo);		
 	},
 
-	
+	bandOutCanvas:function(){
+		this.scenario.eslabonesGroup.forEach(function(item) {
+			if(item.y>=game.world._height){
+				item.y=-item.height;
+			};
+		});
+	},
 
 	update : function() {
 		
+		this.bandOutCanvas();
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 		//this.resize();
