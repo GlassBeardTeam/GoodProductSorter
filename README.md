@@ -26,6 +26,7 @@ Versión 0.5
   * [Historia](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#historia)
   * [Estética](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#est%C3%A9tica)
   * [Música y Sonido](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#m%C3%BAsica-y-sonido)
+  
 [Redes Sociales](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#redes-sociales)
 ## Pitch
 __Good Product Sorter__ es un juego de gestión con toques de humor en el que debes clasificar productos que van llegando a través de una cinta transportadora. Los productos y su clasificación van variando según se avanza en el juego, al igual que la dificultad.  
@@ -78,7 +79,10 @@ Además se crearán sonidos para:
 
 ### Redes Sociales
 E-mail: GlassBeardTeam@gmail.com
+
 Twitter: [@glass_beard](https://twitter.com/glass_beard)
+
 YouTube: [GlassBeard Team](https://www.youtube.com/channel/UCJsIbbIKmbcrgtMvDwL1Ogw/featured?view_as=subscriber)
+
 
 © 2019 GitHub, Inc.
