@@ -94,17 +94,20 @@ GoodProductSorter.gameState.prototype = {
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 
-		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.scenario.machineSpeed,
+		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'maquina', 20, this.scenario.machineSpeed,
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
+		this.scenario.boardMachine.image.animations.add('working');
+		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed, true);
+
 		//Escalamos la IA
-		this.scenario.boardMachine.scale = 0.3;
+		this.scenario.boardMachine.scale = 1;
 		let machineProp = this.scenario.boardMachine.image.width/game.world._width;
 		this.scenario.boardMachine.image.width *= this.scenario.boardMachine.scale/machineProp;
 		this.scenario.boardMachine.image.height *= this.scenario.boardMachine.scale/machineProp;
 
 		//ajustar posicion
-		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width;
+		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width * 0.9;
 
 
 		this.scenario.boxesCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -135,17 +138,19 @@ GoodProductSorter.gameState.prototype = {
 		this.band.image.y=game.world.centerY;*/
 		
 		//Caja Izquierda
-		this.scenario.leftBox.image.width=this.world.width*0.3;
-		this.scenario.leftBox.image.height=this.world.height*0.2;
-		this.scenario.leftBox.image.x= this.scenario.leftBox.image.width/2;
-		this.scenario.leftBox.image.y= this.background.height/2;
-		
-		//Caja Derecha
-		this.scenario.rightBox.image.width = this.world.width*0.3;
-		this.scenario.rightBox.image.height = this.world.height*0.2;
-		this.scenario.rightBox.image.x = this.background.width - this.scenario.rightBox.image.width/2;
-		this.scenario.rightBox.image.y = this.background.height/2;
+		let boxScale = 0.25;
+		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
+		this.scenario.leftBox.scale = boxScale;
+		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
+		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
+		this.scenario.leftBox.image.height *= this.scenario.leftBox.scale/leftBoxProp;
 
+		//Caja Derecha
+		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
+		this.scenario.rightBox.scale = boxScale;
+		let rightBoxProp = this.scenario.rightBox.image.width/game.world._width;
+		this.scenario.rightBox.image.width *= this.scenario.rightBox.scale/rightBoxProp;
+		this.scenario.rightBox.image.height *= this.scenario.rightBox.scale/rightBoxProp;
 		//Info
 		// Get width and height of the window excluding scrollbars
 		var w = document.documentElement.clientWidth;
@@ -206,13 +211,16 @@ GoodProductSorter.gameState.prototype = {
 		//this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
+		/*
+		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
 		this.scenario.leftBox.scale = 0.15;
 		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
 		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
 		this.scenario.leftBox.image.height *= this.scenario.leftBox.scale/leftBoxProp;
+		*/
 
 		this.scenario.leftBox.myPhysicsGroup = this.scenario.boxesGroup;
-		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
+
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
 		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
@@ -222,14 +230,15 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 		//Caja derecha
 		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width - this.scenario.leftBox.image.width/2, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
-
+		/*
+		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
 		this.scenario.rightBox.scale = 0.15;
 		let rightBoxProp = this.scenario.rightBox.image.width/game.world._width;
 		this.scenario.rightBox.image.width *= this.scenario.rightBox.scale/rightBoxProp;
 		this.scenario.rightBox.image.height *= this.scenario.rightBox.scale/rightBoxProp;
-
+		*/
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
-		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
+
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;

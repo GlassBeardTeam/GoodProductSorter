@@ -44,6 +44,8 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
 		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
 
+		//load spriteSheet
+		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquinaMov1.png', 1080, 1920, 2);
 
         /*this.background = this.add.image(0, 0, "preloader_fondo");
         this.background.height = this.game.height;
