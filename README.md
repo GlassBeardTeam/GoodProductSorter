@@ -5,6 +5,7 @@ Versión 0.5
 
 ### Glass Beard
 
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Logo(200x200).png)
 - Adrián Poza Guillermo - Artista 
 - Víctor González Rivera - Diseñador, programador
 - Álvaro Ramírez Miguez - Diseñador, programador, sonido
@@ -39,6 +40,7 @@ El juego estará adaptado para cualquier dispositivo con navegador Chrome o Fire
 La mecánica principal del juego consiste en clasificar productos en distintas categorias, teniendo en cuenta las directrices propuestas en cada nivel (Por ejemplo, utilizar guantes para evitar contaminar ciertos productos). 
 Si se acierta a la hora de clasificar un objeto se obtiene puntuación y se acelera la cinta transportadora, si se deja pasar se reduce la velocidad y si se coloca en la caja equivocada se resta puntuación.
 La partida acaba después de 120 segundos y el objetivo es clasificar correctamente el mayor número de productos para alcanzar el mínimo de puntos necesarios para pasar al siguiente nivel.
+
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
 (Pantalla de juego).
 ### Puntuación
@@ -57,6 +59,7 @@ Al comienzo del juego te llamará el jefe con un nuevo trabajo para ti. Cuando l
 - Jefe: Se trata de un hombre de negocios fracasado que se cree un visionario. Tiene muy poca empatía y cree que te encanta el trabajo. Dice que tiene un chalet en Ibiza pero duerme en su oficina. Usa el micrófono inalámbrico para hablar con su madre.
 ### Estética
 Estilo cartoon desenfadado, semejante a la animación de los años 30. La ambientación será actual, con escenarios deteriorados y decorado absurdo. Se busca que los productos se distingan con facilidad del escenario teniendo en cuenta la velocidad a la que espera jugar, aunque se podrán diseñar objetos similares que requieran que el jugador preste mayor atención.
+
 Bocetos:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Jefe2.png)
