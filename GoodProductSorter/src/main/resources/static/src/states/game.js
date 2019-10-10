@@ -11,20 +11,17 @@ this.band;
 
 this.scenario = {
 	boardMachine: undefined,
+	machineSpeed: 300,
+	minSpeedOfDraggedImage: 500,
+	timeForItemSpawn: 1000,
 	boxesGroup: undefined,
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
+	gameTime: 60,
 	seed: 32748372
 };
 
-//Mi maquina
-this.machineSpeed = 400;
-this.minSpeedOfDraggedImage = 1000;
-this.foo = 1;
-
-//Timer
-this.Durpartida=10;
 puntuacion=0;
 nivel=1;
 mundo=1;
@@ -73,7 +70,9 @@ GoodProductSorter.gameState.prototype = {
 
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
-		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.machineSpeed, this.minSpeedOfDraggedImage, this.scenario.seed);
+
+		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'BocetoCaja', 20, this.scenario.machineSpeed,
+								 this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		//Escalamos la IA
 		this.scenario.boardMachine.scale = 0.3;
@@ -126,7 +125,7 @@ GoodProductSorter.gameState.prototype = {
 	create: function() {
 		//Control Tiempo
 		cuenta_atras=this.time.create();
-		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.Durpartida, this.finTiempo);
+		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo);
 		cuenta_atras.start();		
 		this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
 	
@@ -194,14 +193,12 @@ GoodProductSorter.gameState.prototype = {
 	
 
 	update : function() {
+		
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
 		//this.resize();
 		//Check if  machine has to spawn something
-		if(this.foo > 0){
-			let item = this.scenario.boardMachine.SpawnRandomItem();
-			this.foo--;
-		}
+		this.scenario.boardMachine.CheckItemSpawn(game.time.elapsed);
 	},
 
 	render: function() {

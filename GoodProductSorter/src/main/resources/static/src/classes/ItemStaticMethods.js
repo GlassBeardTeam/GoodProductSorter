@@ -102,14 +102,16 @@ var mouseP2 = function()
 	}
 }
 
-var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
+var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeForItemSpawn)
 {
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
 	this.boardSpeed = speed,
 	this.minSpeedOfDraggedImage = minSpeed,
-
+	//Milliseconds
+	this.elapsedTimeStacker = 0,
+	this.timeForItemSpawn = timeForItemSpawn,
 	this.boxesGroup,
 	this.boxesCollisionGroup,
 	
@@ -135,6 +137,12 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		xcoord = this.image.x; ycoord = this.image.y;
 
 		let item = this.itemSpawner.GiveRandomItem();
+
+		if(game.global.DEBUG_MODE)
+		{
+			console.log("Item spawned: " + item.name);
+		}
+
 		let itemCopy = new Item(item.name);//Creamos el item
 		//Generamos todos los valores como su item padre
 		itemCopy.myBoardPhysicsGroup = this.getBoardPhysicsGroup();
@@ -284,6 +292,17 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed)
 		},this);
 
 		return itemCopy;
+	},
+
+	this.CheckItemSpawn = function(elapsedTime)
+	{
+		//Milliseconds
+		this.elapsedTimeStacker += elapsedTime;
+		if(this.elapsedTimeStacker >= this.timeForItemSpawn)
+		{
+			this.elapsedTimeStacker -= this.timeForItemSpawn;
+			this.SpawnRandomItem();
+		}
 	},
 
 	this.getPhysicsGroup = function()
