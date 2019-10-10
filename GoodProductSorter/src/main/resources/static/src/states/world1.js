@@ -90,7 +90,7 @@ GoodProductSorter.world1State.prototype = {
 				this.image_turn.visible=false;
 			}
 		}
-		//this.resize();
+		this.resize();
 	},
 	
 	getSpriteScale: function (spriteWidth, spriteHeight, availableSpaceWidth, availableSpaceHeight, minPadding) {
