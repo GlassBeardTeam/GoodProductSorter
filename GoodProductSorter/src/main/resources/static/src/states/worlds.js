@@ -158,5 +158,7 @@ GoodProductSorter.worldsState.prototype = {
 		this.button_volver.y = game.world._height*0.9;
 		this.text3.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- textYOffset,
 			this.button_volver.width, this.button_volver.height);
+
+
 	}
 }
