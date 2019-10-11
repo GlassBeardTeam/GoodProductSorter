@@ -273,7 +273,11 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 			}else{ //Hay colision con bounds
 				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
 				console.log("Colision de image con bounds: vuelta a la cinta");
-				attatchToBoardImage(itemCopy);
+				if(itemCopy.dragging == false)
+				{
+					attatchToBoardImage(itemCopy);
+				}
+				
 			}
 
 		},this);
@@ -317,6 +321,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 	this.ItemOnDragStartCallback = function(item)
 	{
+		item.dragging = true;
 		item.image.body.velocity.x = 0;
 		item.image.body.velocity.y = 0;
 		
@@ -324,6 +329,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 	this.ItemOnDragStopCallback = function(item, minSpeed)
 	{
+		item.dragging = false;
 		item.image.update = () =>checkAttatchToBoardImage(item, minSpeed);
 	}
 

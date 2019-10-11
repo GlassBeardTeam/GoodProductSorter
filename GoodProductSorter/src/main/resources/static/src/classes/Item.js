@@ -1,6 +1,7 @@
 
 function Item(name, scale)
 {
+	this.dragging = false,
 	this.scale = scale,
 	this.name = name,
 	this.id,

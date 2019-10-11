@@ -11,7 +11,7 @@ this.band;
 
 this.scenario = {
 	boardMachine: undefined,
-	machineSpeed: 300,
+	machineSpeed: undefined,
 	minSpeedOfDraggedImage: 500,
 	timeForItemSpawn: 1000,
 	boxesGroup: undefined,
@@ -74,6 +74,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	preload : function() {
+		this.scenario.machineSpeed = game.world._height* 0.1;
 		//Callback para resize
 		//window.addEventListener("resize", this.displayWindowSize);
 
@@ -94,20 +95,21 @@ GoodProductSorter.gameState.prototype = {
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 
-		this.scenario.boardMachine = new BoardMachine(game.world._width/2, 0, 'maquina', 20, this.scenario.machineSpeed,
+		this.scenario.boardMachine = new BoardMachine(0, 0, 'maquina', 20, this.scenario.machineSpeed,
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		this.scenario.boardMachine.image.animations.add('working');
 		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed, true);
 
 		//Escalamos la IA
-		this.scenario.boardMachine.scale = 1;
+		this.scenario.boardMachine.scale = 0.6;
 		let machineProp = this.scenario.boardMachine.image.width/game.world._width;
 		this.scenario.boardMachine.image.width *= this.scenario.boardMachine.scale/machineProp;
 		this.scenario.boardMachine.image.height *= this.scenario.boardMachine.scale/machineProp;
 
 		//ajustar posicion
-		this.scenario.boardMachine.image.y += this.scenario.boardMachine.image.width * 0.9;
+		this.scenario.boardMachine.image.x = game.world._width/2;
+		this.scenario.boardMachine.image.y = this.scenario.boardMachine.image.width/2 * 0.72;
 
 
 		this.scenario.boxesCollisionGroup = game.physics.p2.createCollisionGroup();
@@ -132,25 +134,24 @@ GoodProductSorter.gameState.prototype = {
 		this.background.width = this.world.width;
 
 		//Banda transportadora
-		/*this.band.image.width=this.world.width*0.4;
-		this.band.image.height=this.world.height;
-		this.band.image.x=game.world.centerX;
-		this.band.image.y=game.world.centerY;*/
 		
 		//Caja Izquierda
-		let boxScale = 0.25;
+
 		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
-		this.scenario.leftBox.scale = boxScale;
 		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
 		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
 		this.scenario.leftBox.image.height *= this.scenario.leftBox.scale/leftBoxProp;
 
 		//Caja Derecha
 		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
-		this.scenario.rightBox.scale = boxScale;
 		let rightBoxProp = this.scenario.rightBox.image.width/game.world._width;
 		this.scenario.rightBox.image.width *= this.scenario.rightBox.scale/rightBoxProp;
 		this.scenario.rightBox.image.height *= this.scenario.rightBox.scale/rightBoxProp;
+
+		//ajustamos las cajas despues del escalado para que siempre quede pegada a los margenes
+		this.scenario.leftBox.image.body.x = this.scenario.leftBox.image.width/2;
+		this.scenario.rightBox.image.body.x -= (this.scenario.rightBox.image.width/2);
+		
 		//Info
 		// Get width and height of the window excluding scrollbars
 		var w = document.documentElement.clientWidth;
@@ -210,15 +211,9 @@ GoodProductSorter.gameState.prototype = {
 		//Banda transportadora
 		//this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
+		let boxScale = 0.25;
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
-		/*
-		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
-		this.scenario.leftBox.scale = 0.15;
-		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
-		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
-		this.scenario.leftBox.image.height *= this.scenario.leftBox.scale/leftBoxProp;
-		*/
-
+		this.scenario.leftBox.scale = boxScale;
 		this.scenario.leftBox.myPhysicsGroup = this.scenario.boxesGroup;
 
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
@@ -228,15 +223,11 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
+
+
 		//Caja derecha
-		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width - this.scenario.leftBox.image.width/2, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
-		/*
-		this.scenario.rightBox.image.anchor.setTo(0.5, 0.5);
-		this.scenario.rightBox.scale = 0.15;
-		let rightBoxProp = this.scenario.rightBox.image.width/game.world._width;
-		this.scenario.rightBox.image.width *= this.scenario.rightBox.scale/rightBoxProp;
-		this.scenario.rightBox.image.height *= this.scenario.rightBox.scale/rightBoxProp;
-		*/
+		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
+		this.scenario.rightBox.scale = boxScale;
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
 
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
@@ -249,15 +240,15 @@ GoodProductSorter.gameState.prototype = {
 
 		//Layer order
 		game.world.bringToTop(this.scenario.eslabonesGroup);
-		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
 		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
 		game.world.bringToTop(this.scenario.boardMachine.getPhysicsGroup());
+		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
 
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 		this.resize();
-		
+
 	},
 
 	removeAllItems: function()
@@ -283,7 +274,6 @@ GoodProductSorter.gameState.prototype = {
 		this.bandOutCanvas();
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
-		//this.resize();
 		//Check if  machine has to spawn something
 		this.scenario.boardMachine.CheckItemSpawn(game.time.elapsed);
 	},
