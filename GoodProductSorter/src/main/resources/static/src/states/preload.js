@@ -46,6 +46,7 @@ GoodProductSorter.preloadState.prototype={
 
 		//load spriteSheet
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
+		game.load.spritesheet('titulo', 'assets/images/titulo_spritesheet.png', 788, 1200);
 
         /*this.background = this.add.image(0, 0, "preloader_fondo");
         this.background.height = this.game.height;
