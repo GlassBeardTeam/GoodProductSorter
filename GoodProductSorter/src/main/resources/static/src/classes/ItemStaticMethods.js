@@ -235,7 +235,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 							box_sprite = obj1_body.sprite;
 							CheckItemPlacement(box_image, itemCopy, this.scenarioReference);
 						}
-					});
+					},this);
 
 				}else if(obj2_body.id != undefined)
 				{
@@ -389,7 +389,9 @@ function CorrecItemPlacement(item, scenario)
 
 function WrongItemPlacement(item, scenario)
 {
-	scenario.score -=10;
+	if(scenario.score>0){
+		scenario.score -=10;
+	};
 	scenario.streak = 0;
 
 	if(game.global.DEBUG_MODE)
