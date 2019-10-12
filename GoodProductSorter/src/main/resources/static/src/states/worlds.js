@@ -62,6 +62,15 @@ GoodProductSorter.worldsState.prototype = {
 		this.text2.setTextBounds(0, 300, this.game.world.width,100);
 		this.text3.setTextBounds(0, 400, this.game.world.width,100);
 		*/
+
+		//animación mosca
+		this.mosca= game.add.sprite(0, 0, 'mosca');
+		this.mosca.width = game.world._width;
+		this.mosca.height = game.world._height * 0.5;
+		this.mosca.animations.add('fly');
+		this.mosca.animations.play('fly', 10, false);		
+		game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, this.playMosca, this);
+
 		this.resize();
 	},
 
@@ -160,5 +169,10 @@ GoodProductSorter.worldsState.prototype = {
 			this.button_volver.width, this.button_volver.height);
 
 
+	},
+
+	
+	playMosca: function(){
+		this.mosca.animations.play('fly', 10, false);
 	}
 }

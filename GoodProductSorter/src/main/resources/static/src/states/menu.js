@@ -45,6 +45,13 @@ GoodProductSorter.menuState.prototype ={
 		this.button_ajustes = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_ajustes.stage='Ajustes';
 
+		//animación mosca
+		this.mosca= game.add.sprite(0, 0, 'mosca');
+		this.mosca.width = game.world._width;
+		this.mosca.height = game.world._height * 0.5;
+		this.mosca.animations.add('fly');
+		this.mosca.animations.play('fly', 10, false);		
+		game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, this.playMosca, this);
 		
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
@@ -149,6 +156,10 @@ GoodProductSorter.menuState.prototype ={
 		this.text3.setTextBounds(this.button_ajustes.x - this.button_ajustes.width/2, this.button_ajustes.y - this.button_ajustes.height/2-textYOffset, this.button_ajustes.width, this.button_ajustes.height);
 
 	},
+
+	playMosca: function(){
+		this.mosca.animations.play('fly', 10, false);
+	}
 
 };
 
