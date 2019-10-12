@@ -21,7 +21,7 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
-	gameTime: 60,
+	gameTime: 5,
 	seed: 32748372,
 	eslabonesGroup: undefined,
 	eslabones:[11]
@@ -112,8 +112,8 @@ GoodProductSorter.gameState.prototype = {
 
 	resize: function () {
 
-		this.background.height = this.world.height;
-		this.background.width = this.world.width;
+		this.background.height = game.world._height;
+		this.background.width = game.world._width;
 
 		//Banda transportadora
 		
