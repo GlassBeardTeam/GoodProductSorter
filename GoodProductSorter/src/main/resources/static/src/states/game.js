@@ -8,8 +8,8 @@ this.dKey;
 
 this.background;
 this.band;
-
 this.scenario = {
+	score: 0,
 	boardMachine: undefined,
 	machineSpeed: undefined,
 	minSpeedOfDraggedImage: 500,
@@ -24,7 +24,6 @@ this.scenario = {
 	eslabones:[11]
 };
 
-puntuacion=0;
 nivel=1;
 mundo=1;
 
@@ -149,6 +148,8 @@ GoodProductSorter.gameState.prototype = {
 
 	create: function() {
 		
+		//Referencia de escenario para la maquina--> mala practica
+		this.scenario.boardMachine.scenarioReference = this.scenario;
 		//Eslabones bandas transportadoras
 		
 		for(i=0;i<this.scenario.eslabones.length;i++){
@@ -242,12 +243,17 @@ GoodProductSorter.gameState.prototype = {
 
 	CreateItemsWorld1_level1: function()
 	{
-		this.scenario.boardMachine.addItemToLevel(new Item("bebe", 0.2));
-		this.scenario.boardMachine.addItemToLevel(new Item("alcohol", 0.2));
-		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio", 0.2));
-		this.scenario.boardMachine.addItemToLevel(new Item("condon", 0.2));
-		this.scenario.boardMachine.addItemToLevel(new Item("calavera", 0.2));
-		this.scenario.boardMachine.addItemToLevel(new Item("corazon", 0.2));
+		//Reutilizable
+		let reutilizable = this.scenario.leftBox.image.id;
+		//No reutilizable
+		let desechable = this.scenario.rightBox.image.id;
+
+		this.scenario.boardMachine.addItemToLevel(new Item("bebe", 0.2, reutilizable));
+		this.scenario.boardMachine.addItemToLevel(new Item("alcohol", 0.2, reutilizable));
+		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio", 0.2, reutilizable));
+		this.scenario.boardMachine.addItemToLevel(new Item("condon", 0.2, desechable));
+		this.scenario.boardMachine.addItemToLevel(new Item("calavera", 0.2, desechable));
+		this.scenario.boardMachine.addItemToLevel(new Item("corazon", 0.2, reutilizable));
 	}
 
 

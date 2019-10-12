@@ -1,6 +1,7 @@
 
-function Item(name, scale)
+function Item(name, scale, boxId)
 {
+	this.boxId = boxId,
 	this.dragging = false,
 	this.scale = scale,
 	this.name = name,

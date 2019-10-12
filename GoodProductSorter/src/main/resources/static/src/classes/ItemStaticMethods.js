@@ -45,7 +45,6 @@ var ItemSpawner = function(maxItems, seed)
 	this.GiveRandomItem = function()
 	{
 		let randomNumber = this.lasvegas.randomLasVegas(0, this.levelItems.length);
-		console.log("Index del objeto: " + randomNumber);
 		//Buscamos por probabilidad el objeto que este por debajo de ella con el algoritmo de busqueda binaria 
 		//let item = this.levenlItems[];
 		return this.levelItems[randomNumber];
@@ -104,6 +103,7 @@ var mouseP2 = function()
 
 var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeForItemSpawn)
 {
+	this.scenarioReference,
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
@@ -141,6 +141,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 		if(game.global.DEBUG_MODE)
 		{
 			console.log("Item spawned: " + item.name);
+			console.log("item boxid: " + item.boxId);
 		}
 
 		let itemCopy = new Item(item.name);//Creamos el item
@@ -150,26 +151,12 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 		//Creamos la imagen
 		itemCopy.image = itemCopy.myPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
-
+		itemCopy.boxId = item.boxId;
+	
 		//Escalamos el objeto para que ocupa el porcentaje que marca item.scale
-		/*
-		let widthScale = itemCopy.image.width/game.world._width;
-		let heightScale = itemCopy.image.height/game.world._height;
-		itemCopy.image.width *= item.scale/widthScale;
-		itemCopy.image.height *= item.scale/heightScale * 17/9;
-		*/
 		let scale = itemCopy.image.width/game.world._width;
 		itemCopy.image.width *= item.scale/scale;
 		itemCopy.image.height *= item.scale/scale;
-		
-		//ARCADE PHYSICS
-		/*
-		itemCopy.image = game.add.sprite(xcoord, ycoord, itemCopy.name);
-		game.physics.arcade.enable(itemCopy.image);
-		itemCopy.image.body.collideWorldBounds = true;
-		//itemCopy.image.bounce.set(1);
-		*/
-		//ARCADE PHYSICS/
 		itemCopy.image.anchor.setTo(0.5, 0.5);
 
 		//percibe input, se activa el drag
@@ -192,14 +179,6 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 		//Añadimos la imagen al raton de p2
 		this.mouseP2.addBody(itemCopy.image);
 
-		//Tratamiento de imagen transparente
-		/*
-		//ARCADE PHYSICS
-		itemCopy.boardImage = game.add.sprite(xcoord, ycoord, itemCopy.name);
-		game.physics.arcade.enable(itemCopy.boardImage);
-		itemCopy.boardImage.body.collideWorldBounds = true;
-		//ARCADE PHYSICS/
-		*/
 		//P2 PHYSICS
 		itemCopy.boardImage = itemCopy.myBoardPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
 
@@ -254,6 +233,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 						if(box_image.id === obj1_body.id)
 						{
 							box_sprite = obj1_body.sprite;
+							CheckItemPlacement(box_image, itemCopy, this.scenarioReference);
 						}
 					});
 
@@ -264,9 +244,9 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 						if(box_image.id === obj2_body.id)
 						{
 							box_sprite = obj1_body.sprite;
+							CheckItemPlacement(box_image, itemCopy, this.scenarioReference);
 						}
 					});
-
 				}
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 
@@ -356,10 +336,12 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardI
 	//¿Como borramos el Item?
 	delete itemCopy;
 	if(game.global.DEBUG_MODE){
+		/*
 		console.log("[DEBUG] image removed from P2 mouse bodies collision array");
 		console.log("[DEBUG] image removed from physics group");
 		console.log("[DEBUG] boardImage removed from board physics group");
 		console.log("[DEBUG] item removed from cache");
+		*/
 	}
 }
 
@@ -380,4 +362,33 @@ function attatchToBoardImage(item)
 		item.image.body.velocity.x = item.boardImage.body.velocity.x;
 		item.image.body.velocity.y = item.boardImage.body.velocity.y;
 		item.image.update = ()=>{};
+}
+
+
+function CheckItemPlacement(boxSprite, item, scenario)
+{
+	if(boxSprite.id === item.boxId)
+	{
+		CorrecItemPlacement(item, scenario);
+	}else
+	{
+		WrongItemPlacement(item, scenario);
+	}
+}
+
+function CorrecItemPlacement(item)
+{
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(item.name +" metido en la caja CORRECTA!");
+	}
+
+}
+
+function WrongItemPlacement(item)
+{
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(item.name +" metido en la caja INCORRECTA!");
+	}
 }
