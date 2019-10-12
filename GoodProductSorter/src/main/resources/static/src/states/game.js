@@ -21,16 +21,7 @@ this.scenario = {
 	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
-	eslabon_0: undefined,
-	eslabon_1: undefined,
-	eslabon_2: undefined,
-	eslabon_3: undefined,
-	eslabon_4: undefined,
-	eslabon_5: undefined,
-	eslabon_6: undefined,
-	eslabon_7: undefined,
-	eslabon_8: undefined,
-	eslabon_9: undefined
+	eslabones:[11]
 };
 
 puntuacion=0;
@@ -52,17 +43,9 @@ GoodProductSorter.gameState.prototype = {
 		this.band = new Item("Banda");
 		this.scenario.leftBox = new Item("BocetoCaja");
 		this.scenario.rightBox = new Item("BocetoCaja");
-		this.scenario.eslabon_0 = new Item("band");
-		this.scenario.eslabon_1 = new Item("band");
-		this.scenario.eslabon_2 = new Item("band");
-		this.scenario.eslabon_3 = new Item("band");
-		this.scenario.eslabon_4 = new Item("band");
-		this.scenario.eslabon_5 = new Item("band");
-		this.scenario.eslabon_6 = new Item("band");
-		this.scenario.eslabon_7 = new Item("band");
-		this.scenario.eslabon_8 = new Item("band");
-		this.scenario.eslabon_9 = new Item("band");
-		this.scenario.eslabon_10 = new Item("band");
+		for(i=0;i<11;i++){
+			this.scenario.eslabones[i] = new Item("band");
+		};
 		this.scenario.boxesGroup = game.add.group();
 		this.scenario.eslabonesGroup = game.add.group();
 	
@@ -124,7 +107,7 @@ GoodProductSorter.gameState.prototype = {
 		eslabon.width=this.world.width*0.4;
 		eslabon.height=this.world.height*0.1;
 		eslabon.x=game.world.centerX;
-		eslabon.y=this.scenario.eslabon_0.image.height*num;
+		eslabon.y=this.scenario.eslabones[0].image.height*num;
 		eslabon.body.velocity.y = this.scenario.machineSpeed;
 	},
 
@@ -158,44 +141,20 @@ GoodProductSorter.gameState.prototype = {
 		var h = document.documentElement.clientHeight;
 	
 		//Eslabones
-		this.resize_eslab(this.scenario.eslabon_0.image,0);
-		this.resize_eslab(this.scenario.eslabon_1.image,1);
-		this.resize_eslab(this.scenario.eslabon_2.image,2);
-		this.resize_eslab(this.scenario.eslabon_3.image,3);
-		this.resize_eslab(this.scenario.eslabon_4.image,4);
-		this.resize_eslab(this.scenario.eslabon_5.image,5);
-		this.resize_eslab(this.scenario.eslabon_6.image,6);
-		this.resize_eslab(this.scenario.eslabon_7.image,7);
-		this.resize_eslab(this.scenario.eslabon_8.image,8);
-		this.resize_eslab(this.scenario.eslabon_9.image,9);
-		this.resize_eslab(this.scenario.eslabon_10.image,10);
+		for(i=0;i<this.scenario.eslabones.length;i++){
+			this.resize_eslab(this.scenario.eslabones[i].image,i);
+			//this.scenario.eslabones[i] = new Item("band");
+		};
 	},
 
 	create: function() {
 		
 		//Eslabones bandas transportadoras
-		this.scenario.eslabon_0.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_0.name);
-		game.physics.enable(this.scenario.eslabon_0.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_1.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_1.name);
-		game.physics.enable(this.scenario.eslabon_1.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_2.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_2.name);
-		game.physics.enable(this.scenario.eslabon_2.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_3.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_3.name);
-		game.physics.enable(this.scenario.eslabon_3.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_4.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_4.name);
-		game.physics.enable(this.scenario.eslabon_4.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_5.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_5.name);
-		game.physics.enable(this.scenario.eslabon_5.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_6.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_6.name);
-		game.physics.enable(this.scenario.eslabon_6.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_7.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_7.name);
-		game.physics.enable(this.scenario.eslabon_7.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_8.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_8.name);
-		game.physics.enable(this.scenario.eslabon_8.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_9.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_9.name);
-		game.physics.enable(this.scenario.eslabon_9.image, Phaser.Physics.ARCADE);
-		this.scenario.eslabon_10.image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabon_10.name);
-		game.physics.enable(this.scenario.eslabon_10.image, Phaser.Physics.ARCADE);
+		
+		for(i=0;i<this.scenario.eslabones.length;i++){
+			this.scenario.eslabones[i].image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabones[i].name);
+			game.physics.enable(this.scenario.eslabones[i].image, Phaser.Physics.ARCADE);
+		}
 
 		
 		//Control Tiempo
