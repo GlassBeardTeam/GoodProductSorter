@@ -10,7 +10,6 @@ GoodProductSorter.endGameState.prototype ={
 		this.puntos=puntuacion;
 		this.nivel=nivel;
 		this.mundo=mundo;
-		console.log("bug");
 		if(game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **END GAME** state " + puntuacion);

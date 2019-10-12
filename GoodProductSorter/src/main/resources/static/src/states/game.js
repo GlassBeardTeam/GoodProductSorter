@@ -21,7 +21,7 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
-	gameTime: 5,
+	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
 	eslabones:[11]
