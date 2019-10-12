@@ -10,6 +10,7 @@ this.background;
 this.band;
 this.scenario = {
 	score: 0,
+	streak: 0,
 	boardMachine: undefined,
 	machineSpeed: undefined,
 	minSpeedOfDraggedImage: 500,

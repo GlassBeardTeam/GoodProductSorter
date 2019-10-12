@@ -251,7 +251,6 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 
 			}else{ //Hay colision con bounds
-				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
 				console.log("Colision de image con bounds: vuelta a la cinta");
 				if(itemCopy.dragging == false)
 				{
@@ -271,6 +270,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 			if(obj1_body == null || obj2_body == null)
 			{
 				console.log("remove item from game because u didnt clicked it");
+				ItemOutOfBounds(itemCopy, this.scenarioReference);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
 		},this);
@@ -376,8 +376,10 @@ function CheckItemPlacement(boxSprite, item, scenario)
 	}
 }
 
-function CorrecItemPlacement(item)
+function CorrecItemPlacement(item, scenario)
 {
+	scenario.score +=10;
+	scenario.streak ++;
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja CORRECTA!");
@@ -385,10 +387,22 @@ function CorrecItemPlacement(item)
 
 }
 
-function WrongItemPlacement(item)
+function WrongItemPlacement(item, scenario)
 {
+	scenario.score -=10;
+	scenario.streak = 0;
+
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja INCORRECTA!");
+	}
+}
+
+function ItemOutOfBounds(item, scenario)
+{
+	scenario.streak = 0;
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(item.name +" se te ha pasado!");
 	}
 }
