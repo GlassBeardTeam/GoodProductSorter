@@ -21,7 +21,7 @@ this.scenario = {
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
-	gameTime: 6,
+	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
 	eslabones:[11]
@@ -164,7 +164,7 @@ GoodProductSorter.gameState.prototype = {
 							boundsAlignV: "middle", };
 		//Control Tiempo
 		cuenta_atras=this.time.create();
-		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo);
+		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo,this);
 		cuenta_atras.start();	
 		this.text_cuenta_atras=this.game.add.text(game.world.width*0.44,game.world.height*0.08, '00',style_tiempo);
 
