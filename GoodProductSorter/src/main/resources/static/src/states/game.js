@@ -10,6 +10,8 @@ this.background;
 this.band;
 this.scenario = {
 	score: 0,
+	level:1,
+	world:1,
 	streak: 0,
 	boardMachine: undefined,
 	machineSpeed: undefined,
@@ -24,9 +26,6 @@ this.scenario = {
 	eslabonesGroup: undefined,
 	eslabones:[11]
 };
-
-nivel=1;
-mundo=1;
 
 //Puntero a lvlitems
 this.myLvlItems = [];
@@ -156,13 +155,20 @@ GoodProductSorter.gameState.prototype = {
 			game.physics.enable(this.scenario.eslabones[i].image, Phaser.Physics.ARCADE);
 		}
 
-		
+		var style_tiempo = { font: "Acme",
+							fill: "Black",
+							fontSize: "40pt",
+							boundsAlignH: "center",
+							boundsAlignV: "middle", };
 		//Control Tiempo
 		cuenta_atras=this.time.create();
-		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo);
-		cuenta_atras.start();		
-		this.text_cuenta_atras=this.game.add.text(/*game.world.centerX*/50,100, '00',this.style_tiempo);
-	
+		final_cuent_atras=cuenta_atras.add(Phaser.Timer.SECOND * this.scenario.gameTime, this.finTiempo,this);
+		cuenta_atras.start();	
+		this.text_cuenta_atras=this.game.add.text(game.world.width*0.44,game.world.height*0.08, '00',style_tiempo);
+
+		//Texto puntuacion
+		this.text_score=this.game.add.text(game.world.width*0.40,game.world.height*0.02, '00',style_tiempo);
+
 		//Background
         this.background.height = this.game.height;
         this.background.width = this.game.width;
@@ -203,6 +209,8 @@ GoodProductSorter.gameState.prototype = {
 		game.world.bringToTop(this.scenario.boardMachine.getBoardPhysicsGroup());
 		game.world.bringToTop(this.scenario.boardMachine.getPhysicsGroup());
 		game.world.bringToTop(this.scenario.boardMachine.machineGroup);
+		game.world.bringToTop(this.text_cuenta_atras);
+		game.world.bringToTop(this.text_score);
 
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
@@ -220,7 +228,8 @@ GoodProductSorter.gameState.prototype = {
 
 	finTiempo: function(){
 		this.removeAllItems;
-		game.state.start('endGameState',this.scenario.score,this.nivel,this.mundo);		
+		game.state.start('endGameState',this.scenario.score,this.scenario.level,this.scenario.world);		
+
 	},
 
 	bandOutCanvas:function(){
@@ -236,6 +245,8 @@ GoodProductSorter.gameState.prototype = {
 		this.bandOutCanvas();
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
+		puntos="0000" + this.scenario.score;
+		this.text_score.text=puntos.substr(-4);
 		//Check if  machine has to spawn something
 		this.scenario.boardMachine.CheckItemSpawn(game.time.elapsed);
 	},
