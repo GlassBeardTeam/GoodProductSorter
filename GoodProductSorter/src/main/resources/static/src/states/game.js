@@ -1,9 +1,5 @@
 GoodProductSorter.gameState = function(game) {
 
-this.aKey;
-this.dKey;
-
-
 //Game objects
 
 this.background;
@@ -21,10 +17,16 @@ this.scenario = {
 	boardMachine: undefined,
 	minSpeedOfDraggedImage: 500,
 	timeForItemSpawn: 1000,
+	//Boxes
 	boxesGroup: undefined,
 	boxesCollisionGroup: undefined,
 	leftBox: undefined,
 	rightBox: undefined,
+	boxSignLeft: undefined,
+	boxSignRight: undefined,
+	boxSignLeftText: undefined,
+	boxSignRightText: undefined,
+	//Boxes/
 	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
@@ -54,9 +56,6 @@ GoodProductSorter.gameState.prototype = {
 	
 		this.background = game.add.image(0, 0, "SueloFabrica");
 
-		
-		this.dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-		this.aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
 	},
 
 	preload : function() {
@@ -65,11 +64,6 @@ GoodProductSorter.gameState.prototype = {
 		//window.addEventListener("resize", this.displayWindowSize);
 
 		//Iniciamos fisicas ARCADE
-		/*
-		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.physics.arcade.gravity.y = 0;
-		*/
-
 		//Iniciamos fisicas P2
 		game.physics.startSystem(Phaser.Physics.P2JS);
 		game.world.setBounds(0, 0, game.world._width, game.world._height);
@@ -111,18 +105,15 @@ GoodProductSorter.gameState.prototype = {
 		eslabon.height=this.world.height*0.1;
 		eslabon.x=game.world.centerX;
 		eslabon.y=this.scenario.eslabones[0].image.height*num;
-		eslabon.body.velocity.y = this.scenario.machineSpeed[this.scenario.levelSpeed]*this.game.world._height;
+		eslabon.body.velocity.y = this.scenario.machineSpeed[this.scenario.streak]*this.game.world._height;
 	},
 
 	resize: function () {
 
 		this.background.height = game.world._height;
 		this.background.width = game.world._width;
-
-		//Banda transportadora
 		
 		//Caja Izquierda
-
 		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
 		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
 		this.scenario.leftBox.image.width *= this.scenario.leftBox.scale/leftBoxProp;
@@ -137,7 +128,28 @@ GoodProductSorter.gameState.prototype = {
 		//ajustamos las cajas despues del escalado para que siempre quede pegada a los margenes
 		this.scenario.leftBox.image.body.x = this.scenario.leftBox.image.width/2;
 		this.scenario.rightBox.image.body.x -= (this.scenario.rightBox.image.width/2);
+
+		//Carteles de cajas
+		let signOffset = 0.05;
+			//Cartel izquierdo
+			this.scenario.boxSignLeft.anchor.setTo(0.5, 0.5);
+			this.scenario.boxSignLeft.y -= this.scenario.leftBox.image.height/2 + game.world._height * signOffset;
+			
+			//Cartel derecho
+			this.scenario.boxSignRight.anchor.setTo(0.5, 0.5);
+			this.scenario.boxSignRight.y -= this.scenario.rightBox.image.height/2 + game.world._height * signOffset;
+			this.scenario.boxSignRight.x -= this.scenario.rightBox.image.width/2;
 		
+		//Texto de los carteles
+		let LBox = this.scenario.boxSignLeft;
+		let RBox = this.scenario.boxSignRight;
+	
+		this.scenario.boxSignLeftText.anchor.setTo(0.5, 0.5);
+		this.scenario.boxSignLeftText.setTextBounds(LBox.x, LBox.y, LBox.width*0.5, 0);
+
+		this.scenario.boxSignRightText.anchor.setTo(0.5, 0.5);
+		this.scenario.boxSignRightText.setTextBounds(RBox.x, RBox.y, RBox.width*0.75, 0);
+
 		//Info
 		// Get width and height of the window excluding scrollbars
 		var w = document.documentElement.clientWidth;
@@ -176,8 +188,6 @@ GoodProductSorter.gameState.prototype = {
         this.background.height = this.game.height;
         this.background.width = this.game.width;
 		
-		//Banda transportadora
-		//this.band.setItemImage(game.world.centerX, game.world.centerY, 'BandSpriteSheet', this.scenario.boardMachine.getPhysicsGroup());
 		//Caja izquierda
 		let boxScale = 0.25;
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
@@ -206,6 +216,15 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
+		//Carteles de las cajas
+			//Cartel izquierdo
+		this.scenario.boxSignLeft = game.add.image(this.scenario.leftBox.image.body.x, this.scenario.leftBox.image.body.y, 'cartelIzq');
+
+			//Cartel derecho
+		this.scenario.boxSignRight = game.add.image(this.scenario.rightBox.image.body.x, this.scenario.rightBox.image.body.y, 'cartelDer');
+
+
+
 		//Layer order
 		game.world.bringToTop(this.scenario.eslabonesGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
@@ -215,6 +234,14 @@ GoodProductSorter.gameState.prototype = {
 		game.world.bringToTop(this.text_cuenta_atras);
 		game.world.bringToTop(this.text_score);
 
+
+		//Texto de los carteles
+		let style = { font: "Acme", fill: "Blue", fontSize: "30pt", boundsAlignH: "center", boundsAlignV: "middle"};
+		let text0 = "Reutilizable";
+		let text1 = "Desechable";
+		this.scenario.boxSignLeftText = game.add.text(0, 0, text0, style);
+		this.scenario.boxSignRightText = game.add.text(0, 0, text1, style);
+		
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
 		this.resize();
@@ -244,7 +271,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	update : function() {
-		game.physics.arcade.collide(this.scenario.eslabonesGroup, this.scenario.eslabonesGroup﻿);﻿
+		game.physics.arcade.collide(this.scenario.eslabonesGroup, this.scenario.eslabonesGroup);
 		this.bandOutCanvas();
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);

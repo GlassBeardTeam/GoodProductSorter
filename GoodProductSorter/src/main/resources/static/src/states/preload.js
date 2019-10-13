@@ -35,6 +35,8 @@ GoodProductSorter.preloadState.prototype={
 
 		//Game Images
 		this.load.image("band", 'assets/images/scenario/Eslabon_v4.png');
+		game.load.image("cartelIzq" , 'assets/images/scenario/CartelIzq.png');
+		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
