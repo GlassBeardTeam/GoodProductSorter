@@ -1,7 +1,7 @@
 # GOOD PRODUCT SORTER
 
 ## Documento de diseño
-Versión 0.9
+Versión 1.0
 
 ### Glass Beard
 
@@ -48,7 +48,8 @@ La partida acaba después de 2 minutos y el objetivo es clasificar correctamente
 
 Los niveles del juego estarán divididos en distintos mundos, cada uno con su temática. La dificultad irá aumentando progresivamente incrementando tanto la cantidad de objetos que se deben clasificar como las instrucciones a seguir. En un principio los objetos se clasificarán en 2 categorías, pero no se descarta aumentar también el número de categorías para hacerlo más complicado.
 
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/PantallaJuego.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Juego.PNG)
+
 (Pantalla de juego).
 
 Además en determinados niveles aparecerán objetos únicos que podrás introducir en tu mochila y que desencadenarán eventos especiales (por ejemplo, que un personaje te ofrezca algo a cambio de tomar prestada cierta mercancía).
@@ -66,8 +67,9 @@ El Diagrama de flujo entre pantallas es el siguiente:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/FlowChartProductSorter.png)
 
-__Jugar:__
-* Mundos: Selección del mundo en el que vas a jugar (cada uno tendrá una temática distinta).
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Menu.PNG)
+
+__Mundos:__ Selección del mundo en el que vas a jugar (cada uno tendrá una temática distinta).
 * Niveles: Selección del nivel (Se mostrarán las estrellas conseguidas en cada uno).
 * Juego
 * Fin del Juego: indicará tanto la puntuación como los aciertos/fallos realizados por el jugador.
@@ -92,9 +94,10 @@ Estilo cartoon desenfadado, inspirada en la animación de los años 30 pero con 
 
 Bocetos:
 
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/BolsaSangre.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/tijeras.png)
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Jefe2.png)
 
-("El Jefe").
 
 ### Música y Sonido
 La música debe recordar a una fábrica sin dejar de ser cómica y con ritmo. Dependiendo de la pantalla en la que se encuentre el jugador se busca:
