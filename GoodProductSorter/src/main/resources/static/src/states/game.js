@@ -155,7 +155,6 @@ GoodProductSorter.gameState.prototype = {
 			this.scenario.eslabones[i].image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabones[i].name);
 			game.physics.enable(this.scenario.eslabones[i].image, Phaser.Physics.ARCADE);
 		}
-
 		var style_tiempo = { font: "Acme",
 							fill: "Black",
 							fontSize: "40pt",
@@ -242,7 +241,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	update : function() {
-		
+		game.physics.arcade.collide(this.scenario.eslabonesGroup, this.scenario.eslabonesGroup﻿);﻿
 		this.bandOutCanvas();
 		segundos = "0" + Math.round((final_cuent_atras.delay - cuenta_atras.ms) / 1000);
 		this.text_cuenta_atras.text=segundos.substr(-2);
