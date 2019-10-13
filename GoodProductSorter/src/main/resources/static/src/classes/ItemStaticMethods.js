@@ -101,13 +101,15 @@ var mouseP2 = function()
 	}
 }
 
-var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeForItemSpawn)
+var BoardMachine = function(x, y, name, maxItems, speed, levelSpeed , minSpeed, seed, timeForItemSpawn)
 {
 	this.scenarioReference,
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
-	this.boardSpeed = speed,
+	this.lvlSpeed=levelSpeed;
+	this.arraySpeed=speed;
+	this.boardSpeed = speed[this.lvlSpeed]*game.world._height;
 	this.minSpeedOfDraggedImage = minSpeed,
 	//Milliseconds
 	this.elapsedTimeStacker = 0,
@@ -233,7 +235,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 						if(box_image.id === obj1_body.id)
 						{
 							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference);
+							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
 						}
 					},this);
 
@@ -244,7 +246,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 						if(box_image.id === obj2_body.id)
 						{
 							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference);
+							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
 						}
 					});
 				}
@@ -270,7 +272,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 			if(obj1_body == null || obj2_body == null)
 			{
 				console.log("remove item from game because u didnt clicked it");
-				ItemOutOfBounds(itemCopy, this.scenarioReference);
+				ItemOutOfBounds(itemCopy, this.scenarioReference, this);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
 		},this);
@@ -365,21 +367,36 @@ function attatchToBoardImage(item)
 }
 
 
-function CheckItemPlacement(boxSprite, item, scenario)
+function CheckItemPlacement(boxSprite, item, scenario,board)
 {
 	if(boxSprite.id === item.boxId)
 	{
-		CorrecItemPlacement(item, scenario);
+		CorrecItemPlacement(item, scenario, board);
 	}else
 	{
-		WrongItemPlacement(item, scenario);
+		WrongItemPlacement(item, scenario, board);
 	}
 }
 
-function CorrecItemPlacement(item, scenario)
+function CorrecItemPlacement(item, scenario, board)
 {
 	scenario.score +=10;
+	console.log(board.lvlSpeed +" Velocidad");
 	scenario.streak ++;
+	if(board.lvlSpeed<4){
+		scenario.levelSpeed=scenario.streak;
+		board.lvlSpeed++;
+		board.boardSpeed = board.arraySpeed[board.lvlSpeed]*game.world._height;
+		scenario.eslabonesGroup.forEach(function(item) {
+			item.body.velocity.y=board.boardSpeed;
+		});
+		board.itemSpawner.boardItemsPhysicsGroup.forEach(function(item) {
+			item.body.velocity.y=board.boardSpeed;
+		});
+		board.itemSpawner.itemPhysicsGroup.forEach(function(item) {
+			item.body.velocity.y=board.boardSpeed;
+		});		
+	}
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja CORRECTA!");
@@ -387,7 +404,7 @@ function CorrecItemPlacement(item, scenario)
 
 }
 
-function WrongItemPlacement(item, scenario)
+function WrongItemPlacement(item, scenario, board)
 {
 	if(scenario.score>0){
 		scenario.score -=10;
@@ -400,9 +417,23 @@ function WrongItemPlacement(item, scenario)
 	}
 }
 
-function ItemOutOfBounds(item, scenario)
+function ItemOutOfBounds(item, scenario, board)
 {
 	scenario.streak = 0;
+	if(board.lvlSpeed>0){
+		board.lvlSpeed--;
+	};
+	board.boardSpeed = board.arraySpeed[board.lvlSpeed]*game.world._height;
+	scenario.eslabonesGroup.forEach(function(item) {
+		item.body.velocity.y=board.boardSpeed;
+	});
+	board.itemSpawner.boardItemsPhysicsGroup.forEach(function(item) {
+		item.body.velocity.y=board.boardSpeed;
+	});
+	board.itemSpawner.itemPhysicsGroup.forEach(function(item) {
+		item.body.velocity.y=board.boardSpeed;
+	});
+	
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" se te ha pasado!");

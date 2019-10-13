@@ -14,7 +14,8 @@ this.scenario = {
 	world:1,
 	streak: 0,
 	boardMachine: undefined,
-	machineSpeed: undefined,
+	machineSpeed: [ 0.1, 0.2, 0.3, 0.4, 0.5],
+	levelSpeed:0,
 	minSpeedOfDraggedImage: 500,
 	timeForItemSpawn: 1000,
 	boxesGroup: undefined,
@@ -56,7 +57,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	preload : function() {
-		this.scenario.machineSpeed = game.world._height* 0.1;
+		//this.scenario.machineSpeed = game.world._height* 0.1;
 		//Callback para resize
 		//window.addEventListener("resize", this.displayWindowSize);
 
@@ -77,11 +78,11 @@ GoodProductSorter.gameState.prototype = {
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 
-		this.scenario.boardMachine = new BoardMachine(0, 0, 'maquina', 20, this.scenario.machineSpeed,
+		this.scenario.boardMachine = new BoardMachine(0, 0, 'maquina', 20, this.scenario.machineSpeed, this.scenario.levelSpeed,
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		this.scenario.boardMachine.image.animations.add('working');
-		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed, true);
+		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed[this.scenario.levelSpeed]*this.game.world._height, true);
 
 		//Escalamos la IA
 		this.scenario.boardMachine.scale = 0.6;
@@ -107,7 +108,7 @@ GoodProductSorter.gameState.prototype = {
 		eslabon.height=this.world.height*0.1;
 		eslabon.x=game.world.centerX;
 		eslabon.y=this.scenario.eslabones[0].image.height*num;
-		eslabon.body.velocity.y = this.scenario.machineSpeed;
+		eslabon.body.velocity.y = this.scenario.machineSpeed[this.scenario.levelSpeed]*this.game.world._height;
 	},
 
 	resize: function () {
