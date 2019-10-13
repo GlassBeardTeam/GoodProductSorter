@@ -12,10 +12,13 @@ this.scenario = {
 	score: 0,
 	level:1,
 	world:1,
+	//Control de velocidades de la maquina
 	streak: 0,
+	successfulItemsInARow: 0,
+	itemsInARowToChangeStreak: 5,
+	machineSpeed: [0.1, 0.2, 0.3, 0.4, 0.5],
+	//Control de velocidades de la maquina/
 	boardMachine: undefined,
-	machineSpeed: [ 0.1, 0.2, 0.3, 0.4, 0.5],
-	levelSpeed:0,
 	minSpeedOfDraggedImage: 500,
 	timeForItemSpawn: 1000,
 	boxesGroup: undefined,
@@ -78,7 +81,7 @@ GoodProductSorter.gameState.prototype = {
 
 		//Posicion x,y, max items diferentes y velocidad vertical-->HAY QUE METERLE EL NOMBRE DE SU SPRITE
 
-		this.scenario.boardMachine = new BoardMachine(0, 0, 'maquina', 20, this.scenario.machineSpeed, this.scenario.levelSpeed,
+		this.scenario.boardMachine = new BoardMachine(0, 0, 'maquina', 20, this.scenario.machineSpeed,
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		this.scenario.boardMachine.image.animations.add('working');

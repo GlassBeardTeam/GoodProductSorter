@@ -101,15 +101,13 @@ var mouseP2 = function()
 	}
 }
 
-var BoardMachine = function(x, y, name, maxItems, speed, levelSpeed , minSpeed, seed, timeForItemSpawn)
+var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, timeForItemSpawn)
 {
 	this.scenarioReference = undefined,
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
-	this.lvlSpeed=levelSpeed;
-	this.arraySpeed=speed;
-	this.boardSpeed = speed[this.lvlSpeed]*game.world._height;
+	this.lvlSpeed = levelSpeed;
 	this.minSpeedOfDraggedImage = minSpeed,
 	//Milliseconds
 	this.elapsedTimeStacker = 0,
@@ -205,12 +203,10 @@ var BoardMachine = function(x, y, name, maxItems, speed, levelSpeed , minSpeed, 
 		itemCopy.boardImage.body.damping = 0;
 		//P2 PHYSICS/
 
-
 		//Se añade velocidad a los objetos
-		itemCopy.image.body.velocity.y = this.boardSpeed;
-		itemCopy.boardImage.body.velocity.y = this.boardSpeed;
-		
-
+		let itemVel =  this.lvlSpeed[this.scenarioReference.streak] * game.world._height;
+		itemCopy.image.body.velocity.y = itemVel;
+		itemCopy.boardImage.body.velocity.y = itemVel;
 
 		//Añadimos las callbacks de drag and drop
 		addOnDragStartCallback(this.ItemOnDragStartCallback, itemCopy, null);
@@ -251,27 +247,24 @@ var BoardMachine = function(x, y, name, maxItems, speed, levelSpeed , minSpeed, 
 					});
 				}
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
-
+				
 			}else{ //Hay colision con bounds
-				console.log("Colision de image con bounds: vuelta a la cinta");
+				//console.log("Colision de image con bounds: vuelta a la cinta");
 				if(itemCopy.dragging == false)
 				{
 					attatchToBoardImage(itemCopy);
 				}
-				
 			}
-
 		},this);
 
 		itemCopy.boardImage.body.onBeginContact.add(function(body1, body2, shape1, shape2, equation)
 		{
-			console.log("OnbeginContat de boardImage");
 			let obj1_body= equation[0].bodyA.parent;
 			let obj2_body = equation[0].bodyB.parent;
 			//Si alguno de los dos es null, uno son los bounds
 			if(obj1_body == null || obj2_body == null)
 			{
-				console.log("remove item from game because u didnt clicked it");
+				//console.log("remove item from game because u didnt clicked it");
 				ItemOutOfBounds(itemCopy, this.scenarioReference, this);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
@@ -369,7 +362,6 @@ function attatchToBoardImage(item)
 
 function CheckItemPlacement(boxSprite, item, scenario,board)
 {
-	console.log("ESCENARIO SCORE: " + scenario.score);
 	if(boxSprite.id === item.boxId)
 	{
 		CorrecItemPlacement(item, scenario, board);
@@ -382,22 +374,9 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 function CorrecItemPlacement(item, scenario, board)
 {
 	scenario.score +=10;
-	console.log(board.lvlSpeed +" Velocidad");
-	scenario.streak ++;
-	if(board.lvlSpeed<4){
-		scenario.levelSpeed=scenario.streak;
-		board.lvlSpeed++;
-		board.boardSpeed = board.arraySpeed[board.lvlSpeed]*game.world._height;
-		scenario.eslabonesGroup.forEach(function(item) {
-			item.body.velocity.y=board.boardSpeed;
-		});
-		board.itemSpawner.boardItemsPhysicsGroup.forEach(function(item) {
-			item.body.velocity.y=board.boardSpeed;
-		});
-		board.itemSpawner.itemPhysicsGroup.forEach(function(item) {
-			item.body.velocity.y=board.boardSpeed;
-		});		
-	}
+	scenario.successfulItemsInARow++;
+	UpdateStreak(scenario, board);
+
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja CORRECTA!");
@@ -407,9 +386,10 @@ function CorrecItemPlacement(item, scenario, board)
 
 function WrongItemPlacement(item, scenario, board)
 {
-	if(scenario.score>0){
-		scenario.score -=10;
-	};
+	if(scenario.score > 0){
+		scenario.score -= 10;
+	}
+
 	scenario.streak = 0;
 
 	if(game.global.DEBUG_MODE)
@@ -420,23 +400,37 @@ function WrongItemPlacement(item, scenario, board)
 
 function ItemOutOfBounds(item, scenario, board)
 {
-	scenario.streak = 0;
-	if(board.lvlSpeed>0){
-		board.lvlSpeed--;
-	};
-	board.boardSpeed = board.arraySpeed[board.lvlSpeed]*game.world._height;
-	scenario.eslabonesGroup.forEach(function(item) {
-		item.body.velocity.y=board.boardSpeed;
-	});
-	board.itemSpawner.boardItemsPhysicsGroup.forEach(function(item) {
-		item.body.velocity.y=board.boardSpeed;
-	});
-	board.itemSpawner.itemPhysicsGroup.forEach(function(item) {
-		item.body.velocity.y=board.boardSpeed;
-	});
-	
+	scenario.successfulItemsInARow = 0;
+	UpdateStreak(scenario, board);
+
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" se te ha pasado!");
 	}
+}
+
+//La manera de cambiar de racha (o marcha de la maquina)
+function UpdateStreak(scenario, boardMachine)
+{
+	let lastStreak = scenario.streak;
+	let streak = scenario.successfulItemsInARow / scenario.itemsInARowToChangeStreak;
+	streak = Math.trunc(streak);
+	if(streak >= boardMachine.lvlSpeed.length) streak = boardMachine.lvlSpeed.length -1;
+	scenario.streak = streak;
+
+	if(game.global.DEBUG_MODE)
+	{
+		if(lastStreak != streak)
+		{
+			console.log("aumento de march de  " + lastStreak + " a " + scenario.streak);
+		}
+	}
+
+	let updatedVel =  boardMachine.lvlSpeed[scenario.streak] * game.world._height;
+	//Updates de velocidades
+	scenario.eslabonesGroup.forEach((item)=>{item.body.velocity.y = updatedVel});
+
+	boardMachine.itemSpawner.boardItemsPhysicsGroup.forEach((item)=>{item.body.velocity.y = updatedVel;});
+
+	boardMachine.itemSpawner.itemPhysicsGroup.forEach(function(item) {item.body.velocity.y= updatedVel;});	
 }
