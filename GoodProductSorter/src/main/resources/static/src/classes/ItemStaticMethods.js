@@ -390,8 +390,6 @@ function WrongItemPlacement(item, scenario, board)
 		scenario.score -= 10;
 	}
 
-	scenario.streak = 0;
-
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja INCORRECTA!");
