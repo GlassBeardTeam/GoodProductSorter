@@ -113,8 +113,8 @@ GoodProductSorter.gameState.prototype = {
 
 	resize: function () {
 
-		this.background.height = this.world.height;
-		this.background.width = this.world.width;
+		this.background.height = game.world._height;
+		this.background.width = game.world._width;
 
 		//Banda transportadora
 		
@@ -148,9 +148,7 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	create: function() {
-		
-		//Referencia de escenario para la maquina--> mala practica
-		this.scenario.boardMachine.scenarioReference = this.scenario;
+
 		//Eslabones bandas transportadoras
 		
 		for(i=0;i<this.scenario.eslabones.length;i++){
@@ -219,6 +217,9 @@ GoodProductSorter.gameState.prototype = {
 		this.CreateItemsWorld1_level1();
 		this.resize();
 
+				
+		//Referencia de escenario para la maquina--> mala practica
+		this.scenario.boardMachine.scenarioReference = this.scenario;
 	},
 
 	removeAllItems: function()
@@ -229,6 +230,7 @@ GoodProductSorter.gameState.prototype = {
 	finTiempo: function(){
 		this.removeAllItems;
 		game.state.start('endGameState',this.scenario.score,this.scenario.level,this.scenario.world);		
+
 	},
 
 	bandOutCanvas:function(){

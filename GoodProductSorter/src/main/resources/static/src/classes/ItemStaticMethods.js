@@ -103,7 +103,7 @@ var mouseP2 = function()
 
 var BoardMachine = function(x, y, name, maxItems, speed, levelSpeed , minSpeed, seed, timeForItemSpawn)
 {
-	this.scenarioReference,
+	this.scenarioReference = undefined,
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
@@ -369,6 +369,7 @@ function attatchToBoardImage(item)
 
 function CheckItemPlacement(boxSprite, item, scenario,board)
 {
+	console.log("ESCENARIO SCORE: " + scenario.score);
 	if(boxSprite.id === item.boxId)
 	{
 		CorrecItemPlacement(item, scenario, board);
