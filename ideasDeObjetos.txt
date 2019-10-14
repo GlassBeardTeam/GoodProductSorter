@@ -1,0 +1,50 @@
+----Categorias: 
+1 matar o sexual
+2 organico o inorganico
+3 ignifugo o inflamable
+4 comunista o capitalista
+
+5 Mafia o gobierno
+6 Ciudad o Pueblo
+7 Comestible o no comestible
+
+
+----Objetos:
+1 barra de pan: comunista, organico, matar, ignifugo.
+2 arma de fuego: capitalista, inorganico, matar. 
+3 melon cuadrado transgenico: capitalista, organico, sexual.
+4 pollo fariña: capitalista, organico, matar. 
+5 hot coffee: capitalista, organico, sexual/matar.
+6 hoja de marihuana: capitalista, organico, sexual.
+7 hoz: comunista, inorganico, matar.
+8 martillo:  comunista, inorganico, matar.
+9 truño: ambos, inorganico, sexual.
+10 papel higienico: capitalista, inorganico, sexual.
+11 dildo: capitalista, inorganico, sexual.
+12 bebe: capitalista, organico, sexual.
+13 culo de kim kardashian: capitalista, inorganico, sexual.
+14 lata de cola: capitalista, organico, matar/sexual.
+15 hamburguesa: capitalista, organico, matar/sexual.
+16 libro: comunismo, inorganico, matar.
+17 arroz: comunismo, organico, matar.
+18 puro: comunismo, organico, matar.
+19 boina: comunista, inorganico, sexual.
+20 yunque: comunista, inroganico, matar.
+21 cruz cristiano: capitalista, inorganico, matar.
+22 puño comunista: comunista, organico, sexual.
+23 balon: comunista, inorganico, matar.
+24 vodka: comunista, organico, sexual.
+25 bomba atomica: capitalista, inorganico, matar.
+26 ladrillo: comunista, 
+
+
+
+
+
+
+
+
+
+
+
+
