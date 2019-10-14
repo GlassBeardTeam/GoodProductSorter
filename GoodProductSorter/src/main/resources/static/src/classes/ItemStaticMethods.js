@@ -117,8 +117,6 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 	
 	this.itemSpawner = new ItemSpawner(maxItems, seed),
 	this.mouseP2 = new mouseP2();
-	this.MaxSpawnXCoords = [this.image.x,(this.image.x + this.image.width/2)],
-	this.MaxSpawnYCoords = [0 ,(this.image.y + this.image.height/2)],
 	this.timeToSpawnNewItem,
 	this.timeSinceLastSpawn,
 
@@ -131,10 +129,11 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 
 	this.SpawnRandomItem = function()
 	{
-		let xcoord = RandomNumberBetween(this.MaxSpawnXCoords[0], this.MaxSpawnXCoords[1]);
-		let ycoord = RandomNumberBetween(this.MaxSpawnYCoords[0], this.MaxSpawnYCoords[1]);
+		let imageOffset = this.image.width * 0.15;
+		let xcoord = RandomNumberBetween(this.image.x -imageOffset, this.image.x + imageOffset);
+		let ycoord = this.image.y;
 
-		xcoord = this.image.x; ycoord = this.image.y;
+		//xcoord = this.image.x; ycoord = this.image.y;
 
 		let item = this.itemSpawner.GiveRandomItem();
 
@@ -263,8 +262,7 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 			let obj2_body = equation[0].bodyB.parent;
 			//Si alguno de los dos es null, uno son los bounds
 			if(obj1_body == null || obj2_body == null)
-			{
-				//console.log("remove item from game because u didnt clicked it");
+			{			
 				ItemOutOfBounds(itemCopy, this.scenarioReference, this);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
@@ -389,7 +387,9 @@ function WrongItemPlacement(item, scenario, board)
 	if(scenario.score > 0){
 		scenario.score -= 10;
 	}
-	scenario.successfulItemsInARow = 0;
+	//Hay que hacer que pierda la racha para el proximo nivel de velocidad pero que no le quite velocidad
+	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
+
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja INCORRECTA!");
@@ -403,7 +403,7 @@ function ItemOutOfBounds(item, scenario, board)
 
 	if(game.global.DEBUG_MODE)
 	{
-		console.log(item.name +" se te ha pasado!");
+		console.log(" se te ha pasado " + item.name);
 	}
 }
 
@@ -431,4 +431,6 @@ function UpdateStreak(scenario, boardMachine)
 	boardMachine.itemSpawner.boardItemsPhysicsGroup.forEach((item)=>{item.body.velocity.y = updatedVel;});
 
 	boardMachine.itemSpawner.itemPhysicsGroup.forEach(function(item) {item.body.velocity.y= updatedVel;});	
+
+	boardMachine.image.animations.currentAnim.speed = updatedVel;
 }

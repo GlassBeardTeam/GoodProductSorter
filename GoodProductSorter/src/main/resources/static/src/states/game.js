@@ -79,7 +79,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		this.scenario.boardMachine.image.animations.add('working');
-		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed[this.scenario.levelSpeed]*this.game.world._height, true);
+		this.scenario.boardMachine.image.animations.play('working',this.scenario.boardMachine.lvlSpeed[this.scenario.streak]*this.game.world._height, true);
 
 		//Escalamos la IA
 		this.scenario.boardMachine.scale = 0.6;
@@ -197,7 +197,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
 		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
-		this.scenario.leftBox.image.body.setCircle(this.scenario.leftBox.image.body.width);
+		this.scenario.leftBox.image.body.setCircle(this.scenario.leftBox.image.body.width*2);
 		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
@@ -211,7 +211,7 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;
-		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width);
+		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width*2);
 		this.scenario.rightBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
