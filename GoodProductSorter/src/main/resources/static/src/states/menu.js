@@ -49,8 +49,7 @@ GoodProductSorter.menuState.prototype ={
 		this.mosca.width = game.world._width;
 		this.mosca.height = game.world._height * 0.5;
 		this.mosca.animations.add('fly');
-		this.mosca.animations.play('fly', 10, false);		
-		game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, this.playMosca, this);
+		game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, this.playMosca, this);
 		
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
