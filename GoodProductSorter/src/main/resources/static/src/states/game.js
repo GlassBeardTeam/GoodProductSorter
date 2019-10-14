@@ -266,7 +266,7 @@ GoodProductSorter.gameState.prototype = {
 
 	finTiempo: function(){
 		this.removeAllItems;
-		game.state.start('endGameState',this.scenario.score,this.scenario.level,this.scenario.world);		
+		game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world);		
 
 	},
 
