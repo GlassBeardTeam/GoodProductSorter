@@ -203,8 +203,9 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
 		//nombre, frames de la anim, fps, loop, usar numeric index
-		this.scenario.leftBox.image.animations.add('success',[1], 1, true, true);
-		this.scenario.leftBox.image.animations.play('success');
+		this.scenario.leftBox.image.animations.add('idle',[1], 1, true, true);
+		this.scenario.leftBox.image.animations.add('success',[1,2,3,4], 15, false, true);
+		this.scenario.leftBox.image.animations.play('idle');
 
 
 		//Caja derecha
@@ -220,6 +221,9 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
+		this.scenario.rightBox.image.animations.add('idle',[1], 1, true, true);
+		this.scenario.rightBox.image.animations.add('success',[1,2,3,4], 15, false, true);
+		this.scenario.rightBox.image.animations.play('idle');
 		//Carteles de las cajas
 			//Cartel izquierdo
 		this.scenario.boxSignLeft = game.add.image(this.scenario.leftBox.image.body.x, this.scenario.leftBox.image.body.y, 'cartelIzq');

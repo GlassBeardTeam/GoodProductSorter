@@ -222,29 +222,24 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				//Buscamos la caja en los dos bodies
 				let box_sprite;
 				//Si tiene un id es una caja
-				if(obj1_body.id != undefined)
-				{
 					//si la la imagen de la caja tiene el mismo id que el body encontramos nuestra caja
-					this.boxesGroup.forEach(function(box_image)
-					{
-						if(box_image.id === obj1_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
-						}
-					},this);
-
-				}else if(obj2_body.id != undefined)
+				this.boxesGroup.forEach(function(box_image)
 				{
-					this.boxesGroup.forEach(function(box_image)
+					if(box_image.id == obj1_body.id)
 					{
-						if(box_image.id === obj2_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
-						}
-					});
+						box_sprite = obj1_body.sprite;
+					}else if(box_image.id == obj2_body.id)
+					{
+						box_sprite = obj2_body.sprite;
+					}
+				},this);
+
+				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
+				if(isCorrect)
+				{
+					box_sprite.animations.play('success');
 				}
+
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 				
 			}else{ //Hay colision con bounds
@@ -362,14 +357,15 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 {
 	if(boxSprite.id === item.boxId)
 	{
-		CorrecItemPlacement(item, scenario, board);
+		console.log(item.name + " Metido correctamente");
+		return CorrectItemPlacement(item, scenario, board);
 	}else
 	{
-		WrongItemPlacement(item, scenario, board);
+		return WrongItemPlacement(item, scenario, board);
 	}
 }
 
-function CorrecItemPlacement(item, scenario, board)
+function CorrectItemPlacement(item, scenario, board)
 {
 	scenario.score +=10;
 	scenario.successfulItemsInARow++;
@@ -380,6 +376,7 @@ function CorrecItemPlacement(item, scenario, board)
 		console.log(item.name +" metido en la caja CORRECTA!");
 	}
 
+	return true;
 }
 
 function WrongItemPlacement(item, scenario, board)
@@ -394,6 +391,7 @@ function WrongItemPlacement(item, scenario, board)
 	{
 		console.log(item.name +" metido en la caja INCORRECTA!");
 	}
+	return false;
 }
 
 function ItemOutOfBounds(item, scenario, board)
