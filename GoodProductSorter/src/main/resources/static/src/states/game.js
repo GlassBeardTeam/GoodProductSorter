@@ -46,7 +46,7 @@ GoodProductSorter.gameState.prototype = {
 			console.log("[DEBUG] Entering **GAME** state");
 		}
 		this.band = new Item("Banda");
-		this.scenario.leftBox = new Item("BocetoCaja");
+		this.scenario.leftBox = new Item("cajaAcierto");
 		this.scenario.rightBox = new Item("BocetoCaja");
 		for(i=0;i<11;i++){
 			this.scenario.eslabones[i] = new Item("band");
@@ -79,7 +79,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.minSpeedOfDraggedImage, this.scenario.seed, this.scenario.timeForItemSpawn);
 
 		this.scenario.boardMachine.image.animations.add('working');
-		this.scenario.boardMachine.image.animations.play('working', this.scenario.machineSpeed[this.scenario.levelSpeed]*this.game.world._height, true);
+		this.scenario.boardMachine.image.animations.play('working',this.scenario.boardMachine.lvlSpeed[this.scenario.streak]*this.game.world._height, true);
 
 		//Escalamos la IA
 		this.scenario.boardMachine.scale = 0.6;
@@ -197,25 +197,33 @@ GoodProductSorter.gameState.prototype = {
 		game.physics.enable(this.scenario.leftBox.image, Phaser.Physics.P2JS);
 		this.scenario.leftBox.image.id = this.scenario.leftBox.image.body.id;
 		this.scenario.leftBox.image.body.static = true;
-		this.scenario.leftBox.image.body.setCircle(this.scenario.leftBox.image.body.width);
+		this.scenario.leftBox.image.body.setCircle(this.scenario.leftBox.image.body.width*2);
 		this.scenario.leftBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
+		//nombre, frames de la anim, fps, loop, usar numeric index
+		this.scenario.leftBox.image.animations.add('idle',[1], 1, true, true);
+		this.scenario.leftBox.image.animations.add('success',[1,2,3,4], 15, false, true);
+		this.scenario.leftBox.image.animations.play('idle');
+
 
 		//Caja derecha
 		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
+		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.scale = boxScale;
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
 
-		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;
-		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width);
+		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width*2);
 		this.scenario.rightBox.image.body.setCollisionGroup(this.scenario.boxesCollisionGroup);
 		this.scenario.rightBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.rightBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
+		this.scenario.rightBox.image.animations.add('idle',[1], 1, true, true);
+		this.scenario.rightBox.image.animations.add('success',[1,2,3,4], 15, false, true);
+		this.scenario.rightBox.image.animations.play('idle');
 		//Carteles de las cajas
 			//Cartel izquierdo
 		this.scenario.boxSignLeft = game.add.image(this.scenario.leftBox.image.body.x, this.scenario.leftBox.image.body.y, 'cartelIzq');
@@ -258,7 +266,7 @@ GoodProductSorter.gameState.prototype = {
 
 	finTiempo: function(){
 		this.removeAllItems;
-		game.state.start('endGameState',this.scenario.score,this.scenario.level,this.scenario.world);		
+		game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world);		
 
 	},
 

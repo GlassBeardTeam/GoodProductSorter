@@ -117,8 +117,6 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 	
 	this.itemSpawner = new ItemSpawner(maxItems, seed),
 	this.mouseP2 = new mouseP2();
-	this.MaxSpawnXCoords = [this.image.x,(this.image.x + this.image.width/2)],
-	this.MaxSpawnYCoords = [0 ,(this.image.y + this.image.height/2)],
 	this.timeToSpawnNewItem,
 	this.timeSinceLastSpawn,
 
@@ -131,10 +129,11 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 
 	this.SpawnRandomItem = function()
 	{
-		let xcoord = RandomNumberBetween(this.MaxSpawnXCoords[0], this.MaxSpawnXCoords[1]);
-		let ycoord = RandomNumberBetween(this.MaxSpawnYCoords[0], this.MaxSpawnYCoords[1]);
+		let imageOffset = this.image.width * 0.15;
+		let xcoord = RandomNumberBetween(this.image.x -imageOffset, this.image.x + imageOffset);
+		let ycoord = this.image.y;
 
-		xcoord = this.image.x; ycoord = this.image.y;
+		//xcoord = this.image.x; ycoord = this.image.y;
 
 		let item = this.itemSpawner.GiveRandomItem();
 
@@ -223,29 +222,24 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				//Buscamos la caja en los dos bodies
 				let box_sprite;
 				//Si tiene un id es una caja
-				if(obj1_body.id != undefined)
-				{
 					//si la la imagen de la caja tiene el mismo id que el body encontramos nuestra caja
-					this.boxesGroup.forEach(function(box_image)
-					{
-						if(box_image.id === obj1_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
-						}
-					},this);
-
-				}else if(obj2_body.id != undefined)
+				this.boxesGroup.forEach(function(box_image)
 				{
-					this.boxesGroup.forEach(function(box_image)
+					if(box_image.id == obj1_body.id)
 					{
-						if(box_image.id === obj2_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-							CheckItemPlacement(box_image, itemCopy, this.scenarioReference,this);
-						}
-					});
+						box_sprite = obj1_body.sprite;
+					}else if(box_image.id == obj2_body.id)
+					{
+						box_sprite = obj2_body.sprite;
+					}
+				},this);
+
+				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
+				if(isCorrect)
+				{
+					box_sprite.animations.play('success');
 				}
+
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 				
 			}else{ //Hay colision con bounds
@@ -263,8 +257,7 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 			let obj2_body = equation[0].bodyB.parent;
 			//Si alguno de los dos es null, uno son los bounds
 			if(obj1_body == null || obj2_body == null)
-			{
-				//console.log("remove item from game because u didnt clicked it");
+			{			
 				ItemOutOfBounds(itemCopy, this.scenarioReference, this);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
@@ -364,14 +357,15 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 {
 	if(boxSprite.id === item.boxId)
 	{
-		CorrecItemPlacement(item, scenario, board);
+		console.log(item.name + " Metido correctamente");
+		return CorrectItemPlacement(item, scenario, board);
 	}else
 	{
-		WrongItemPlacement(item, scenario, board);
+		return WrongItemPlacement(item, scenario, board);
 	}
 }
 
-function CorrecItemPlacement(item, scenario, board)
+function CorrectItemPlacement(item, scenario, board)
 {
 	scenario.score +=10;
 	scenario.successfulItemsInARow++;
@@ -382,6 +376,7 @@ function CorrecItemPlacement(item, scenario, board)
 		console.log(item.name +" metido en la caja CORRECTA!");
 	}
 
+	return true;
 }
 
 function WrongItemPlacement(item, scenario, board)
@@ -389,13 +384,14 @@ function WrongItemPlacement(item, scenario, board)
 	if(scenario.score > 0){
 		scenario.score -= 10;
 	}
-
-	scenario.streak = 0;
+	//Hay que hacer que pierda la racha para el proximo nivel de velocidad pero que no le quite velocidad
+	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
 
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja INCORRECTA!");
 	}
+	return false;
 }
 
 function ItemOutOfBounds(item, scenario, board)
@@ -405,7 +401,7 @@ function ItemOutOfBounds(item, scenario, board)
 
 	if(game.global.DEBUG_MODE)
 	{
-		console.log(item.name +" se te ha pasado!");
+		console.log(" se te ha pasado " + item.name);
 	}
 }
 
@@ -433,4 +429,6 @@ function UpdateStreak(scenario, boardMachine)
 	boardMachine.itemSpawner.boardItemsPhysicsGroup.forEach((item)=>{item.body.velocity.y = updatedVel;});
 
 	boardMachine.itemSpawner.itemPhysicsGroup.forEach(function(item) {item.body.velocity.y= updatedVel;});	
+
+	boardMachine.image.animations.currentAnim.speed = updatedVel;
 }
