@@ -50,18 +50,8 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
 		game.load.spritesheet('titulo', 'assets/images/titulo_spritesheet.png', 788, 1200);
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
+		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4)
 
-        /*this.background = this.add.image(0, 0, "preloader_fondo");
-        this.background.height = this.game.height;
-        this.background.width = this.game.width;	
-		
-		this.preloadBar=this.add.sprite(this.world.centerX,this.world.centerY + this.world.centerY/2,'preloader_bar');
-		this.preloadBar.anchor.setTo(0.5,0.5);
-		this.preloadBar.scale.x *= 0.5;
-		this.time.advancedTiming = true;
-			
-		
-		this.load.setPreloadSprite(this.preloadBar);*/
 	},
 	
     //Carga el script necesario para cargar las fuentes de google

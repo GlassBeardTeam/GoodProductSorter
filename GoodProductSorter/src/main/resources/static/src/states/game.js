@@ -46,7 +46,7 @@ GoodProductSorter.gameState.prototype = {
 			console.log("[DEBUG] Entering **GAME** state");
 		}
 		this.band = new Item("Banda");
-		this.scenario.leftBox = new Item("BocetoCaja");
+		this.scenario.leftBox = new Item("cajaAcierto");
 		this.scenario.rightBox = new Item("BocetoCaja");
 		for(i=0;i<11;i++){
 			this.scenario.eslabones[i] = new Item("band");
@@ -202,13 +202,17 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.leftBox.image.body.collisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.leftBox.image.body.collides([this.scenario.boardMachine.itemSpawner.itemCollisionGroup]);
 
+		//nombre, frames de la anim, fps, loop, usar numeric index
+		this.scenario.leftBox.image.animations.add('success',[1], 1, true, true);
+		this.scenario.leftBox.image.animations.play('success');
+
 
 		//Caja derecha
 		this.scenario.rightBox.image = this.scenario.boxesGroup.create(game.world._width, this.scenario.leftBox.image.y, this.scenario.leftBox.name);
+		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.scale = boxScale;
 		this.scenario.rightBox.myPhysicsGroup = this.scenario.boxesGroup;
 
-		game.physics.enable(this.scenario.rightBox.image, Phaser.Physics.P2JS);
 		this.scenario.rightBox.image.id = this.scenario.rightBox.image.body.id;
 		this.scenario.rightBox.image.body.static = true;
 		this.scenario.rightBox.image.body.setCircle(this.scenario.rightBox.image.body.width*2);
