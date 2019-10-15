@@ -24,7 +24,7 @@ window.onload = function() {
 	// GLOBAL VARIABLES
 	game.global = {
 		FPS : 30,
-		DEBUG_MODE : true,
+		DEBUG_MODE : false,
 		socket : null,
 		IDIOMA: 'ESP',
 		ASPECT_RATIO: desired_aspect_ratio,

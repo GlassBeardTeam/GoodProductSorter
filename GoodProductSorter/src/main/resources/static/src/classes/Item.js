@@ -1,6 +1,8 @@
 
-function Item(name, scale)
+function Item(name, scale, boxId)
 {
+	this.boxId = boxId,
+	this.dragging = false,
 	this.scale = scale,
 	this.name = name,
 	this.id,
@@ -33,4 +35,28 @@ function Item(name, scale)
 		this.image.animations.play(name, FPS, true);
 	}
 
+}
+
+function StaticObject(x, y, name, scale, group)
+{
+	this.name = name,
+	this.image = undefined,
+	this.group = undefined,
+	this.scale = scale,
+
+	this.InstaceObject = function()
+	{
+		if(this.group != undefined)
+		{
+			this.image = group.create(x,y, name);
+
+		}else
+		{
+			this.image = game.add.image(x, y, name);
+		}
+		let scale = this.image.width/game.world._width;
+		let scaleToUse = this.scale/scale;
+		this.image.width *= scaleToUse;
+		this.image.height *= scaleToUse;
+	}
 }

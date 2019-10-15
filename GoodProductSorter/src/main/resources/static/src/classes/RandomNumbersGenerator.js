@@ -23,7 +23,6 @@
 	//Lo que hay que llamar
 	this.randomLCM = function(c)
 	{
-		console.log("c.a: " + c.A + " c.x: " + c.X + " c.M:"  + c.M);
 		r = (c.A * c.X) % c.M;
 		r = this.moduloSum(r, c.C, c.M);
 		c.X = r;
@@ -58,11 +57,4 @@ function lasvegas(seed)
 		}
 		return r;
 	}
-
-/*
-    low = 10
-    high = 100
-    for i in range(10):
-        print(randomLasVegas(low, high))
-*/
 }

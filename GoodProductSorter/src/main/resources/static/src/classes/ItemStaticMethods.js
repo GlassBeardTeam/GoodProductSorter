@@ -45,7 +45,6 @@ var ItemSpawner = function(maxItems, seed)
 	this.GiveRandomItem = function()
 	{
 		let randomNumber = this.lasvegas.randomLasVegas(0, this.levelItems.length);
-		console.log("Index del objeto: " + randomNumber);
 		//Buscamos por probabilidad el objeto que este por debajo de ella con el algoritmo de busqueda binaria 
 		//let item = this.levenlItems[];
 		return this.levelItems[randomNumber];
@@ -102,12 +101,13 @@ var mouseP2 = function()
 	}
 }
 
-var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeForItemSpawn)
+var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, timeForItemSpawn)
 {
+	this.scenarioReference = undefined,
 	this.machineGroup = game.add.group();
 	this.image = this.machineGroup.create(x, y, name);
 	this.image.anchor.setTo(0.5, 0.5);
-	this.boardSpeed = speed,
+	this.lvlSpeed = levelSpeed;
 	this.minSpeedOfDraggedImage = minSpeed,
 	//Milliseconds
 	this.elapsedTimeStacker = 0,
@@ -117,8 +117,6 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 	
 	this.itemSpawner = new ItemSpawner(maxItems, seed),
 	this.mouseP2 = new mouseP2();
-	this.MaxSpawnXCoords = [this.image.x,(this.image.x + this.image.width/2)],
-	this.MaxSpawnYCoords = [0 ,(this.image.y + this.image.height/2)],
 	this.timeToSpawnNewItem,
 	this.timeSinceLastSpawn,
 
@@ -131,16 +129,18 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 	this.SpawnRandomItem = function()
 	{
-		let xcoord = RandomNumberBetween(this.MaxSpawnXCoords[0], this.MaxSpawnXCoords[1]);
-		let ycoord = RandomNumberBetween(this.MaxSpawnYCoords[0], this.MaxSpawnYCoords[1]);
+		let imageOffset = this.image.width * 0.15;
+		let xcoord = RandomNumberBetween(this.image.x -imageOffset, this.image.x + imageOffset);
+		let ycoord = this.image.y;
 
-		xcoord = this.image.x; ycoord = this.image.y;
+		//xcoord = this.image.x; ycoord = this.image.y;
 
 		let item = this.itemSpawner.GiveRandomItem();
 
 		if(game.global.DEBUG_MODE)
 		{
 			console.log("Item spawned: " + item.name);
+			console.log("item boxid: " + item.boxId);
 		}
 
 		let itemCopy = new Item(item.name);//Creamos el item
@@ -150,26 +150,12 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 		//Creamos la imagen
 		itemCopy.image = itemCopy.myPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
-
+		itemCopy.boxId = item.boxId;
+	
 		//Escalamos el objeto para que ocupa el porcentaje que marca item.scale
-		/*
-		let widthScale = itemCopy.image.width/game.world._width;
-		let heightScale = itemCopy.image.height/game.world._height;
-		itemCopy.image.width *= item.scale/widthScale;
-		itemCopy.image.height *= item.scale/heightScale * 17/9;
-		*/
 		let scale = itemCopy.image.width/game.world._width;
 		itemCopy.image.width *= item.scale/scale;
 		itemCopy.image.height *= item.scale/scale;
-		
-		//ARCADE PHYSICS
-		/*
-		itemCopy.image = game.add.sprite(xcoord, ycoord, itemCopy.name);
-		game.physics.arcade.enable(itemCopy.image);
-		itemCopy.image.body.collideWorldBounds = true;
-		//itemCopy.image.bounce.set(1);
-		*/
-		//ARCADE PHYSICS/
 		itemCopy.image.anchor.setTo(0.5, 0.5);
 
 		//percibe input, se activa el drag
@@ -192,14 +178,6 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 		//Añadimos la imagen al raton de p2
 		this.mouseP2.addBody(itemCopy.image);
 
-		//Tratamiento de imagen transparente
-		/*
-		//ARCADE PHYSICS
-		itemCopy.boardImage = game.add.sprite(xcoord, ycoord, itemCopy.name);
-		game.physics.arcade.enable(itemCopy.boardImage);
-		itemCopy.boardImage.body.collideWorldBounds = true;
-		//ARCADE PHYSICS/
-		*/
 		//P2 PHYSICS
 		itemCopy.boardImage = itemCopy.myBoardPhysicsGroup.create(xcoord, ycoord, itemCopy.name);
 
@@ -224,12 +202,10 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 		itemCopy.boardImage.body.damping = 0;
 		//P2 PHYSICS/
 
-
 		//Se añade velocidad a los objetos
-		itemCopy.image.body.velocity.y = this.boardSpeed;
-		itemCopy.boardImage.body.velocity.y = this.boardSpeed;
-		
-
+		let itemVel =  this.lvlSpeed[this.scenarioReference.streak] * game.world._height;
+		itemCopy.image.body.velocity.y = itemVel;
+		itemCopy.boardImage.body.velocity.y = itemVel;
 
 		//Añadimos las callbacks de drag and drop
 		addOnDragStartCallback(this.ItemOnDragStartCallback, itemCopy, null);
@@ -246,47 +222,43 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 				//Buscamos la caja en los dos bodies
 				let box_sprite;
 				//Si tiene un id es una caja
-				if(obj1_body.id != undefined)
-				{
 					//si la la imagen de la caja tiene el mismo id que el body encontramos nuestra caja
-					this.boxesGroup.forEach(function(box_image)
-					{
-						if(box_image.id === obj1_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-						}
-					});
-
-				}else if(obj2_body.id != undefined)
+				this.boxesGroup.forEach(function(box_image)
 				{
-					this.boxesGroup.forEach(function(box_image)
+					if(box_image.id == obj1_body.id)
 					{
-						if(box_image.id === obj2_body.id)
-						{
-							box_sprite = obj1_body.sprite;
-						}
-					});
+						box_sprite = obj1_body.sprite;
+					}else if(box_image.id == obj2_body.id)
+					{
+						box_sprite = obj2_body.sprite;
+					}
+				},this);
 
+				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
+				if(isCorrect)
+				{
+					box_sprite.animations.play('success');
 				}
+
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
-
+				
 			}else{ //Hay colision con bounds
-				//Utilizo el metodo attatch con velocidad 0 para que mande el objeto directamente a board de nuevo
-				console.log("Colision de image con bounds: vuelta a la cinta");
-				attatchToBoardImage(itemCopy);
+				//console.log("Colision de image con bounds: vuelta a la cinta");
+				if(itemCopy.dragging == false)
+				{
+					attatchToBoardImage(itemCopy);
+				}
 			}
-
 		},this);
 
 		itemCopy.boardImage.body.onBeginContact.add(function(body1, body2, shape1, shape2, equation)
 		{
-			console.log("OnbeginContat de boardImage");
 			let obj1_body= equation[0].bodyA.parent;
 			let obj2_body = equation[0].bodyB.parent;
 			//Si alguno de los dos es null, uno son los bounds
 			if(obj1_body == null || obj2_body == null)
-			{
-				console.log("remove item from game because u didnt clicked it");
+			{			
+				ItemOutOfBounds(itemCopy, this.scenarioReference, this);
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2);
 			}
 		},this);
@@ -317,6 +289,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 	this.ItemOnDragStartCallback = function(item)
 	{
+		item.dragging = true;
 		item.image.body.velocity.x = 0;
 		item.image.body.velocity.y = 0;
 		
@@ -324,6 +297,7 @@ var BoardMachine = function(x, y, name, maxItems, speed, minSpeed, seed, timeFor
 
 	this.ItemOnDragStopCallback = function(item, minSpeed)
 	{
+		item.dragging = false;
 		item.image.update = () =>checkAttatchToBoardImage(item, minSpeed);
 	}
 
@@ -350,10 +324,12 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardI
 	//¿Como borramos el Item?
 	delete itemCopy;
 	if(game.global.DEBUG_MODE){
+		/*
 		console.log("[DEBUG] image removed from P2 mouse bodies collision array");
 		console.log("[DEBUG] image removed from physics group");
 		console.log("[DEBUG] boardImage removed from board physics group");
 		console.log("[DEBUG] item removed from cache");
+		*/
 	}
 }
 
@@ -374,4 +350,85 @@ function attatchToBoardImage(item)
 		item.image.body.velocity.x = item.boardImage.body.velocity.x;
 		item.image.body.velocity.y = item.boardImage.body.velocity.y;
 		item.image.update = ()=>{};
+}
+
+
+function CheckItemPlacement(boxSprite, item, scenario,board)
+{
+	if(boxSprite.id === item.boxId)
+	{
+		console.log(item.name + " Metido correctamente");
+		return CorrectItemPlacement(item, scenario, board);
+	}else
+	{
+		return WrongItemPlacement(item, scenario, board);
+	}
+}
+
+function CorrectItemPlacement(item, scenario, board)
+{
+	scenario.score +=10;
+	scenario.successfulItemsInARow++;
+	UpdateStreak(scenario, board);
+
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(item.name +" metido en la caja CORRECTA!");
+	}
+
+	return true;
+}
+
+function WrongItemPlacement(item, scenario, board)
+{
+	if(scenario.score > 0){
+		scenario.score -= 10;
+	}
+	//Hay que hacer que pierda la racha para el proximo nivel de velocidad pero que no le quite velocidad
+	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
+
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(item.name +" metido en la caja INCORRECTA!");
+	}
+	return false;
+}
+
+function ItemOutOfBounds(item, scenario, board)
+{
+	scenario.successfulItemsInARow = 0;
+	UpdateStreak(scenario, board);
+
+	if(game.global.DEBUG_MODE)
+	{
+		console.log(" se te ha pasado " + item.name);
+	}
+}
+
+//La manera de cambiar de racha (o marcha de la maquina)
+function UpdateStreak(scenario, boardMachine)
+{
+	let lastStreak = scenario.streak;
+	let streak = scenario.successfulItemsInARow / scenario.itemsInARowToChangeStreak;
+	streak = Math.trunc(streak);
+	if(streak >= boardMachine.lvlSpeed.length) streak = boardMachine.lvlSpeed.length -1;
+	scenario.streak = streak;
+
+	if(game.global.DEBUG_MODE)
+	{
+		if(lastStreak != streak)
+		{
+			console.log("aumento de march de  " + lastStreak + " a " + scenario.streak);
+		}
+	}
+
+	let updatedVel =  boardMachine.lvlSpeed[scenario.streak] * game.world._height;
+	//Updates de velocidades
+	scenario.eslabonesGroup.forEach((item)=>{item.body.velocity.y = updatedVel});
+
+	boardMachine.itemSpawner.boardItemsPhysicsGroup.forEach((item)=>{item.body.velocity.y = updatedVel;});
+
+	boardMachine.itemSpawner.itemPhysicsGroup.forEach(function(item) {item.body.velocity.y= updatedVel;});	
+
+	boardMachine.image.animations.currentAnim.speed = updatedVel;
 }

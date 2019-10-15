@@ -18,12 +18,11 @@ GoodProductSorter.worldsState.prototype = {
 	create : function() {
         var style = {	font: "Acme",
 						fill: "Black",
-						fontSize: "100pt",
+						fontSize: "70pt",
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};
 
-		//game.state.start("menuState");
         this.background = this.add.image(0, 0, "fondoMenu");
         this.background.height = this.game.height;
         this.background.width = this.game.width;
@@ -36,10 +35,10 @@ GoodProductSorter.worldsState.prototype = {
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_world1 = this.add.button(0, 0, 'botonEnable', this.click_button, this, 2, 0, 0);
 		this.button_world1.stage='world1State';
 
-		this.button_world2 = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_world2 = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
 		//this.button_world2.stage='world1State';
 		
 		//Boton Volver
@@ -58,10 +57,20 @@ GoodProductSorter.worldsState.prototype = {
 			this.text2=this.game.add.text(0, 0, "World 2",style);
 			this.text3=this.game.add.text(0, 0, "Return",style);
 		}
+		/*
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
 		this.text2.setTextBounds(0, 300, this.game.world.width,100);
 		this.text3.setTextBounds(0, 400, this.game.world.width,100);
+		*/
 
+		//animación mosca
+		this.mosca= game.add.sprite(0, 0, 'mosca');
+		this.mosca.width = game.world._width;
+		this.mosca.height = game.world._height * 0.5;
+		this.mosca.animations.add('fly');
+		game.time.events.repeat(Phaser.Timer.SECOND * 10, 10, this.playMosca, this);
+
+		this.resize();
 	},
 
 	click_button:function(button){
@@ -131,23 +140,38 @@ GoodProductSorter.worldsState.prototype = {
 		this.button_idioma.y = 0;//0 es la posicion
 
 		//Botones Menu
-		this.button_world1.width=this.world.width*0.32;
-		this.button_world1.height=this.world.height*0.12;
-		this.button_world1.x =0+this.world.width*0.15;
-		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
-		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
+		let buttonsYOffset = game.world._width * 0.05;
+		let textYOffset = game.world._height * 0.02;
 
-		this.button_world2.width=this.world.width*0.32;
-		this.button_world2.height=this.world.height*0.12;
-		this.button_world2.x =this.world.width-this.world.width*0.15-this.button_world2.width;
-		this.button_world2.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
-		this.text2.setTextBounds(this.button_world2.x+this.button_world2.width/3, this.button_world2.y+this.button_world2.height, this.button_world1.x,100);
+		this.button_world1.anchor.setTo(0.5, 0.5);
+		this.button_world1.width = game.world._width*0.5;
+		this.button_world1.height = game.world._height*0.15;
+		this.button_world1.x = game.world._width*0.5;
+		this.button_world1.y = this.world._height*0.3;
+		this.text1.setTextBounds(this.button_world1.x - this.button_world1.width/2, this.button_world1.y - this.button_world1.height/2- textYOffset,
+			this.button_world1.width, this.button_world1.height);
+
+		this.button_world2.anchor.setTo(0.5, 0.5);
+		this.button_world2.width = this.world.width*0.5;
+		this.button_world2.height = this.world.height*0.15;
+		this.button_world2.x = this.button_world1.x;
+		this.button_world2.y = this.button_world1.y + this.button_world2.height + buttonsYOffset;
+		this.text2.setTextBounds(this.button_world2.x - this.button_world2.width/2, this.button_world2.y - this.button_world2.height/2- textYOffset,
+			this.button_world2.width, this.button_world2.height);
+
+		this.button_volver.anchor.setTo(0.5, 0.5);
+		this.button_volver.width=this.world.width*0.3;
+		this.button_volver.height=this.world.height*0.10;
+		this.button_volver.x = game.world._width/2;
+		this.button_volver.y = game.world._height*0.9;
+		this.text3.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- textYOffset,
+			this.button_volver.width, this.button_volver.height);
 
 
-		this.button_volver.width=this.world.width*0.32;
-		this.button_volver.height=this.world.height*0.12;
-		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
-		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
-		this.text3.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
+	},
+
+	
+	playMosca: function(){
+		this.mosca.animations.play('fly', 10, false);
 	}
 }

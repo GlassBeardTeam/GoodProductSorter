@@ -61,6 +61,12 @@ GoodProductSorter.world1State.prototype = {
 
 		this.resize();
 
+		//animación mosca
+		this.mosca= game.add.sprite(0, 0, 'mosca');
+		this.mosca.width = game.world._width;
+		this.mosca.height = game.world._height * 0.5;
+		game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, this.playMosca, this);
+
 	},
 
 	click_button:function(button){
@@ -92,7 +98,8 @@ GoodProductSorter.world1State.prototype = {
 				this.image_turn.visible=false;
 			}
 		}
-		
+
+		this.resize();
 	},
 	
 	getSpriteScale: function (spriteWidth, spriteHeight, availableSpaceWidth, availableSpaceHeight, minPadding) {
@@ -138,5 +145,11 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
 		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
 		this.text3.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
+	},
+
+	
+	playMosca: function(){
+		this.mosca.animations.play('fly', 10, false);
 	}
+
 }

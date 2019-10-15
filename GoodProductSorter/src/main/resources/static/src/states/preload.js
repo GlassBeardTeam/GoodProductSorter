@@ -34,9 +34,11 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BandSpriteSheet", 'assets/images/scenario/BandSpriteSheet.png');
 
 		//Game Images
-		this.load.image("band", 'assets/images/scenario/Eslabon_v1.png');
+		this.load.image("band", 'assets/images/scenario/Eslabon_v4.png');
+		game.load.image("cartelIzq" , 'assets/images/scenario/CartelIzq.png');
+		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
-		this.load.image("SueloFabrica", 'assets/images/scenario/SueloFabricaBoceto.png');
+		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
@@ -44,18 +46,12 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
 		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
 
+		//load spriteSheet
+		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
+		game.load.spritesheet('titulo', 'assets/images/titulo_spritesheet.png', 788, 1200);
+		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
+		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4)
 
-        /*this.background = this.add.image(0, 0, "preloader_fondo");
-        this.background.height = this.game.height;
-        this.background.width = this.game.width;	
-		
-		this.preloadBar=this.add.sprite(this.world.centerX,this.world.centerY + this.world.centerY/2,'preloader_bar');
-		this.preloadBar.anchor.setTo(0.5,0.5);
-		this.preloadBar.scale.x *= 0.5;
-		this.time.advancedTiming = true;
-			
-		
-		this.load.setPreloadSprite(this.preloadBar);*/
 	},
 	
     //Carga el script necesario para cargar las fuentes de google

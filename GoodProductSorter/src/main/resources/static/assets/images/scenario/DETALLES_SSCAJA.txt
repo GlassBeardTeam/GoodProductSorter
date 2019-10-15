@@ -1,0 +1,14 @@
+//Tamaño total
+width: 1925
+height: 1850
+
+//tamaño frame:
+width: 385
+heght: 370
+
+//posiciones frames
+
+parado: [1]
+acierto: [2, 3, 4, 5]
+cerrar:[6,7, 8, 9,10]
+error: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
