@@ -57,11 +57,4 @@ function lasvegas(seed)
 		}
 		return r;
 	}
-
-/*
-    low = 10
-    high = 100
-    for i in range(10):
-        print(randomLasVegas(low, high))
-*/
 }
