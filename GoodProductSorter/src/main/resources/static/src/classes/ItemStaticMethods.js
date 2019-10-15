@@ -394,7 +394,13 @@ function WrongItemPlacement(item, scenario, board)
 
 function ItemOutOfBounds(item, scenario, board)
 {
-	scenario.successfulItemsInARow = 0;
+	
+	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
+	scenario.successfulItemsInARow -= scenario.itemsInARowToChangeStreak;
+	if(scenario.successfulItemsInARow < 0){
+		scenario.successfulItemsInARow = 0;
+	}
+	
 	UpdateStreak(scenario, board);
 
 	if(game.global.DEBUG_MODE)
@@ -406,6 +412,7 @@ function ItemOutOfBounds(item, scenario, board)
 //La manera de cambiar de racha (o marcha de la maquina)
 function UpdateStreak(scenario, boardMachine)
 {
+	
 	let lastStreak = scenario.streak;
 	let streak = scenario.successfulItemsInARow / scenario.itemsInARowToChangeStreak;
 	streak = Math.trunc(streak);
@@ -416,7 +423,7 @@ function UpdateStreak(scenario, boardMachine)
 	{
 		if(lastStreak != streak)
 		{
-			console.log("aumento de march de  " + lastStreak + " a " + scenario.streak);
+			console.log("cambio de marcha de  " + lastStreak + " a " + scenario.streak);
 		}
 	}
 
