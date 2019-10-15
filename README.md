@@ -48,7 +48,7 @@ La partida acaba después de 2 minutos y el objetivo es clasificar correctamente
 
 Los niveles del juego estarán divididos en distintos mundos, cada uno con su temática. La dificultad irá aumentando progresivamente incrementando tanto la cantidad de objetos que se deben clasificar como las instrucciones a seguir. En un principio los objetos se clasificarán en 2 categorías, pero no se descarta aumentar también el número de categorías para hacerlo más complicado.
 
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Juego.PNG)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/Juego3.PNG)
 
 (Pantalla de juego).
 
@@ -67,7 +67,7 @@ El Diagrama de flujo entre pantallas es el siguiente:
 
 ![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/FlowChartProductSorter.png)
 
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Menu.PNG)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/Menu.PNG)
 
 __Mundos:__ Selección del mundo en el que vas a jugar (cada uno tendrá una temática distinta).
 * Niveles: Selección del nivel (Se mostrarán las estrellas conseguidas en cada uno).
@@ -94,9 +94,9 @@ Estilo cartoon desenfadado, inspirada en la animación de los años 30 pero con 
 
 Bocetos:
 
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/BolsaSangre.png)
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/tijeras.png)
-![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/AllBranch/GDD%20Images/Jefe2.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/BolsaSangre.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/tijeras.png)
+![Error al cargar la imagen](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/GDD%20Images/Jefe2.png)
 
 
 ### Música y Sonido
