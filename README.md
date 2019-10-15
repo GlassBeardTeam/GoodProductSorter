@@ -15,7 +15,7 @@ Versión 1.0
 ### Índice
 [Pitch](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#pitch)
   * [Propósito y público objetivo](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#prop%C3%B3sito-y-p%C3%BAblico-objetivo)
-  * [Plataforma y monetización](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#plataforma)
+  * [Plataforma y monetización](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#plataforma-y-monetizaci%C3%B3n)
   
 [Mecánicas](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#mec%C3%A1nicas)
   * [Puntuación](https://github.com/GlassBeardTeam/GoodProductSorter/blob/master/README.md#puntuaci%C3%B3n)
