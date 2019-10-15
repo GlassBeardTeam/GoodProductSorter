@@ -243,7 +243,6 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
 				
 			}else{ //Hay colision con bounds
-				//console.log("Colision de image con bounds: vuelta a la cinta");
 				if(itemCopy.dragging == false)
 				{
 					attatchToBoardImage(itemCopy);
@@ -357,7 +356,6 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 {
 	if(boxSprite.id === item.boxId)
 	{
-		console.log(item.name + " Metido correctamente");
 		return CorrectItemPlacement(item, scenario, board);
 	}else
 	{
