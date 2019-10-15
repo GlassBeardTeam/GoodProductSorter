@@ -68,7 +68,7 @@ GoodProductSorter.menuState.prototype ={
 			game.global.socket.send(JSON.stringify(message));
 		}, this);
 		*/
-
+		//this.resize();
 	},
 
 	cambiar_idioma:function(){
@@ -99,7 +99,7 @@ GoodProductSorter.menuState.prototype ={
 				this.image_turn.visible=false;
 			}
 		}
-		//this.resize();
+		
 	},
 
 	click_button:function(button){

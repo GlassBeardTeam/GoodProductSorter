@@ -59,6 +59,8 @@ GoodProductSorter.world1State.prototype = {
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
 		this.text3.setTextBounds(0, 400, this.game.world.width,100);
 
+		this.resize();
+
 	},
 
 	click_button:function(button){
@@ -90,7 +92,7 @@ GoodProductSorter.world1State.prototype = {
 				this.image_turn.visible=false;
 			}
 		}
-		//this.resize();
+		
 	},
 	
 	getSpriteScale: function (spriteWidth, spriteHeight, availableSpaceWidth, availableSpaceHeight, minPadding) {
