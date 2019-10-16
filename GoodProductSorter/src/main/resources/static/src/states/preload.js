@@ -50,7 +50,8 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
 		game.load.spritesheet('titulo', 'assets/images/titulo_spritesheet.png', 788, 1200);
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
-		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4)
+		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
+		game.load.spritesheet('ojos', 'assets/images/scenario/SSOjos1.png', 92, 49, 5);
 
 	},
 	
