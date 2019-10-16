@@ -41,8 +41,8 @@ GoodProductSorter.menuState.prototype ={
 		this.button_casa = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
 		this.button_casa.stage='Casa';
 
-		this.button_ajustes = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
-		this.button_ajustes.stage='Ajustes';
+		this.button_contacto = this.add.button(0, 0, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_contacto.stage='contactState';
 
 		//animación mosca
 		this.mosca= game.add.sprite(0, 0, 'mosca');
@@ -56,12 +56,12 @@ GoodProductSorter.menuState.prototype ={
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1=this.game.add.text(0, 0, "Mundos",style);
 			this.text2=this.game.add.text(0, 0, "Casa",style);
-			this.text3=this.game.add.text(0, 0, "Ajustes",style);
+			this.text3=this.game.add.text(0, 0, "Contacto",style);
 		}else{
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1=this.game.add.text(0, 0, "Worlds",style);
 			this.text2=this.game.add.text(0, 0, "Home",style);
-			this.text3=this.game.add.text(0, 0, "Settings",style);
+			this.text3=this.game.add.text(0, 0, "Contact",style);
 		}
 		/*
 		this.startGameKey.onDown.add(()=>
@@ -81,13 +81,13 @@ GoodProductSorter.menuState.prototype ={
 			this.button_idioma.loadTexture('idioma2');
 			this.text1.setText('Worlds');
 			this.text2.setText('Home');
-			this.text3.setText('Settings');
+			this.text3.setText('Contact');
 		}else{
 			this.game.global.IDIOMA='ESP';
 			this.button_idioma.loadTexture('idioma1');
 			this.text1.setText('Mundos');
 			this.text2.setText('Casa');
-			this.text3.setText('Ajustes');
+			this.text3.setText('Contacto');
 		}
 	},
 	
@@ -142,16 +142,16 @@ GoodProductSorter.menuState.prototype ={
 		this.button_casa.x += this.button_inicio.x;
 		this.button_casa.y += this.button_inicio.y + this.button_inicio.height + buttonsOffset;
 			//Button ajustes
-		this.button_ajustes.anchor.setTo(0.5, 0.5);
-		this.button_ajustes.width = game.world._width*0.6;
-		this.button_ajustes.height = game.world._height*0.2;
-		this.button_ajustes.x += this.button_casa.x;
-		this.button_ajustes.y +=  this.button_casa.y + this.button_casa.height + buttonsOffset;
+		this.button_contacto.anchor.setTo(0.5, 0.5);
+		this.button_contacto.width = game.world._width*0.6;
+		this.button_contacto.height = game.world._height*0.2;
+		this.button_contacto.x += this.button_casa.x;
+		this.button_contacto.y +=  this.button_casa.y + this.button_casa.height + buttonsOffset;
 			//Text bounds		
 		let textYOffset = game.world._height * 0.02;
 		this.text1.setTextBounds(this.button_inicio.x - this.button_inicio.width/2, this.button_inicio.y - this.button_inicio.height/2-textYOffset, this.button_inicio.width, this.button_inicio.height);
 		this.text2.setTextBounds(this.button_casa.x - this.button_casa.width/2, this.button_casa.y - this.button_casa.height/2-textYOffset, this.button_casa.width, this.button_casa.height);
-		this.text3.setTextBounds(this.button_ajustes.x - this.button_ajustes.width/2, this.button_ajustes.y - this.button_ajustes.height/2-textYOffset, this.button_ajustes.width, this.button_ajustes.height);
+		this.text3.setTextBounds(this.button_contacto.x - this.button_contacto.width/2, this.button_contacto.y - this.button_contacto.height/2-textYOffset, this.button_contacto.width, this.button_contacto.height);
 
 	},
 
