@@ -30,7 +30,9 @@ this.scenario = {
 	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
-	eslabones:[11]
+	eslabones:[11],
+	//Ojos
+	eyes: undefined,
 };
 
 //Puntero a lvlitems
@@ -260,6 +262,18 @@ GoodProductSorter.gameState.prototype = {
 		let text1 = "Desechable";
 		this.scenario.boxSignLeftText = game.add.text(0, 0, text0, style);
 		this.scenario.boxSignRightText = game.add.text(0, 0, text1, style);
+
+		//Ojos
+		this.scenario.eyes = game.add.sprite(this.scenario.boardMachine.image.x, this.scenario.boardMachine.image.y + this.scenario.boardMachine.image.height / 4, 'ojos');
+		this.scenario.eyes.anchor.setTo(0.5);
+		this.scenario.eyes.width = this.scenario.boardMachine.image.width / 5;
+		this.scenario.eyes.height = this.scenario.boardMachine.image.height / 8;
+		this.scenario.eyes.visible = false;
+		this.scenario.eyes.animations.add('opening', [0, 1, 2, 3, 4], 15, true, true);
+		this.scenario.eyes.animations.add('closing', [4, 3, 2, 1, 0], 15, true, true);
+		this.scenario.eyes.animations.add('blink', [4, 3, 2, 1, 0, 1, 2, 3, 4], 15, true, true)
+
+		game.time.events.add(Phaser.Timer.SECOND * 20, this.playOpening, this)
 		
 		//OBJETOS
 		this.CreateItemsWorld1_level1();
@@ -318,6 +332,27 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.boardMachine.addItemToLevel(new Item("condon", 0.2, desechable));
 		this.scenario.boardMachine.addItemToLevel(new Item("calavera", 0.2, desechable));
 		this.scenario.boardMachine.addItemToLevel(new Item("corazon", 0.2, reutilizable));
+	},
+
+	playOpening: function(){
+		this.scenario.eyes.visible = true;
+		this.scenario.eyes.animations.play('opening', 50, false).onComplete.add(
+			()=>{game.time.events.add(Phaser.Timer.SECOND * 1, this.blink, this);}
+		);
+		
+	},
+	
+	blink: function(){
+		this.scenario.eyes.animations.play('blink',50, false).onComplete.add(
+			()=>{game.time.events.add(Phaser.Timer.SECOND * 1, this.playClosing, this);}
+		);
+	},
+
+	playClosing: function(){
+		this.scenario.eyes.animations.play('closing',50, false).onComplete.add(
+			()=>{this.scenario.eyes.visible = false;}
+		);
+		
 	}
 
 
