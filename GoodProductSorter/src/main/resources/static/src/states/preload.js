@@ -39,6 +39,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
+		this.load.image("bocadillo", 'assets/images/bocadillo.png')
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
@@ -51,6 +52,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('titulo', 'assets/images/titulo_spritesheet.png', 788, 1200);
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4)
+		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 
 	},
 	
