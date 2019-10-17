@@ -38,10 +38,11 @@ GoodProductSorter.level1Cutscene.prototype = {
         this.playBossDialog(this.dialogCount);
         this.dialogCount++;
 
+        fontResize = scaleFont(60, game.width);
         var style1 = {	
             font: "Acme",
             fill: "White",
-            fontSize: "12pt",
+            fontSize: fontResize,
         };
 
         var continueText = game.add.text(game.world._width*0.5, game.world._height*0.02, "Haz click para saltar", style1);
@@ -54,10 +55,11 @@ GoodProductSorter.level1Cutscene.prototype = {
         bocadillo.width = game.world._width*0.95;
         bocadillo.height = game.world._height*0.5;
 
+        fontResize2 = scaleFont(80, game.width);
         var style2 = {	
             font: "Acme",
             fill: "Black",
-            fontSize: "20pt",
+            fontSize: fontResize2,
             align: "left",
             boundsAlignH: "left",
             boundsAlignV: "top"

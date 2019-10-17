@@ -19,6 +19,7 @@ window.onload = function() {
 		w  = h * (1/desired_aspect_ratio);
 	}
 
+
 	game = new Phaser.Game(w, h, Phaser.CANVAS, 'GoodProductSorter');
 
 	// GLOBAL VARIABLES

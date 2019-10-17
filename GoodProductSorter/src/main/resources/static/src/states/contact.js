@@ -16,16 +16,17 @@ GoodProductSorter.contactState.prototype ={
 	},
 
 	create:function(){
+		fontResize = scaleFont(70, game.width);
         var style1 = {	font: "Acme",
 						fill: "Black",
-						fontSize: "60pt",
+						fontSize: fontResize,
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};
-					
+		fontResize2 = scaleFont(50, game.width);			
         var style2 = {	font: "Acme",
 						fill: "Black",
-						fontSize: "30pt",
+						fontSize: fontResize2,
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};

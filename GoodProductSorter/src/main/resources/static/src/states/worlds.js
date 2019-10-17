@@ -18,9 +18,10 @@ GoodProductSorter.worldsState.prototype = {
 	},
 
 	create : function() {
+		fontResize = scaleFont(70, game.width);
         var style = {	font: "Acme",
 						fill: "Black",
-						fontSize: "70pt",
+						fontSize: fontResize,
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};

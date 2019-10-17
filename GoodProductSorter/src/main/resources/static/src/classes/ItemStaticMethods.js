@@ -439,3 +439,10 @@ function UpdateStreak(scenario, boardMachine)
 
 	boardMachine.image.animations.currentAnim.speed = updatedVel;
 }
+
+//Ajustar tamaño de la fuente dependiendo del ancho de la pantalla de juego
+function scaleFont(fontSize, width){
+	ratio = width * 0.000625
+	fontSize *= ratio;
+	return fontSize;
+}

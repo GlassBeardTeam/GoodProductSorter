@@ -183,9 +183,10 @@ GoodProductSorter.gameState.prototype = {
 			this.scenario.eslabones[i].image=this.scenario.eslabonesGroup.create(game.world.centerX,0,this.scenario.eslabones[i].name);
 			game.physics.enable(this.scenario.eslabones[i].image, Phaser.Physics.ARCADE);
 		}
+		fontResize = scaleFont(70, game.width);
 		var style_tiempo = { font: "Acme",
 							fill: "Black",
-							fontSize: "40pt",
+							fontSize: fontResize,
 							boundsAlignH: "center",
 							boundsAlignV: "middle", };
 		//Control Tiempo
@@ -257,7 +258,8 @@ GoodProductSorter.gameState.prototype = {
 
 
 		//Texto de los carteles
-		let style = { font: "Acme", fill: "Blue", fontSize: "30pt", boundsAlignH: "center", boundsAlignV: "middle"};
+		fontResize = scaleFont(60, game.width);
+		let style = { font: "Acme", fill: "Blue", fontSize: fontResize, boundsAlignH: "center", boundsAlignV: "middle"};
 		let text0 = "Reutilizable";
 		let text1 = "Desechable";
 		this.scenario.boxSignLeftText = game.add.text(0, 0, text0, style);
