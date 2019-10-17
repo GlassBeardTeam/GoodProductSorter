@@ -35,7 +35,7 @@ GoodProductSorter.gameTitleState.prototype = {
 
 		title.animations.play('move', 10, true);
 		
-		game.time.events.add(Phaser.Timer.SECOND * 4, this.goToMenu, this);
+		game.time.events.add(Phaser.Timer.SECOND * 1, this.goToMenu, this);
 	},
 
 	update : function() {

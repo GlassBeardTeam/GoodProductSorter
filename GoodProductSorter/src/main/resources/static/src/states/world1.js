@@ -40,7 +40,7 @@ GoodProductSorter.world1State.prototype = {
 
 		//Boton mundos
 		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_button, this, 2, 0, 0);
-		this.button_world1.stage='gameState';
+		this.button_world1.stage='level1CutsceneState';
 		
 		//Boton Volver
 		this.button_volver = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);

@@ -40,6 +40,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
+		this.load.image("bocadillo", 'assets/images/bocadillo.png')
 		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
@@ -60,9 +61,9 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
 		
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
+		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
 		game.load.spritesheet('ojos', 'assets/images/scenario/SSOjos1.png', 92, 49, 5);
-
 
 		//Boss sounds
 		game.load.audio('bossDialog1', 'assets/Sounds/BossSounds/BossDialog1.ogg');
