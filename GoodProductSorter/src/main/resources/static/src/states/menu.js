@@ -2,6 +2,7 @@ GoodProductSorter.menuState = function(game){
 	this.startGameKey;
 };
 
+
 GoodProductSorter.menuState.prototype ={
 
 	init : function() {
@@ -13,6 +14,9 @@ GoodProductSorter.menuState.prototype ={
 	},
 	
 	preload : function() {
+		//sonidos botones
+		buttonSound = game.add.audio('select');
+		uselessSound = game.add.audio('cantSelect');
 
 	},
 
@@ -51,6 +55,8 @@ GoodProductSorter.menuState.prototype ={
 		this.mosca.animations.add('fly');
 		game.time.events.repeat(Phaser.Timer.SECOND * 5, 10, this.playMosca, this);
 		
+		
+
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
@@ -107,7 +113,9 @@ GoodProductSorter.menuState.prototype ={
 	},
 
 	click_button:function(button){
+		buttonSound.play();
 		this.state.start(button.stage);
+
 	},
 
 	resize: function () {

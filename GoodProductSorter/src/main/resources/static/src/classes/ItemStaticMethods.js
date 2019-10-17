@@ -354,6 +354,7 @@ function attatchToBoardImage(item)
 
 function CheckItemPlacement(boxSprite, item, scenario,board)
 {
+	store.play();
 	if(boxSprite.id === item.boxId)
 	{
 		return CorrectItemPlacement(item, scenario, board);
@@ -365,10 +366,10 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 
 function CorrectItemPlacement(item, scenario, board)
 {
+	correct.play();
 	scenario.score +=10;
 	scenario.successfulItemsInARow++;
 	UpdateStreak(scenario, board);
-
 	if(game.global.DEBUG_MODE)
 	{
 		console.log(item.name +" metido en la caja CORRECTA!");
@@ -379,6 +380,7 @@ function CorrectItemPlacement(item, scenario, board)
 
 function WrongItemPlacement(item, scenario, board)
 {
+	wrong.play();
 	if(scenario.score > 0){
 		scenario.score -= 10;
 	}

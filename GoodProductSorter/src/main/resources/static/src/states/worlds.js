@@ -2,6 +2,8 @@ GoodProductSorter.worldsState = function(game) {
 
 }
 
+
+
 GoodProductSorter.worldsState.prototype = {
 
 	init : function() {
@@ -74,6 +76,7 @@ GoodProductSorter.worldsState.prototype = {
 	},
 
 	click_button:function(button){
+		buttonSound.play();
 		this.state.start(button.stage);
 	},
 

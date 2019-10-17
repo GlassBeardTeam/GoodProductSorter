@@ -37,6 +37,8 @@ this.scenario = {
 this.myLvlItems = [];
 }
 
+
+
 GoodProductSorter.gameState.prototype = {
 
 	
@@ -97,6 +99,13 @@ GoodProductSorter.gameState.prototype = {
 		//Añadir a boardMachine el grupo de colisiones cajas y el grupo de fisicas
 		this.scenario.boardMachine.boxesCollisionGroup = this.scenario.boxesCollisionGroup;
 		this.scenario.boardMachine.boxesGroup = this.scenario.boxesGroup;
+
+		//Sonidos Juego
+		correct = game.add.audio('success');
+		wrong = game.add.audio('wrong');
+		store = game.add.audio('store');
+		//Música
+		gameMusic = game.add.audio('fabric');
 	},
 
 	resize_eslab: function (eslabon,num){
@@ -164,6 +173,8 @@ GoodProductSorter.gameState.prototype = {
 
 	create: function() {
 
+		//Musica
+		gameMusic.play();
 		//Eslabones bandas transportadoras
 		
 		for(i=0;i<this.scenario.eslabones.length;i++){
@@ -257,6 +268,8 @@ GoodProductSorter.gameState.prototype = {
 				
 		//Referencia de escenario para la maquina--> mala practica
 		this.scenario.boardMachine.scenarioReference = this.scenario;
+
+
 	},
 
 	removeAllItems: function()
