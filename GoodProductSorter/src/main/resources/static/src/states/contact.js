@@ -23,7 +23,7 @@ GoodProductSorter.contactState.prototype ={
 						boundsAlignH: "center",
 						boundsAlignV: "middle",
 					};
-		fontResize2 = scaleFont(50, game.width);			
+		fontResize2 = scaleFont(60, game.width);			
         var style2 = {	font: "Acme",
 						fill: "Black",
 						fontSize: fontResize2,
