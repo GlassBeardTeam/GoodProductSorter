@@ -117,6 +117,7 @@ GoodProductSorter.endGameState.prototype ={
 	},
 
 	click_button:function(button){
+		buttonSound.play();
 		this.state.start(button.stage);
 	},
 
