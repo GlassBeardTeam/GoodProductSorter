@@ -40,7 +40,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
-		this.load.image("bocadillo", 'assets/images/bocadillo.png')
+		this.load.image("bocadillo", 'assets/images/Bocadillo.png')
 		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
