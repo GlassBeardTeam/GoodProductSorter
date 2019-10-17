@@ -105,6 +105,7 @@ GoodProductSorter.contactState.prototype ={
 	},
 
 	click_button:function(button){
+		buttonSound.play();
 		this.state.start(button.stage);
 	},
 	new_page:function(button){
