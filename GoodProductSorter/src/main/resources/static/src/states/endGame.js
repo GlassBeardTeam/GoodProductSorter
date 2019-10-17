@@ -8,6 +8,9 @@ GoodProductSorter.endGameState.prototype ={
 
 	init: function(puntuacion,nivel,mundo) {
 		this.puntos=puntuacion;
+		this.clasificados=10;
+		this.mal_clasificados=10;
+		this.no_clasificados=10;
 		this.nivel=nivel;
 		this.mundo=mundo;
 		if(game.global.DEBUG_MODE)
@@ -23,13 +26,24 @@ GoodProductSorter.endGameState.prototype ={
 	create:function(){
         var style = {	font: "Acme",
 						fill: "Black",
-						fontSize: "100pt",
+						fontSize: "60pt",
 						boundsAlignH: "center",
+						boundsAlignV: "middle",
+					};
+        var style2 = {	font: "Acme",
+						fill: "Black",
+						fontSize: "30pt",
+						boundsAlignH: "left",
 						boundsAlignV: "middle",
 					};
         this.background = game.add.image(0, 0, "fondoMenu");
         this.background.height = game.world._height;
         this.background.width = game.world._width;
+
+		//Nomina
+        this.Nomina = this.add.image(0, 0, "Nomina");
+        this.Nomina.height = this.game.height;
+        this.Nomina.width = this.game.width;
 
 		//imagen mala orientacion
 		this.image_turn = game.add.image(0, 0, "landscape");		
@@ -41,31 +55,48 @@ GoodProductSorter.endGameState.prototype ={
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
 			this.button_idioma = this.add.button(game.world._width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
-			this.text1 = game.add.text(0, 0, "Puntuacion Nivel",style);
-			this.text2 = game.add.text(0, 0, this.puntos,style);
-			this.text3 = game.add.text(0, 0, "Volver",style);
+			this.text1 = game.add.text(0, 0, "Objetos bien clasificados",style2);
+			this.text2 = game.add.text(0, 0, "Objetos mal clasificados",style2);
+			this.text3 = game.add.text(0, 0, "Objetos no clasificados",style2);
+			this.text4 = game.add.text(0, 0, "Puntuacion Nivel",style2);
+			this.text5 = game.add.text(0, 0, "Volver",style);	
 		}else{
-			this.button_idioma = game.add.button(game.world._width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
-			this.text1 = game.add.text(0, 0, "Final score",style);
-			this.text2 = game.add.text(0, 0, this.puntos,style);
-			this.text3 = game.add.text(0, 0, "Back",style);
+			this.text1 = game.add.text(0, 0, "Well classified objects:",style2);
+			this.text2 = game.add.text(0, 0, "Misclassified objects:",style2);
+			this.text3 = game.add.text(0, 0, "Unclassified objects:",style2);
+			this.text4 = game.add.text(0, 0, "Level Score",style2);
+			this.text5 = game.add.text(0, 0, "Back",style);
 		}
-		this.text1.setTextBounds(0, 400, game.world._width, game.world._height*0.25);
-		this.text2.setTextBounds(0, 400, game.world._width, game.world._height*0.4);
-		this.text3.setTextBounds(0, 400, game.world._width,100);
+
+		this.text1_1=game.add.text(0, 0, "x" + this.clasificados, style2);
+		this.text2_1=game.add.text(0, 0, "x" + this.mal_clasificados, style2);
+		this.text3_1=game.add.text(0, 0, "x" + this.no_clasificados, style2);
+	
+		this.text1_2=game.add.text(0, 0, this.clasificados*10, style2);
+		this.text2_2=game.add.text(0, 0, this.mal_clasificados*-10, style2);
+		this.text3_2=game.add.text(0, 0, this.no_clasificados*0, style2);
+		this.text4_2=game.add.text(0, 0, this.puntos, style2);
+
+		this.resize();
 	},
 
 	cambiar_idioma:function(){
 		if(game.global.IDIOMA=='ESP'){
 			game.global.IDIOMA='ENG';
 			this.button_idioma.loadTexture('idioma2');
-			this.text3.setText('Final score');
-			this.text3.setText("Puntuacion Nivel");
+			this.text1.setText('Well classified objects:');
+			this.text2.setText('Misclassified objects:');
+			this.text3.setText('Unclassified objects:');
+			this.text4.setText('Level Score');
+			this.text5.setText('Back');
 		}else{
 			game.global.IDIOMA='ESP';
 			this.button_idioma.loadTexture('idioma1');
-			this.text3.setText('Volver');
-			this.text3.setText('Volver');
+			this.text1.setText('Objetos bien clasificados:');
+			this.text2.setText('Objetos mal clasificados:');
+			this.text3.setText('Objetos no clasificados:');
+			this.text4.setText('Puntuacion Nivel:');
+			this.text5.setText('Volver');
 		}
 	},
 
@@ -81,7 +112,6 @@ GoodProductSorter.endGameState.prototype ={
 				this.image_turn.visible=false;
 			}
 		}
-		this.resize();
 	},
 
 	click_button:function(button){
@@ -108,6 +138,9 @@ GoodProductSorter.endGameState.prototype ={
 
 		this.background.height = this.world.height;
 		this.background.width = this.world.width;
+		
+		this.Nomina.height = game.world._height;
+		this.Nomina.width = game.world._width;
 
 		//Boton idioma
 		this.button_idioma.width= game.world._width*0.05;
@@ -116,12 +149,28 @@ GoodProductSorter.endGameState.prototype ={
 		this.button_idioma.y = 0;//0 es la posicion
 
 		//Botones Menu
+		this.button_volver.width=this.world.width*0.32;
+		this.button_volver.height=this.world.height*0.12;
+		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
+		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
+		this.text5.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
+		
+		this.text1.setTextBounds(game.world._width/6.6, game.world._height*0.27,game.world._width/6.6, game.world._height*0.27);
+		this.text2.setTextBounds(game.world._width/6.6, game.world._height*0.30,game.world._width/6.6, game.world._height*0.30);
+		this.text3.setTextBounds(game.world._width/6.6, game.world._height*0.33,game.world._width/6.6, game.world._height*0.33);
+		this.text4.setTextBounds(game.world._width/6.6, game.world._height*0.46,game.world._width/6.6, game.world._height*0.46);
 
-		this.button_volver.width = game.world._width*0.3;
-		this.button_volver.height = game.world._height*0.2;
-		this.button_volver.x = this.world.centerX - this.button_volver.width / 2;
-		this.button_volver.y = (game.world._height*this.porcentaje_logo_juego/100) + (game.world._height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*2;//2 es la posicion
-		this.text3.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, game.world._width,100);
+
+		this.text1_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.27,game.world._width/6.6*4, game.world._height*0.27);
+		this.text2_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.30,game.world._width/6.6*4, game.world._height*0.30);
+		this.text3_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.33,game.world._width/6.6*4, game.world._height*0.33);
+
+		this.text1_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.27,game.world._width/6.6*5, game.world._height*0.27);
+		this.text2_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.30,game.world._width/6.6*5, game.world._height*0.30);
+		this.text3_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.33,game.world._width/6.6*5, game.world._height*0.33);
+		this.text4_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.46,game.world._width/6.6*5, game.world._height*0.46);
+
+
 	},
 
 	render:function() {

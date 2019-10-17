@@ -102,6 +102,7 @@ window.onload = function() {
 	game.state.add('gameState', GoodProductSorter.gameState);
 	game.state.add('endGameState', GoodProductSorter.endGameState);
 	game.state.add('level1CutsceneState', GoodProductSorter.level1Cutscene)
+	game.state.add('contactState', GoodProductSorter.contactState);
 	game.state.start('bootState');		
 
 };
