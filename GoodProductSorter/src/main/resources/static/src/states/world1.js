@@ -44,14 +44,17 @@ GoodProductSorter.world1State.prototype = {
 		this.button_lvl1 = this.add.button(0, 200, 'ssboton', this.click_lvl1_button, this, 2, 0, 0);
 		this.button_lvl1.setFrames(1);
 		this.button_lvl1.stage='level1CutsceneState';
+		this.button_lvl1.level=1;
 
 		this.button_lvl2 = this.add.button(0, 0, 'ssboton', this.click_lvl2_button, this, 2, 0, 0);
 		this.button_lvl2.setFrames(1);
 		this.button_lvl2.stage='gameState';
+		this.button_lvl2.level=2;
 
 		this.button_lvl3 = this.add.button(0, 0, 'ssboton', this.click_lvl3_button, this, 2, 0, 0);
 		this.button_lvl3.setFrames(1);
 		this.button_lvl3.stage='gameState';
+		this.button_lvl3.level=3;
 
 		//Boton Volver
 		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 2, 0, 0);
@@ -59,9 +62,9 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver.stage='worldsState';
 		
 		//Puntuacion
-		this.text1_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[0] + " P.P",style);
-		this.text2_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[1] + " P.P",style);
-		this.text3_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[2] + " P.P",style);
+		this.text1_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[0] + " P.P.",style);
+		this.text2_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[1] + " P.P.",style);
+		this.text3_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[2] + " P.P.",style);
 		
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
@@ -75,7 +78,7 @@ GoodProductSorter.world1State.prototype = {
 			this.text1=this.game.add.text(0, 0, "Level 1",style);
 			this.text2=this.game.add.text(0, 0, "Level 2",style);
 			this.text3=this.game.add.text(0, 0, "Level 3",style);
-			this.text4=this.game.add.text(0, 0, "Return",style);
+			this.text4=this.game.add.text(0, 0, "Back",style);
 		}
 		this.text1.setTextBounds(0, 300, this.game.world.width,100);
 		this.text4.setTextBounds(0, 400, this.game.world.width,100);
@@ -91,7 +94,7 @@ GoodProductSorter.world1State.prototype = {
 
 	click_button:function(button){
 		buttonSound.play();
-		this.state.start(button.stage);
+		this.state.start(button.stage,true,false,button.level);
 	},
 
 	createDefaultBoxManager: function()

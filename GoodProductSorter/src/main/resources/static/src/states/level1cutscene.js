@@ -12,7 +12,8 @@ GoodProductSorter.level1Cutscene.prototype = {
 
     dialogCount: 0,
 
-	init : function() {
+	init : function(level) {
+		this.level=level;
 		if(this.game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **level 1 cutscene** state");
@@ -122,7 +123,7 @@ GoodProductSorter.level1Cutscene.prototype = {
 
     goToGame : function(){
         game.camera.fade(0x000000, 1000);
-        game.time.events.add(Phaser.Timer.SECOND * 1, ()=>{game.state.start("gameState");}, this)
+        game.time.events.add(Phaser.Timer.SECOND * 1, ()=>{game.state.start("gameState",true,false,this.level);}, this)
     }
 
 
