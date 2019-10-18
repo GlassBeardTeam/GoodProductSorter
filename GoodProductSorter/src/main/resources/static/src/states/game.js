@@ -67,7 +67,9 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.eslabonesGroup = game.add.group();
 	
 		this.background = game.add.image(0, 0, "SueloFabrica");
-
+		
+		this.scenario.score=0;
+		this.scenario.streak=0;
 	},
 
 	preload : function() {
