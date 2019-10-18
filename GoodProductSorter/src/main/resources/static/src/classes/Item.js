@@ -1,7 +1,8 @@
 
-function Item(name, scale, boxId)
+function Item(name, scale, boxIndex)
 {
-	this.boxId = boxId,
+	this.boxIndex = boxIndex
+	this.boxId = undefined,
 	this.dragging = false,
 	this.scale = scale,
 	this.name = name,
@@ -11,6 +12,11 @@ function Item(name, scale, boxId)
 	this.myPhysicsGroup,
 	this.myBoardPhysicsGroup,
 	this.animationsFPS,
+
+	this.setBoxId = function(box)
+	{
+		this.boxId = box.image.id;
+	},
 
 	this.setItemImage = function(x, y, name, group)
 	{
