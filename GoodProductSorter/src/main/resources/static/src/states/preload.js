@@ -40,15 +40,36 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("cartelDer" , 'assets/images/scenario/CartelDch.png');
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
-		this.load.image("bocadillo", 'assets/images/Bocadillo.png')
-		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
+		this.load.image("bocadillo", 'assets/images/Bocadillo.png');
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
 		this.load.image("condon", 'assets/items/hosptal/condon.png');
 		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
 		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
-		
+		game.load.image("analisisOrina" , 'assets/items/hosptal/analisis_orina.png');
+		game.load.image("bolsaSangre" , 'assets/items/hosptal/BolsaSangre.png');
+		game.load.image("coca" , 'assets/items/hosptal/Coca.png');
+		game.load.image("estetoscopio" , 'assets/items/hosptal/Estetoscopio_v2.png');
+		game.load.image("jarabe" , 'assets/items/hosptal/jarabe.png');
+		game.load.image("jeringuilla" , 'assets/items/hosptal/jeringuilla.png');
+		game.load.image("licor" , 'assets/items/hosptal/licor.png');
+		game.load.image("martillo" , 'assets/items/hosptal/martillo.png');
+		game.load.image("mascarilla" , 'assets/items/hosptal/Mascarilla.png');
+		game.load.image("ojo" , 'assets/items/hosptal/ojo.png');
+		game.load.image("pastillas" , 'assets/items/hosptal/pastillas.png');
+		game.load.image("probeta" , 'assets/items/hosptal/Probeta.png');
+		game.load.image("pulmones" , 'assets/items/hosptal/pulmones.png');
+		game.load.image("pulmonesNegros" , 'assets/items/hosptal/pulmones_negros.png');
+		game.load.image("sierra" , 'assets/items/hosptal/sierra.png');
+		game.load.image("tarroBebe" , 'assets/items/hosptal/tarro_bebe.png');
+		game.load.image("testEmbarazo" , 'assets/items/hosptal/test_embarazo.png');
+		game.load.image("tijerasSangre" , 'assets/items/hosptal/tijeras_sangre.png');
+		game.load.image("veneno" , 'assets/items/hosptal/Veneno.png');
+		game.load.image("viagra" , 'assets/items/hosptal/viagra.png');
+		game.load.image("voodoo" , 'assets/items/hosptal/VoodooDoll.png');
+
+		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
 		
 		//Contact Logos
 		this.load.image("GitHub", 'assets/images/interface/github_logo.png');
@@ -63,6 +84,8 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
+		game.load.spritesheet('sscaja', 'assets/images/scenario/SScaja.png', 1925/25, 1850, 25);
+		game.load.spritesheet('ssboton', 'assets/images/interface/SSBotonVerde.png', 1654/2, 377, 2);
 		game.load.spritesheet('ojos', 'assets/images/scenario/SSOjos1.png', 92, 49, 5);
 
 		//Boss sounds

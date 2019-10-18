@@ -41,17 +41,21 @@ GoodProductSorter.world1State.prototype = {
 
 		//Boton mundos
 
-		this.button_lvl1 = this.add.button(0, 200, 'botonEnable', this.click_lvl1_button, this, 2, 0, 0);
+		this.button_lvl1 = this.add.button(0, 200, 'ssboton', this.click_lvl1_button, this, 2, 0, 0);
+		this.button_lvl1.setFrames(1);
 		this.button_lvl1.stage='level1CutsceneState';
 
-		this.button_lvl2 = this.add.button(0, 0, 'botonEnable', this.click_lvl2_button, this, 2, 0, 0);
+		this.button_lvl2 = this.add.button(0, 0, 'ssboton', this.click_lvl2_button, this, 2, 0, 0);
+		this.button_lvl2.setFrames(1);
 		this.button_lvl2.stage='gameState';
 
-		this.button_lvl3 = this.add.button(0, 0, 'botonEnable', this.click_lvl3_button, this, 2, 0, 0);
+		this.button_lvl3 = this.add.button(0, 0, 'ssboton', this.click_lvl3_button, this, 2, 0, 0);
+		this.button_lvl3.setFrames(1);
 		this.button_lvl3.stage='gameState';
 
 		//Boton Volver
-		this.button_volver = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 2, 0, 0);
+		this.button_volver.setFrames(1);
 		this.button_volver.stage='worldsState';
 		
 		//Texto botones y Boton selector de idioma
@@ -121,7 +125,7 @@ GoodProductSorter.world1State.prototype = {
 	click_lvl2_button : function(button)
 	{
 		game.global.gameParams.itemsInARowToChangeStreak =  5;
-		game.global.gameParams.machineSpeed = [0.1, 0.2, 0.3, 0.4, 0.5];
+		game.global.gameParams.machineSpeed = [0.1, 0.2, 0.25, 0.35, 0.5];
 		game.global.gameParams.minSpeedOfDraggedImage = 500;
 		game.global.gameParams.timeForItemSpawn = 2000;
 
@@ -131,9 +135,14 @@ GoodProductSorter.world1State.prototype = {
 		game.global.gameParams.gameItems.push(new Item("alcohol", 0.2, 0)); 
 		game.global.gameParams.gameItems.push(new Item("bisturiLimpio", 0.2, 0));
 		game.global.gameParams.gameItems.push(new Item("corazon", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("bolsaSangre", 0.2, 0)); 
 		game.global.gameParams.gameItems.push(new Item("condon", 0.2, 1)); 
 		game.global.gameParams.gameItems.push(new Item("calavera", 0.2, 1)); 
-	 
+		game.global.gameParams.gameItems.push(new Item("analisisOrina", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("coca", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("estetoscopio", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("viagra", 0.2, 1));
+		game.global.gameParams.gameItems.push(new Item("voodoo", 0.2, 1)); 
 		this.click_button(button);
 	},
 	click_lvl3_button : function(button)
@@ -141,7 +150,7 @@ GoodProductSorter.world1State.prototype = {
 		game.global.gameParams.itemsInARowToChangeStreak =  5;
 		game.global.gameParams.machineSpeed = [0.1, 0.2, 0.3, 0.4, 0.5];
 		game.global.gameParams.minSpeedOfDraggedImage = 500;
-		game.global.gameParams.timeForItemSpawn = 2000;
+		game.global.gameParams.timeForItemSpawn = 1500;
 
 		this.createDefaultBoxManager();
 		//Cada objeto tiene el index de la caja a la que pertenece en el array del box manager	
@@ -150,7 +159,24 @@ GoodProductSorter.world1State.prototype = {
 		game.global.gameParams.gameItems.push(new Item("bisturiLimpio", 0.2, 0));
 		game.global.gameParams.gameItems.push(new Item("corazon", 0.2, 0));
 		game.global.gameParams.gameItems.push(new Item("condon", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("calavera", 0.2, 1));
+		game.global.gameParams.gameItems.push(new Item("bebe", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("alcohol", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("bisturiLimpio", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("corazon", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("bolsaSangre", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("condon", 0.2, 1)); 
 		game.global.gameParams.gameItems.push(new Item("calavera", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("analisisOrina", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("coca", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("estetoscopio", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("viagra", 0.2, 1));
+		game.global.gameParams.gameItems.push(new Item("voodoo", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("testEmbarazo", 0.2, 1));
+		game.global.gameParams.gameItems.push(new Item("tijerasSangre", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("sierra", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("pulmones", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("pulmonesNegros", 0.2, 1)); 
 	 
 		this.click_button(button);
 	},
