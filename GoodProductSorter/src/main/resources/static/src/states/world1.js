@@ -252,11 +252,12 @@ GoodProductSorter.world1State.prototype = {
 		this.text3.setTextBounds(this.button_lvl3.x, this.button_lvl3.y, this.button_lvl3.width * 0.5, 0);
 
 		//Boton volver
+		this.button_volver.anchor.setTo(0.5 ,0.5);
 		this.button_volver.width=this.world.width*0.32;
 		this.button_volver.height=this.world.height*0.12;
-		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
-		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
-		this.text4.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
+		this.button_volver.x = game.world._width * 0.5;
+		this.button_volver.y = game.world._height*0.8;
+		this.text4.setTextBounds(this.button_volver.x, this.button_volver.y -this.button_volver.height* 0.1, 0, 0);
 	},
 
 	
