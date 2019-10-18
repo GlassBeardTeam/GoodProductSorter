@@ -57,7 +57,7 @@ GoodProductSorter.endGameState.prototype ={
 		this.image_turn = game.add.image(0, 0, "landscape");		
 
 		//Botones del menu
-		this.button_volver = game.add.button(game.world.centerX, 400, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_volver = game.add.button(game.world.centerX, 400, 'ssboton', this.click_button, this, 1, 2, 1);
 		this.button_volver.stage='worldsState';
 
 		//Texto botones y Boton selector de idioma
@@ -158,17 +158,19 @@ GoodProductSorter.endGameState.prototype ={
 		this.button_idioma.y = 0;//0 es la posicion
 
 		//Botones Menu
-		this.button_volver.width=this.world.width*0.32;
-		this.button_volver.height=this.world.height*0.12;
-		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
-		this.button_volver.y = this.world.height-this.world.height*0.05-this.button_volver.height;
-		this.text5.setTextBounds(0, this.button_volver.y+this.button_volver.height/3, this.game.world.width,100);
+		this.button_volver.anchor.setTo(0.5, 0.5);
+		this.button_volver.width=this.world.width*0.3;
+		this.button_volver.height=this.world.height*0.10;
+		this.button_volver.x = game.world._width/2;
+		this.button_volver.y = game.world._height*0.9;		
+		
+		this.text5.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- game.world._height * 0.02,
+			this.button_volver.width, this.button_volver.height);
 		
 		this.text1.setTextBounds(game.world._width/6.6, game.world._height*0.27,game.world._width/6.6, game.world._height*0.27);
 		this.text2.setTextBounds(game.world._width/6.6, game.world._height*0.30,game.world._width/6.6, game.world._height*0.30);
 		this.text3.setTextBounds(game.world._width/6.6, game.world._height*0.33,game.world._width/6.6, game.world._height*0.33);
 		this.text4.setTextBounds(game.world._width/6.6, game.world._height*0.46,game.world._width/6.6, game.world._height*0.46);
-
 
 		this.text1_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.27,game.world._width/6.6*4, game.world._height*0.27);
 		this.text2_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.30,game.world._width/6.6*4, game.world._height*0.30);
