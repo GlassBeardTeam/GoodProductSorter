@@ -6,11 +6,11 @@ this.mundo;
 
 GoodProductSorter.endGameState.prototype ={
 
-	init: function(puntuacion,nivel,mundo) {
+	init: function(puntuacion,nivel,mundo,bien,mal,perdido) {
 		this.puntos=puntuacion;
-		this.clasificados=10;
-		this.mal_clasificados=10;
-		this.no_clasificados=10;
+		this.clasificados=bien;
+		this.mal_clasificados=mal;
+		this.no_clasificados=perdido;
 		this.nivel=nivel;
 		this.mundo=mundo;
 		if(game.global.DEBUG_MODE)

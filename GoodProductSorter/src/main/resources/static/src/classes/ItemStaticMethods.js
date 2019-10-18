@@ -372,6 +372,7 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 function CorrectItemPlacement(item, scenario, board)
 {
 	correct.play();
+	scenario.well++;
 	scenario.score +=10;
 	scenario.successfulItemsInARow++;
 	UpdateStreak(scenario, board);
@@ -386,6 +387,7 @@ function CorrectItemPlacement(item, scenario, board)
 function WrongItemPlacement(item, scenario, board)
 {
 	wrong.play();
+	scenario.bad++;
 	if(scenario.score > 0){
 		scenario.score -= 10;
 	}
@@ -401,7 +403,7 @@ function WrongItemPlacement(item, scenario, board)
 
 function ItemOutOfBounds(item, scenario, board)
 {
-	
+	scenario.miss++;
 	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
 	scenario.successfulItemsInARow -= scenario.itemsInARowToChangeStreak;
 	if(scenario.successfulItemsInARow < 0){

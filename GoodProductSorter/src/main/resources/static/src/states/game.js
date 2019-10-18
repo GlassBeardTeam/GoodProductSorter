@@ -31,6 +31,9 @@ this.scenario = {
 	seed: 32748372,
 	eslabonesGroup: undefined,
 	eslabones:[11],
+	miss:0,
+	bad:0,
+	well:0,
 	//Ojos
 	eyes: undefined,
 };
@@ -70,6 +73,9 @@ GoodProductSorter.gameState.prototype = {
 		
 		this.scenario.score=0;
 		this.scenario.streak=0;
+		this.scenario.miss=0;
+		this.scenario.bad=0;
+		this.scenario.well=0;
 	},
 
 	preload : function() {
@@ -310,8 +316,7 @@ GoodProductSorter.gameState.prototype = {
 
 	finTiempo: function(){
 		this.removeAllItems;
-		game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world);		
-
+		game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world,this.scenario.well,this.scenario.bad,this.scenario.miss);
 	},
 
 	bandOutCanvas:function(){
