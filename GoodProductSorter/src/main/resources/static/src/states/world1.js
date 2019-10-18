@@ -190,7 +190,7 @@ GoodProductSorter.world1State.prototype = {
 		//Botones Menu
 		this.button_world1.width=this.world.width*0.32;
 		this.button_world1.height=this.world.height*0.12;
-		this.button_world1.x =0+this.world.width*0.15;
+		this.button_world1.x = this.world.width*0.5;
 		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
 		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
 
