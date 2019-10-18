@@ -29,6 +29,14 @@ window.onload = function() {
 		socket : null,
 		IDIOMA: 'ESP',
 		ASPECT_RATIO: desired_aspect_ratio,
+		gameParams: {
+			itemsInARowToChangeStreak: undefined,
+			machineSpeed: undefined,
+			minSpeedOfDraggedImage: undefined,
+			timeForItemSpawn: undefined,
+			boxManager: undefined,
+			gameItems: []
+			}
 	}
 
 
