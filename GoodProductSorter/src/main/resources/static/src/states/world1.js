@@ -40,10 +40,13 @@ GoodProductSorter.world1State.prototype = {
 		//this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_lvl1_button, this, 2, 0, 0);
-		this.button_world1.stage='gameState';
+
+		this.button_lvl1 = this.add.button(0, 200, 'botonEnable', this.click_lvl1_button, this, 2, 0, 0);
+		this.button_lvl1.stage='level1CutsceneState';
+
+
 		
-		this.button_lvl2 = this.add.button(0, this.button_world1.y + 200, 'botonEnable', this.click_lvl2_button, this, 2, 0, 0);
+		this.button_lvl2 = this.add.button(0, this.button_lvl1.y + 200, 'botonEnable', this.click_lvl2_button, this, 2, 0, 0);
 		this.button_lvl2.stage='gameState';
 		
 		//Boton Volver
@@ -96,7 +99,7 @@ GoodProductSorter.world1State.prototype = {
 		game.global.gameParams.itemsInARowToChangeStreak =  5;
 		game.global.gameParams.machineSpeed = [0.1, 0.15, 0.2, 0.25, 0.3];
 		game.global.gameParams.minSpeedOfDraggedImage = 500;
-		game.global.gameParams.timeForItemSpawn = 1000;
+		game.global.gameParams.timeForItemSpawn = 3000;
 
 		this.createDefaultBoxManager();
 		//Cada objeto tiene el index de la caja a la que pertenece en el array del box manager	
@@ -115,7 +118,7 @@ GoodProductSorter.world1State.prototype = {
 		game.global.gameParams.itemsInARowToChangeStreak =  5;
 		game.global.gameParams.machineSpeed = [0.1, 0.2, 0.3, 0.4, 0.5];
 		game.global.gameParams.minSpeedOfDraggedImage = 500;
-		game.global.gameParams.timeForItemSpawn = 1000;
+		game.global.gameParams.timeForItemSpawn = 2000;
 
 		this.createDefaultBoxManager();
 		//Cada objeto tiene el index de la caja a la que pertenece en el array del box manager	
@@ -188,19 +191,21 @@ GoodProductSorter.world1State.prototype = {
 		this.button_idioma.y = 0;//0 es la posicion
 		
 		//Botones Menu
-		this.button_world1.width=this.world.width*0.32;
-		this.button_world1.height=this.world.height*0.12;
-		this.button_world1.x =0+this.world.width*0.15;
-		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
-		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
+		this.button_lvl1.anchor.setTo(0.5, 0.5);
+		this.button_lvl1.width=this.world.width*0.32;
+		this.button_lvl1.height=this.world.height*0.12;
+		this.button_lvl1.x = this.world.width*0.5;
+		this.button_lvl1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
+
 
 		//Boton lvl2
+		this.button_lvl2.anchor.setTo(0.5, 0.5);
 		this.button_lvl2.width=this.world.width*0.32;
 		this.button_lvl2.height=this.world.height*0.12;
-		this.button_lvl2.x = this.button_world1.x;
-		this.button_lvl2.y = this.button_world1.y + game.world._height * 0.1;
-		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height,
-								 this.button_world1.x + game.world._height * 0.1, 100);
+		this.button_lvl2.x = this.button_lvl1.x;
+		this.button_lvl2.y = this.button_lvl1.y + game.world._height * 0.15;
+		this.text1.setTextBounds(this.button_lvl1.x+this.button_lvl1.width/3, this.button_lvl1.y+this.button_lvl1.height,
+								 this.button_lvl1.x + game.world._height * 0.1, 100);
 		this.button_volver.width=this.world.width*0.32;
 		this.button_volver.height=this.world.height*0.12;
 		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
