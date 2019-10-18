@@ -40,8 +40,11 @@ GoodProductSorter.world1State.prototype = {
 		//this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 
 		//Boton mundos
+
 		this.button_lvl1 = this.add.button(0, 200, 'botonEnable', this.click_lvl1_button, this, 2, 0, 0);
-		this.button_lvl1.stage='gameState';
+		this.button_lvl1.stage='level1CutsceneState';
+
+
 		
 		this.button_lvl2 = this.add.button(0, this.button_lvl1.y + 200, 'botonEnable', this.click_lvl2_button, this, 2, 0, 0);
 		this.button_lvl2.stage='gameState';
