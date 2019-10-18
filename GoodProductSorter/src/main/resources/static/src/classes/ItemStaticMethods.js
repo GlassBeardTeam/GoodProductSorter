@@ -223,8 +223,9 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				let box_sprite;
 				//Si tiene un id es una caja
 					//si la la imagen de la caja tiene el mismo id que el body encontramos nuestra caja
-				this.boxesGroup.forEach(function(box_image)
+				this.scenarioReference.boxManager.boxes.forEach(function(box)
 				{
+					let box_image = box.image;
 					if(box_image.id == obj1_body.id)
 					{
 						box_sprite = obj1_body.sprite;
