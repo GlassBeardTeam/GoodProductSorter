@@ -238,7 +238,9 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
 				if(isCorrect)
 				{
-					box_sprite.animations.play('success');
+					box_sprite.animations.play('success').onComplete.add(()=>{box_sprite.animations.play('idle')},this);;
+				}else{
+					//box_sprite.animations.play('wrong');
 				}
 
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
@@ -322,8 +324,10 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardI
 	//Borramos el objeto del grupo de colisiones
 	itemCopy.boardImage.body.clearCollision(true,true);
 	//¿Como borramos el Item?
+	let name = itemCopy.name;
 	delete itemCopy;
 	if(game.global.DEBUG_MODE){
+		console.log("[DEBUG] removed " + name);
 		/*
 		console.log("[DEBUG] image removed from P2 mouse bodies collision array");
 		console.log("[DEBUG] image removed from physics group");

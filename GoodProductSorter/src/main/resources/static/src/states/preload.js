@@ -63,6 +63,8 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
+		game.load.spritesheet('sscaja', 'assets/images/scenario/SScaja.png', 1925/25, 1850, 25);
+		game.load.spritesheet('ssboton', 'assets/images/interface/SSBotonVerde.png', 1654/2, 377, 2);
 		game.load.spritesheet('ojos', 'assets/images/scenario/SSOjos1.png', 92, 49, 5);
 
 		//Boss sounds
