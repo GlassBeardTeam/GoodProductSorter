@@ -34,7 +34,7 @@ this.scenario = {
 	//Ojos
 	eyes: undefined,
 };
-
+this.gameParams = undefined;
 //Puntero a lvlitems
 this.myLvlItems = [];
 }
@@ -49,6 +49,14 @@ GoodProductSorter.gameState.prototype = {
 		{
 			console.log("[DEBUG] Entering **GAME** state");
 		}
+		this.gameParams = game.global.gameParams;
+		this.scenario.itemsInARowToChangeStreak = game.global.gameParams.itemsInARowToChangeStreak,
+		this.scenario.machineSpeed = game.global.gameParams.machineSpeed;
+		this.scenario.minSpeedOfDraggedImage = game.global.gameParams.minSpeedOfDraggedImage;
+		this.scenario.timeForItemSpawn = game.global.gameParams.timeForItemSpawn;
+		this.scenario.boxManager = game.global.gameParams.boxManager;
+
+		
 		this.band = new Item("Banda");
 		this.scenario.leftBox = new Item("cajaAcierto");
 		this.scenario.rightBox = new Item("BocetoCaja");
@@ -149,7 +157,7 @@ GoodProductSorter.gameState.prototype = {
 			//Cartel derecho
 			this.scenario.boxSignRight.anchor.setTo(0.5, 0.5);
 			this.scenario.boxSignRight.y -= this.scenario.rightBox.image.height/2 + game.world._height * signOffset;
-			this.scenario.boxSignRight.x -= this.scenario.rightBox.image.width/2;
+			//this.scenario.boxSignRight.x -= this.scenario.rightBox.image.width/2;
 		
 		//Texto de los carteles
 		let LBox = this.scenario.boxSignLeft;
@@ -174,6 +182,9 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	create: function() {
+		//Crear las cajas
+		game.global.gameParams.boxManager.createBoxesPositions();
+		this.scenario.boxManager.createBoxes(this.scenario.boxesCollisionGroup, this.scenario.boardMachine.itemSpawner.itemCollisionGroup);
 
 		//Musica
 		gameMusic.play();
@@ -201,7 +212,7 @@ GoodProductSorter.gameState.prototype = {
 		//Background
         this.background.height = this.game.height;
         this.background.width = this.game.width;
-		
+		/*
 		//Caja izquierda
 		let boxScale = 0.25;
 		this.scenario.leftBox.image = this.scenario.boxesGroup.create(game.world.width*0.15, game.world.centerY, this.scenario.leftBox.name);
@@ -238,6 +249,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.animations.add('idle',[1], 1, true, true);
 		this.scenario.rightBox.image.animations.add('success',[1,2,3,4], 15, false, true);
 		this.scenario.rightBox.image.animations.play('idle');
+		*/
 		//Carteles de las cajas
 			//Cartel izquierdo
 		this.scenario.boxSignLeft = game.add.image(this.scenario.leftBox.image.body.x, this.scenario.leftBox.image.body.y, 'cartelIzq');
@@ -322,19 +334,14 @@ GoodProductSorter.gameState.prototype = {
 	},
 
 	CreateItemsWorld1_level1: function()
-	{
-		//Reutilizable
-		let reutilizable = this.scenario.leftBox.image.id;
-		//No reutilizable
-		let desechable = this.scenario.rightBox.image.id;
-
-		this.scenario.boardMachine.addItemToLevel(new Item("bebe", 0.2, reutilizable));
-		this.scenario.boardMachine.addItemToLevel(new Item("alcohol", 0.2, reutilizable));
-		this.scenario.boardMachine.addItemToLevel(new Item("bisturiLimpio", 0.2, reutilizable));
-		this.scenario.boardMachine.addItemToLevel(new Item("condon", 0.2, desechable));
-		this.scenario.boardMachine.addItemToLevel(new Item("calavera", 0.2, desechable));
-		this.scenario.boardMachine.addItemToLevel(new Item("corazon", 0.2, reutilizable));
-	},
+	{		
+		game.global.gameParams.gameItems.forEach((item)=>{
+			//Asigno el id de la caja buscandolo por su posicion en el array
+			item.boxId = this.scenario.boxManager.boxes[item.boxIndex].image.id;
+			this.scenario.boardMachine.addItemToLevel(item, null);
+		});
+		
+	}
 
 	playOpening: function(){
 		this.scenario.eyes.visible = true;
