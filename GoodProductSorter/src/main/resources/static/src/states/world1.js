@@ -41,24 +41,24 @@ GoodProductSorter.world1State.prototype = {
 
 		//Boton mundos
 
-		this.button_lvl1 = this.add.button(0, 200, 'ssboton', this.click_lvl1_button, this, 2, 0, 0);
-		this.button_lvl1.setFrames(1);
+		this.button_lvl1 = this.add.button(0, 200, 'ssboton', this.click_lvl1_button, this, 1, 2, 1);
+		//this.button_lvl1.setFrames(1);
 		this.button_lvl1.stage='level1CutsceneState';
 		this.button_lvl1.level=1;
 
-		this.button_lvl2 = this.add.button(0, 0, 'ssboton', this.click_lvl2_button, this, 2, 0, 0);
-		this.button_lvl2.setFrames(1);
+		this.button_lvl2 = this.add.button(0, 0, 'ssboton', this.click_lvl2_button, this, 1, 2, 1);
+		//this.button_lvl2.setFrames(1);
 		this.button_lvl2.stage='gameState';
 		this.button_lvl2.level=2;
 
-		this.button_lvl3 = this.add.button(0, 0, 'ssboton', this.click_lvl3_button, this, 2, 0, 0);
-		this.button_lvl3.setFrames(1);
+		this.button_lvl3 = this.add.button(0, 0, 'ssboton', this.click_lvl3_button, this, 1, 2, 1);
+		//this.button_lvl3.setFrames(1);
 		this.button_lvl3.stage='gameState';
 		this.button_lvl3.level=3;
 
 		//Boton Volver
-		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 2, 0, 0);
-		this.button_volver.setFrames(1);
+		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_volver.setFrames(1);
 		this.button_volver.stage='worldsState';
 		
 		//Puntuacion

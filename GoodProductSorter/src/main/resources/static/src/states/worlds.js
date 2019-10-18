@@ -38,16 +38,16 @@ GoodProductSorter.worldsState.prototype = {
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 0, 'ssboton', this.click_button, this, 2, 0, 0);
-		this.button_world1.setFrames(1);
+		this.button_world1 = this.add.button(0, 0, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_world1.setFrames(1);
 		this.button_world1.stage='world1State';
 
-		this.button_world2 = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_world2 = this.add.button(0, 0, 'botonTipo', this.click_button, this, 1, 2, 0);
 		//this.button_world2.stage='world1State';
 		
 		//Boton Volver
-		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 2, 0, 0);
-		this.button_volver.setFrames(1);
+		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_volver.setFrames(1);
 		this.button_volver.stage='menuState';
 		
 		//Texto botones y Boton selector de idioma
