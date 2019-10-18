@@ -40,8 +40,11 @@ GoodProductSorter.world1State.prototype = {
 		//this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0);
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_button, this, 2, 0, 0);
-		this.button_world1.stage='level1CutsceneState';
+		this.button_world1 = this.add.button(0, 200, 'botonEnable', this.click_lvl1_button, this, 2, 0, 0);
+		this.button_world1.stage='gameState';
+		
+		this.button_lvl2 = this.add.button(0, this.button_world1.y + 200, 'botonEnable', this.click_lvl2_button, this, 2, 0, 0);
+		this.button_lvl2.stage='gameState';
 		
 		//Boton Volver
 		this.button_volver = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
@@ -72,6 +75,58 @@ GoodProductSorter.world1State.prototype = {
 	click_button:function(button){
 		buttonSound.play();
 		this.state.start(button.stage);
+	},
+
+	createDefaultBoxManager: function()
+	{
+		//(boxName, nBoxes, group, xleft, xright, ymin, ymax, boxSpriteSize, boxYOffset)
+		let boxScale = 0.6;
+		let cajaWidth = game.cache.getImage('cajaAcierto').width * boxScale;
+		let xleft = cajaWidth*0.5 * boxScale;	let xright = game.world._width - xleft;
+		let ymin = game.world._height * 0.5;	let ymax = game.world._height * 0.5;
+		let yOffset = game.world._height * 0.1;
+
+		game.global.gameParams.boxManager = new BoxManager('cajaAcierto', boxScale, 2, xleft, xright,
+									ymin, ymax, cajaWidth, yOffset);
+		console.log("Width height: " + game.world._width + ", " + game.world._height);
+	},
+
+	click_lvl1_button: function(button)
+	{
+		game.global.gameParams.itemsInARowToChangeStreak =  5;
+		game.global.gameParams.machineSpeed = [0.1, 0.15, 0.2, 0.25, 0.3];
+		game.global.gameParams.minSpeedOfDraggedImage = 500;
+		game.global.gameParams.timeForItemSpawn = 1000;
+
+		this.createDefaultBoxManager();
+		//Cada objeto tiene el index de la caja a la que pertenece en el array del box manager	
+		game.global.gameParams.gameItems.push(new Item("bebe", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("alcohol", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("bisturiLimpio", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("corazon", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("condon", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("calavera", 0.2, 1)); 
+	 
+		this.click_button(button);
+	},
+
+	click_lvl2_button : function(button)
+	{
+		game.global.gameParams.itemsInARowToChangeStreak =  5;
+		game.global.gameParams.machineSpeed = [0.1, 0.2, 0.3, 0.4, 0.5];
+		game.global.gameParams.minSpeedOfDraggedImage = 500;
+		game.global.gameParams.timeForItemSpawn = 1000;
+
+		this.createDefaultBoxManager();
+		//Cada objeto tiene el index de la caja a la que pertenece en el array del box manager	
+		game.global.gameParams.gameItems.push(new Item("bebe", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("alcohol", 0.2, 0)); 
+		game.global.gameParams.gameItems.push(new Item("bisturiLimpio", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("corazon", 0.2, 0));
+		game.global.gameParams.gameItems.push(new Item("condon", 0.2, 1)); 
+		game.global.gameParams.gameItems.push(new Item("calavera", 0.2, 1)); 
+	 
+		this.click_button(button);
 	},
 
 	cambiar_idioma:function(){
@@ -139,7 +194,13 @@ GoodProductSorter.world1State.prototype = {
 		this.button_world1.y = (this.world.height*this.porcentaje_logo_juego/100) + (this.world.height*((100-this.porcentaje_logo_juego))/100)/this.num_botones*0;
 		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height, this.button_world1.x,100);
 
-
+		//Boton lvl2
+		this.button_lvl2.width=this.world.width*0.32;
+		this.button_lvl2.height=this.world.height*0.12;
+		this.button_lvl2.x = this.button_world1.x;
+		this.button_lvl2.y = this.button_world1.y + game.world._height * 0.1;
+		this.text1.setTextBounds(this.button_world1.x+this.button_world1.width/3, this.button_world1.y+this.button_world1.height,
+								 this.button_world1.x + game.world._height * 0.1, 100);
 		this.button_volver.width=this.world.width*0.32;
 		this.button_volver.height=this.world.height*0.12;
 		this.button_volver.x =this.world.centerX- this.button_volver.width / 2;
