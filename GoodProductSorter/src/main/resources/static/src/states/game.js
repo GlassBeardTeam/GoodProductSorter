@@ -132,6 +132,7 @@ GoodProductSorter.gameState.prototype = {
 		this.background.height = game.world._height;
 		this.background.width = game.world._width;
 		
+		/*
 		//Caja Izquierda
 		this.scenario.leftBox.image.anchor.setTo(0.5, 0.5);
 		let leftBoxProp = this.scenario.leftBox.image.width/game.world._width;
@@ -147,17 +148,17 @@ GoodProductSorter.gameState.prototype = {
 		//ajustamos las cajas despues del escalado para que siempre quede pegada a los margenes
 		this.scenario.leftBox.image.body.x = this.scenario.leftBox.image.width/2;
 		this.scenario.rightBox.image.body.x -= (this.scenario.rightBox.image.width/2);
-
+		*/
 		//Carteles de cajas
 		let signOffset = 0.05;
-			//Cartel izquierdo
-			this.scenario.boxSignLeft.anchor.setTo(0.5, 0.5);
-			this.scenario.boxSignLeft.y -= this.scenario.leftBox.image.height/2 + game.world._height * signOffset;
-			
-			//Cartel derecho
-			this.scenario.boxSignRight.anchor.setTo(0.5, 0.5);
-			this.scenario.boxSignRight.y -= this.scenario.rightBox.image.height/2 + game.world._height * signOffset;
-			//this.scenario.boxSignRight.x -= this.scenario.rightBox.image.width/2;
+		//Cartel izquierdo
+		this.scenario.boxSignLeft.anchor.setTo(0.5, 0.5);
+		this.scenario.boxSignLeft.y -= this.scenario.boxManager.boxes[0].image.height/2 + game.world._height * signOffset;
+		
+		//Cartel derecho
+		this.scenario.boxSignRight.anchor.setTo(0.5, 0.5);
+		this.scenario.boxSignRight.y -= this.scenario.boxManager.boxes[1].image.height/2 + game.world._height * signOffset;
+		//this.scenario.boxSignRight.x -= this.scenario.boxManager.boxes[1].image.width *0.5;
 		
 		//Texto de los carteles
 		let LBox = this.scenario.boxSignLeft;
@@ -252,10 +253,10 @@ GoodProductSorter.gameState.prototype = {
 		*/
 		//Carteles de las cajas
 			//Cartel izquierdo
-		this.scenario.boxSignLeft = game.add.image(this.scenario.leftBox.image.body.x, this.scenario.leftBox.image.body.y, 'cartelIzq');
+		this.scenario.boxSignLeft = game.add.image(this.scenario.boxManager.boxes[0].image.body.x, this.scenario.boxManager.boxes[0].image.body.y, 'cartelIzq');
 
 			//Cartel derecho
-		this.scenario.boxSignRight = game.add.image(this.scenario.rightBox.image.body.x, this.scenario.rightBox.image.body.y, 'cartelDer');
+		this.scenario.boxSignRight = game.add.image(this.scenario.boxManager.boxes[1].image.body.x, this.scenario.boxManager.boxes[1].image.body.y, 'cartelDer');
 
 
 
@@ -341,7 +342,7 @@ GoodProductSorter.gameState.prototype = {
 			this.scenario.boardMachine.addItemToLevel(item, null);
 		});
 		
-	}
+	},
 
 	playOpening: function(){
 		this.scenario.eyes.visible = true;
