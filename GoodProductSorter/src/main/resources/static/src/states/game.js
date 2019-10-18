@@ -95,7 +95,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.boardMachine.image.animations.add('working');
 		this.scenario.boardMachine.image.animations.play('working',this.scenario.boardMachine.lvlSpeed[this.scenario.streak]*this.game.world._height, true);
 
-		//Escalamos la IA
+		//Escalamos la Máquina
 		this.scenario.boardMachine.scale = 0.6;
 		let machineProp = this.scenario.boardMachine.image.width/game.world._width;
 		this.scenario.boardMachine.image.width *= this.scenario.boardMachine.scale/machineProp;
@@ -160,6 +160,7 @@ GoodProductSorter.gameState.prototype = {
 		//Cartel derecho
 		this.scenario.boxSignRight.anchor.setTo(0.5, 0.5);
 		this.scenario.boxSignRight.y -= this.scenario.boxManager.boxes[1].image.height/2 + game.world._height * signOffset;
+		
 		//this.scenario.boxSignRight.x -= this.scenario.boxManager.boxes[1].image.width *0.5;
 		
 		//Texto de los carteles
@@ -254,14 +255,33 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.rightBox.image.animations.play('idle');
 		*/
 		//Carteles de las cajas
+		signScale = 0.25
+		
 			//Cartel izquierdo
 		this.scenario.boxSignLeft = game.add.image(this.scenario.boxManager.boxes[0].image.body.x, this.scenario.boxManager.boxes[0].image.body.y, 'cartelIzq');
+		
 
+		let signLeftProp = this.scenario.boxSignLeft.width/game.world._width;
+		leftWidth = this.scenario.boxSignLeft.width;
+		console.log("leftSign X1: " + this.scenario.boxSignLeft.x);
+		this.scenario.boxSignLeft.width *= signScale/signLeftProp;
+		this.scenario.boxSignLeft.height *= signScale/signLeftProp;
+		//this.scenario.boxSignLeft.x += this.scenario.boxSignLeft.width - leftWidth;
+		
+		console.log("leftSign X2: " + this.scenario.boxSignLeft.x);
 			//Cartel derecho
 		this.scenario.boxSignRight = game.add.image(this.scenario.boxManager.boxes[1].image.body.x, this.scenario.boxManager.boxes[1].image.body.y, 'cartelDer');
+		
 
-
-
+		let signRightProp = this.scenario.boxSignRight.width/game.world._width;
+		rightWidth = this.scenario.boxSignRight.width;
+		console.log("rightSign X1: " + this.scenario.boxSignRight.x);
+		this.scenario.boxSignRight.width *= signScale/signRightProp;
+		this.scenario.boxSignRight.height *= signScale/signRightProp;
+		//this.scenario.boxSignRight.x += this.scenario.boxSignRight.width - rightWidth;
+		
+		
+		console.log("rightSign X2: " + this.scenario.boxSignRight.x);
 		//Layer order
 		game.world.bringToTop(this.scenario.eslabonesGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
@@ -273,11 +293,11 @@ GoodProductSorter.gameState.prototype = {
 
 
 		//Texto de los carteles
-		fontResize = scaleFont(60, game.width);
+		fontResize = scaleFont(50, game.width);
 		let style = { font: "Acme", fill: "Blue", fontSize: fontResize, boundsAlignH: "center", boundsAlignV: "middle"};
 		let text0 = "Reutilizable";
 		let text1 = "Desechable";
-		this.scenario.boxSignLeftText = game.add.text(0, 0, text0, style);
+		this.scenario.boxSignLeftText = game.add.text(-game.width*0.01, 0, text0, style);
 		this.scenario.boxSignRightText = game.add.text(0, 0, text1, style);
 
 		//Ojos
