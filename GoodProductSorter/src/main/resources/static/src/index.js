@@ -50,7 +50,12 @@ window.onload = function() {
 			timeForItemSpawn: undefined,
 			boxManager: undefined,
 			gameItems: []
+			},
+		game_save:{
+			world1:{
+				score:[0,0,0]
 			}
+		}
 	}
 
 

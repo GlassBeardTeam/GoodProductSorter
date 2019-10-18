@@ -58,6 +58,11 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver.setFrames(1);
 		this.button_volver.stage='worldsState';
 		
+		//Puntuacion
+		this.text1_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[0] + " P.P",style);
+		this.text2_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[1] + " P.P",style);
+		this.text3_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[2] + " P.P",style);
+		
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0)
@@ -269,13 +274,23 @@ GoodProductSorter.world1State.prototype = {
 			//Texto boton lvl1
 		this.text1.anchor.setTo(0.5 ,0.5);
 		this.text1.setTextBounds(this.button_lvl1.x, this.button_lvl1.y, this.button_lvl1.width * 0.5, 0);
+			///Texto puntos lvl1
+		this.text1_1.anchor.setTo(0.5 ,0.5);
+		this.text1_1.setTextBounds(this.button_lvl1.x, this.button_lvl1.y+this.text1.height*0.75, this.button_lvl1.width * 0.5, 0);
 
 			//Texto boton lvl2
 		this.text2.anchor.setTo(0.5 ,0.5);
 		this.text2.setTextBounds(this.button_lvl2.x, this.button_lvl2.y, this.button_lvl2.width * 0.5, 0);
+			///Texto puntos lvl2
+		this.text2_1.anchor.setTo(0.5 ,0.5);
+		this.text2_1.setTextBounds(this.button_lvl2.x, this.button_lvl2.y+this.text2.height*0.75, this.button_lvl2.width * 0.5, 0);
+		
 			//Texto boton lvl3
 		this.text3.anchor.setTo(0.5 ,0.5);
 		this.text3.setTextBounds(this.button_lvl3.x, this.button_lvl3.y, this.button_lvl3.width * 0.5, 0);
+			///Texto puntos lvl3
+		this.text3_1.anchor.setTo(0.5 ,0.5);
+		this.text3_1.setTextBounds(this.button_lvl3.x, this.button_lvl3.y+this.text3.height*0.75, this.button_lvl3.width * 0.5, 0);
 
 		//Boton volver
 		this.button_volver.anchor.setTo(0.5 ,0.5);

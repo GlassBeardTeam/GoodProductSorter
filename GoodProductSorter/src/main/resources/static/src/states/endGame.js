@@ -7,6 +7,12 @@ this.mundo;
 GoodProductSorter.endGameState.prototype ={
 
 	init: function(puntuacion,nivel,mundo,bien,mal,perdido) {
+		//actualiza la cache
+		if(this.game.global.game_save.world1.score[nivel-1]<puntuacion){
+			this.game.global.game_save.world1.score[nivel-1]=puntuacion;
+			window.localStorage.setItem('game_save',JSON.stringify(this.game.global.game_save));
+		};
+		
 		this.puntos=puntuacion;
 		this.clasificados=bien;
 		this.mal_clasificados=mal;
