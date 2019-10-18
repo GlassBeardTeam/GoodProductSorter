@@ -162,7 +162,7 @@ GoodProductSorter.world1State.prototype = {
 			this.text1.setText("Level 1");
 			this.text2.setText("Level 2");
 			this.text3.setText("Level 3");
-			this.text4.setText('Return');
+			this.text4.setText('Back');
 		}else{
 			this.game.global.IDIOMA='ESP';
 			this.button_idioma.loadTexture('idioma1');
