@@ -270,25 +270,24 @@ GoodProductSorter.gameState.prototype = {
 
 		let signLeftProp = this.scenario.boxSignLeft.width/game.world._width;
 		leftWidth = this.scenario.boxSignLeft.width;
-		console.log("leftSign X1: " + this.scenario.boxSignLeft.x);
+		
 		this.scenario.boxSignLeft.width *= signScale/signLeftProp;
 		this.scenario.boxSignLeft.height *= signScale/signLeftProp;
 		//this.scenario.boxSignLeft.x += this.scenario.boxSignLeft.width - leftWidth;
 		
-		console.log("leftSign X2: " + this.scenario.boxSignLeft.x);
+		
 			//Cartel derecho
 		this.scenario.boxSignRight = game.add.image(this.scenario.boxManager.boxes[1].image.body.x, this.scenario.boxManager.boxes[1].image.body.y, 'cartelDer');
 		
 
 		let signRightProp = this.scenario.boxSignRight.width/game.world._width;
 		rightWidth = this.scenario.boxSignRight.width;
-		console.log("rightSign X1: " + this.scenario.boxSignRight.x);
+		
 		this.scenario.boxSignRight.width *= signScale/signRightProp;
 		this.scenario.boxSignRight.height *= signScale/signRightProp;
 		//this.scenario.boxSignRight.x += this.scenario.boxSignRight.width - rightWidth;
 		
 		
-		console.log("rightSign X2: " + this.scenario.boxSignRight.x);
 		//Layer order
 		game.world.bringToTop(this.scenario.eslabonesGroup);
 		game.world.bringToTop(this.scenario.boxesGroup);
@@ -302,8 +301,14 @@ GoodProductSorter.gameState.prototype = {
 		//Texto de los carteles
 		fontResize = scaleFont(50, game.width);
 		let style = { font: "Acme", fill: "Blue", fontSize: fontResize, boundsAlignH: "center", boundsAlignV: "middle"};
-		let text0 = "Reutilizable";
-		let text1 = "Desechable";
+		if (this.game.global.IDIOMA=='ESP'){
+			let text0 = "Reutilizable";
+			let text1 = "Desechable";
+		} else {
+			let text0 = "Reusable";
+			let text1 = "Disposable";
+		}
+		
 		this.scenario.boxSignLeftText = game.add.text(-game.width*0.01, 0, text0, style);
 		this.scenario.boxSignRightText = game.add.text(0, 0, text1, style);
 
