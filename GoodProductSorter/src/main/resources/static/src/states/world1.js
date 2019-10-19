@@ -60,12 +60,19 @@ GoodProductSorter.world1State.prototype = {
 		this.button_volver = game.add.button(game.world.centerX, 400, 'ssboton', this.click_button, this, 1, 2, 1);
 		//this.button_volver.setFrames(1);
 		this.button_volver.stage='worldsState';
-		
+		this.text1_1=this.game.add.text(0, 0, '' ,style);
+		this.text2_1=this.game.add.text(0, 0, '' ,style);
+		this.text3_1=this.game.add.text(0, 0, '' ,style);
 		//Puntuacion
-		this.text1_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[0] + " P.P.",style);
-		this.text2_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[1] + " P.P.",style);
-		this.text3_1=this.game.add.text(0, 0, this.game.global.game_save.world1.score[2] + " P.P.",style);
-		
+		if (this.game.global.game_save.world1.score[0]>0){
+			this.text1_1.setText(this.game.global.game_save.world1.score[0] + " P.P.");
+		}
+		if (this.game.global.game_save.world1.score[1]>0){
+			this.text2_1.setText(this.game.global.game_save.world1.score[1] + " P.P.");
+		}
+		if (this.game.global.game_save.world1.score[2]>0){
+			this.text3_1.setText(this.game.global.game_save.world1.score[2] + " P.P.");
+		}
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma1', this.cambiar_idioma, this, 2, 0, 0)
