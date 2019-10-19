@@ -52,7 +52,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("estetoscopio" , 'assets/items/hosptal/Estetoscopio_v2.png');
 		game.load.image("jarabe" , 'assets/items/hosptal/jarabe.png');
 		game.load.image("jeringuilla" , 'assets/items/hosptal/jeringuilla.png');
-		game.load.image("licor" , 'assets/items/hosptal/licor.png');
+		game.load.image("licor" , 'assets/items/hosptal/Licor.png');
 		game.load.image("martillo" , 'assets/items/hosptal/martillo.png');
 		game.load.image("mascarilla" , 'assets/items/hosptal/Mascarilla.png');
 		game.load.image("ojo" , 'assets/items/hosptal/ojo.png');
@@ -79,7 +79,7 @@ GoodProductSorter.preloadState.prototype={
 		
 		//load spriteSheet
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
-		
+		game.load.spritesheet('ssflecha', 'assets/images/scenario/SSFlecha.png', 40, 19, 2);
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);

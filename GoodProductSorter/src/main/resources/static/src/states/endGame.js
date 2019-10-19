@@ -69,6 +69,7 @@ GoodProductSorter.endGameState.prototype ={
 			this.text4 = game.add.text(0, 0, "Puntuacion Nivel",style2);
 			this.text5 = game.add.text(0, 0, "Volver",style);	
 		}else{
+			this.button_idioma = this.add.button(game.world._width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1 = game.add.text(0, 0, "Well classified objects:",style2);
 			this.text2 = game.add.text(0, 0, "Misclassified objects:",style2);
 			this.text3 = game.add.text(0, 0, "Unclassified objects:",style2);
@@ -152,7 +153,7 @@ GoodProductSorter.endGameState.prototype ={
 		this.Nomina.width = game.world._width;
 
 		//Boton idioma
-		this.button_idioma.width= game.world._width*0.05;
+		this.button_idioma.width= game.world._width*0.08;
 		this.button_idioma.height= game.world._height*0.05;
 		this.button_idioma.x = game.world._width- this.button_idioma.width-10;
 		this.button_idioma.y = 0;//0 es la posicion

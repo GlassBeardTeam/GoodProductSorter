@@ -60,7 +60,7 @@ GoodProductSorter.worldsState.prototype = {
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1=this.game.add.text(0, 0, "World 1",style);
 			this.text2=this.game.add.text(0, 0, "World 2",style);
-			this.text3=this.game.add.text(0, 0, "Return",style);
+			this.text3=this.game.add.text(0, 0, "Back",style);
 		}
 		/*
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
@@ -90,7 +90,7 @@ GoodProductSorter.worldsState.prototype = {
 			this.button_idioma.loadTexture('idioma2');
 			this.text1.setText("World 1");
 			this.text2.setText('World 2');
-			this.text3.setText('Return');
+			this.text3.setText('Back');
 		}else{
 			this.game.global.IDIOMA='ESP';
 			this.button_idioma.loadTexture('idioma1');
