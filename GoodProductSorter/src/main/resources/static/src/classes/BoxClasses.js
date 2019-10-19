@@ -11,7 +11,6 @@ function Box(name){
 		this.scale = scale;
 		this.group = group;
 		this.image = group.create(x,y,name);
-		this.image.anchor.setTo(0.5, 0.5);
 
 		let imageWidth = this.image.width;
 		this.image.width = game.world._width * scale;	this.image.height = game.world._width * scale;
@@ -84,10 +83,10 @@ function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxYOf
 			this.boxes[i].createBox(pos[0], pos[1], this.boxesGroup, this.boxScale);
 			if(i%2 === 0) //Si la caja esta a la izquierda
 			{
-				this.boxes[i].image.body.x -= this.boxes[i].widthDiff;
-			}else
+				//this.boxes[i].image.body.x -= this.boxes[i].widthDiff;
+			}else //Si la caja esta a la derecha
 			{
-				this.boxes[i].image.body.x += this.boxes[i].widthDiff;
+				//sthis.boxes[i].image.body.x += this.boxes[i].widthDiff;
 			}
 
 			this.boxes[i].image.body.setCollisionGroup(collisionGroup);
@@ -98,7 +97,7 @@ function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxYOf
 			this.boxes[i].image.animations.add('closing',[5,6,7,8,9], 15, false, true);
 			this.boxes[i].image.animations.add('wrong',[10,11,12,13,14,15,16,17,18,19,20], 15, false, true);
 			this.boxes[i].image.animations.play('idle');
-			//this.boxes[i].image.body.x = pos[0];		this.boxes[i].image.body.y = pos[1];
+			this.boxes[i].image.anchor.setTo(0.5, 0.5);
 			i++;
 		});
 	}
