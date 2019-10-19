@@ -100,9 +100,10 @@ GoodProductSorter.world1State.prototype = {
 	createDefaultBoxManager: function()
 	{
 		//(boxName, nBoxes, group, xleft, xright, ymin, ymax, boxSpriteSize, boxYOffset)
-		let boxScale = 0.6;
-		let cajaWidth = game.cache.getImage('cajaAcierto').width * boxScale;
-		let xleft = cajaWidth*0.5 * boxScale;	let xright = game.world._width - xleft;
+		let boxScale = 0.2;
+		//let cajaWidth = game.cache.getImage('cajaAcierto').width * boxScale;
+		let cajaWidth  =game.world._width * boxScale;
+		let xleft = cajaWidth * 0.5;	let xright = game.world._width - xleft;
 		let ymin = game.world._height * 0.5;	let ymax = game.world._height * 0.5;
 		let yOffset = game.world._height * 0.1;
 

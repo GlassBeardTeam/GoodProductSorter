@@ -14,13 +14,12 @@ function Box(name){
 		this.image.anchor.setTo(0.5, 0.5);
 
 		let imageWidth = this.image.width;
-		this.image.width *= scale;	this.image.height *= scale;
+		this.image.width = game.world._width * scale;	this.image.height = game.world._width * scale;
 		this.widthDiff = imageWidth - this.image.width;
 
 		game.physics.enable(this.image, Phaser.Physics.P2JS);
 		this.image.body.static = true;
 		this.image.body.setCircle(this.image.body.width*2);
-		//this.image.anchor.setTo(0.5 ,0.5);
 		this.image.id = this.image.body.id;
 	}
 }
@@ -28,11 +27,10 @@ function Box(name){
 
 function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxSpriteSize, boxYOffset)
 {
-	//game.cache.getImage('nombre')
 	this.boxName = boxName,
 	this.boxScale =  boxScale,
 	this.boxesGroup = undefined,
-	this.boxSpriteSize = boxSpriteSize,
+	this.boxSpriteSize = boxSpriteSize, //already scaled
 	this.xPos = [xleft, xright],
 	this.ymin = ymin, 
 	this.ymax = ymax,
@@ -45,7 +43,7 @@ function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxSpr
 		let xIndex = 0;
 		let yIndex = 0;
 		let lastXPos = this.xPos[xIndex];
-		let totalYOffset = this.boxSpriteSize*this.boxScale + this.boxYOffset;
+		let totalYOffset = this.boxSpriteSize + this.boxYOffset;
 		let lastYPos = this.ymin;
 
 		for(i= 0; i< this.nBoxes; i++)
@@ -85,10 +83,10 @@ function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxSpr
 			this.boxes[i].createBox(pos[0], pos[1], this.boxesGroup, this.boxScale);
 			if(i%2 === 0) //Si la caja esta a la izquierda
 			{
-				this.boxes[i].image.body.x -= this.boxes[i].widthDiff;
+				//this.boxes[i].image.body.x -= this.boxes[i].widthDiff;
 			}else
 			{
-				this.boxes[i].image.body.x += this.boxes[i].widthDiff;
+				//this.boxes[i].image.body.x += this.boxes[i].widthDiff;
 			}
 			this.boxes[i].image.body.setCollisionGroup(collisionGroup);
 			this.boxes[i].image.body.collides([itemCollisionGroup]);
