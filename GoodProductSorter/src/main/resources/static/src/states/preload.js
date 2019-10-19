@@ -79,7 +79,7 @@ GoodProductSorter.preloadState.prototype={
 		
 		//load spriteSheet
 		game.load.spritesheet('maquina', 'assets/images/scenario/SSmaquina1.png', 1276/2, 459, 2);
-		
+		game.load.spritesheet('ssflecha', 'assets/images/scenario/SSFlecha.png', 40, 19, 2);
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
