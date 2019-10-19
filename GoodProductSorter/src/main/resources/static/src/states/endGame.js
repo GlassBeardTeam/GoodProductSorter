@@ -66,24 +66,25 @@ GoodProductSorter.endGameState.prototype ={
 			this.text1 = game.add.text(0, 0, "Objetos bien clasificados",style2);
 			this.text2 = game.add.text(0, 0, "Objetos mal clasificados",style2);
 			this.text3 = game.add.text(0, 0, "Objetos no clasificados",style2);
-			this.text4 = game.add.text(0, 0, "Puntuacion Nivel",style2);
+			this.text4 = game.add.text(0, 0, "Puntos Positivos",style2);
 			this.text5 = game.add.text(0, 0, "Volver",style);	
 		}else{
 			this.button_idioma = this.add.button(game.world._width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1 = game.add.text(0, 0, "Well classified objects:",style2);
 			this.text2 = game.add.text(0, 0, "Misclassified objects:",style2);
 			this.text3 = game.add.text(0, 0, "Unclassified objects:",style2);
-			this.text4 = game.add.text(0, 0, "Level Score",style2);
+			this.text4 = game.add.text(0, 0, "Positive Points",style2);
 			this.text5 = game.add.text(0, 0, "Back",style);
 		}
 
 		this.text1_1=game.add.text(0, 0, "x" + this.clasificados, style2);
 		this.text2_1=game.add.text(0, 0, "x" + this.mal_clasificados, style2);
 		this.text3_1=game.add.text(0, 0, "x" + this.no_clasificados, style2);
-	
-		this.text1_2=game.add.text(0, 0, this.clasificados*10, style2);
-		this.text2_2=game.add.text(0, 0, this.mal_clasificados*-10, style2);
-		this.text3_2=game.add.text(0, 0, this.no_clasificados*0, style2);
+		
+		total=this.clasificados+ this.mal_clasificados+this.no_clasificados;
+		this.text1_2=game.add.text(0, 0, Math.round(this.clasificados/total*10000)/100 + " %", style2);
+		this.text2_2=game.add.text(0, 0, Math.round(this.mal_clasificados/total*10000)/100 + " %", style2);
+		this.text3_2=game.add.text(0, 0, Math.round(this.no_clasificados/total*10000)/100 + " %", style2);
 		this.text4_2=game.add.text(0, 0, this.puntos, style2);
 
 		this.resize();
@@ -96,7 +97,7 @@ GoodProductSorter.endGameState.prototype ={
 			this.text1.setText('Well classified objects:');
 			this.text2.setText('Misclassified objects:');
 			this.text3.setText('Unclassified objects:');
-			this.text4.setText('Level Score');
+			this.text4.setText('Positive Points');
 			this.text5.setText('Back');
 		}else{
 			game.global.IDIOMA='ESP';
@@ -104,7 +105,7 @@ GoodProductSorter.endGameState.prototype ={
 			this.text1.setText('Objetos bien clasificados:');
 			this.text2.setText('Objetos mal clasificados:');
 			this.text3.setText('Objetos no clasificados:');
-			this.text4.setText('Puntuacion Nivel:');
+			this.text4.setText('Puntos Positivos:');
 			this.text5.setText('Volver');
 		}
 	},
@@ -177,9 +178,9 @@ GoodProductSorter.endGameState.prototype ={
 		this.text2_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.30,game.world._width/6.6*4, game.world._height*0.30);
 		this.text3_1.setTextBounds(game.world._width/6.6*4, game.world._height*0.33,game.world._width/6.6*4, game.world._height*0.33);
 
-		this.text1_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.27,game.world._width/6.6*5, game.world._height*0.27);
-		this.text2_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.30,game.world._width/6.6*5, game.world._height*0.30);
-		this.text3_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.33,game.world._width/6.6*5, game.world._height*0.33);
+		this.text1_2.setTextBounds(game.world._width/6.8*5, game.world._height*0.27,game.world._width/6.8*5, game.world._height*0.27);
+		this.text2_2.setTextBounds(game.world._width/6.8*5, game.world._height*0.30,game.world._width/6.8*5, game.world._height*0.30);
+		this.text3_2.setTextBounds(game.world._width/6.8*5, game.world._height*0.33,game.world._width/6.8*5, game.world._height*0.33);
 		this.text4_2.setTextBounds(game.world._width/6.6*5, game.world._height*0.46,game.world._width/6.6*5, game.world._height*0.46);
 
 
