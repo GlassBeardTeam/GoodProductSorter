@@ -57,7 +57,7 @@ GoodProductSorter.world1State.prototype = {
 		this.button_lvl3.level=3;
 
 		//Boton Volver
-		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 1, 2, 1);
+		this.button_volver = game.add.button(game.world.centerX, 400, 'ssboton', this.click_button, this, 1, 2, 1);
 		//this.button_volver.setFrames(1);
 		this.button_volver.stage='worldsState';
 		
@@ -296,12 +296,14 @@ GoodProductSorter.world1State.prototype = {
 		this.text3_1.setTextBounds(this.button_lvl3.x, this.button_lvl3.y+this.text3.height*0.75, this.button_lvl3.width * 0.5, 0);
 
 		//Boton volver
-		this.button_volver.anchor.setTo(0.5 ,0.5);
-		this.button_volver.width=this.world.width*0.32;
-		this.button_volver.height=this.world.height*0.12;
-		this.button_volver.x = game.world._width * 0.5;
-		this.button_volver.y = game.world._height*0.8;
-		this.text4.setTextBounds(this.button_volver.x, this.button_volver.y -this.button_volver.height* 0.1, 0, 0);
+		this.button_volver.anchor.setTo(0.5, 0.5);
+		this.button_volver.width=this.world.width*0.3;
+		this.button_volver.height=this.world.height*0.10;
+		this.button_volver.x = game.world._width/2;
+		this.button_volver.y = game.world._height*0.9;		
+		
+		this.text4.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- game.world._height * 0.02,
+			this.button_volver.width, this.button_volver.height);
 	},
 
 	
