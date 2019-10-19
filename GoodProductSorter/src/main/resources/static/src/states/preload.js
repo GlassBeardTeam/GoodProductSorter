@@ -52,7 +52,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("estetoscopio" , 'assets/items/hosptal/Estetoscopio_v2.png');
 		game.load.image("jarabe" , 'assets/items/hosptal/jarabe.png');
 		game.load.image("jeringuilla" , 'assets/items/hosptal/jeringuilla.png');
-		game.load.image("licor" , 'assets/items/hosptal/licor.png');
+		game.load.image("licor" , 'assets/items/hosptal/Licor.png');
 		game.load.image("martillo" , 'assets/items/hosptal/martillo.png');
 		game.load.image("mascarilla" , 'assets/items/hosptal/Mascarilla.png');
 		game.load.image("ojo" , 'assets/items/hosptal/ojo.png');
