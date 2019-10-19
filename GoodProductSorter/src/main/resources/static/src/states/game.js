@@ -301,12 +301,13 @@ GoodProductSorter.gameState.prototype = {
 		//Texto de los carteles
 		fontResize = scaleFont(50, game.width);
 		let style = { font: "Acme", fill: "Blue", fontSize: fontResize, boundsAlignH: "center", boundsAlignV: "middle"};
+		
 		if (this.game.global.IDIOMA=='ESP'){
-			let text0 = "Reutilizable";
-			let text1 = "Desechable";
+			var text0 = "Reutilizable";
+			var text1 = "Desechable";
 		} else {
-			let text0 = "Reusable";
-			let text1 = "Disposable";
+			var text0 = "Reusable";
+			var text1 = "Disposable";
 		}
 		
 		this.scenario.boxSignLeftText = game.add.text(-game.width*0.01, 0, text0, style);
