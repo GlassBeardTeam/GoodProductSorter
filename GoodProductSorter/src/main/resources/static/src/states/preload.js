@@ -8,6 +8,7 @@ GoodProductSorter.preloadState.prototype={
 	fontsReady : false,
 	
 	init : function() {
+		
 /*		if(game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **PRELOAD** state");
@@ -16,6 +17,7 @@ GoodProductSorter.preloadState.prototype={
 
 
 	preload : function() {
+		this.loading =this.add.image(this.game.width*0.16, this.game.height*0.3, "logo");	
 		this.loadAnimation();
 		this.loadFonts();
         this.loadAssets();

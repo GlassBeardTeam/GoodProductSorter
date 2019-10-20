@@ -59,6 +59,7 @@ GoodProductSorter.bootState.prototype = {
 	},
 	
 	preload:function(){
+		this.load.image("logo", 'assets/images/Logo.png');
 		/*this.load.image('preloader_fondo','assets/Backgrounds/FondoPreload.png');
 		this.load.image('preloader_bar','assets/Backgrounds/BarraCarga.png');*/
 	},
