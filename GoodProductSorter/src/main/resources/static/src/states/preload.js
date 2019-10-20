@@ -21,10 +21,10 @@ GoodProductSorter.preloadState.prototype={
 		//Escalado
 		this.loading.anchor.x = 0.5;
 		this.loading.anchor.y = 0.5;
-		logoScale = 0.25;
+		logoScale = 0.5;
 		let logoProp = this.loading.width/game.width;
-		this.loading.width += logoScale/logoProp;
-		this.loading.height += logoScale/logoProp;
+		this.loading.width *= logoScale/logoProp;
+		this.loading.height *= logoScale/logoProp;
 		
 		this.loadAnimation();
 		this.loadFonts();
