@@ -33,7 +33,15 @@ GoodProductSorter.level1Cutscene.prototype = {
 	create : function() {
 
         var boss = game.add.sprite(game.world._width*0.1, game.world._height*0.05, 'jefe');
-        boss.scale.setTo(2.5);
+        //boss.scale.setTo(2.5);
+        bossScale = 1;
+
+        let bossProp = boss.width/game.world._width;
+        
+        
+        boss.width *= bossScale/bossProp;
+        boss.height *= bossScale/bossProp;
+
         boss.animations.add('talk');
         boss.animations.play('talk', 30, true);
         this.playBossDialog(this.dialogCount);
