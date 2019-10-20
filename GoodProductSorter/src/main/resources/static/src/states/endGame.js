@@ -90,7 +90,74 @@ GoodProductSorter.endGameState.prototype ={
 		this.text3_2=game.add.text(0, 0, Math.round(this.no_clasificados/total*10000)/100 + " %", style2);
 		this.text4_2=game.add.text(0, 0, this.puntos, style2);
 
+		this.stampSound = game.add.audio("stamp");
+
+		this.levelStamps(this.nivel, this.puntos);
+
 		this.resize();
+	},
+
+	//Recibe el nivel y los puntos obtenidos y coloca el número de sellos correspondiente
+	levelStamps: function(level, points){
+		switch (level) {
+			case 1:
+				if (points > 149){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.6, game.height*0.6);
+				}
+				else if (points > 99){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+				}
+				else if (points > 49){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+				}
+				break;
+			case 2:
+				if (points > 199){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.6, game.height*0.6);
+				}
+				else if (points > 129){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+				}
+				else if (points > 79){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+				}
+				break;
+			case 3:
+				if (points > 249){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.6, game.height*0.6);
+				}
+				else if (points > 199){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+					game.time.events.add(Phaser.Timer.SECOND * 0.5, this.placeStamp, this, game.width*0.4, game.height*0.6);
+				}
+				else if (points > 129){
+					this.placeStamp(game.width*0.2, game.height*0.6);
+				}
+				break;
+		}
+	},
+
+	//Coloca un sello en la posición indicada
+	placeStamp: function(posX, posY){
+		
+		this.stamp = game.add.image(posX, posY, "sello");
+
+		stampScale = 1;
+
+        let stampProp = this.stamp.width/game.world._width;
+        
+        boss.width *= stampScale/stampProp;
+        boss.height *= stampScale/stampProp;
+
+		this.stampSound.play();
 	},
 
 	cambiar_idioma:function(){

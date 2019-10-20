@@ -41,6 +41,7 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bocadillo", 'assets/images/Bocadillo.png');
+		this.load.image("sello", 'assets/images/interface/Sello.png');
 		
 		//Products 
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
@@ -123,6 +124,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.audio('store', 'assets/Sounds/Effects/Store.ogg');
 		game.load.audio('success', 'assets/Sounds/Effects/Success.ogg');
 		game.load.audio('wrong', 'assets/Sounds/Effects/Wrong.ogg');
+		game.load.audio('stamp', 'assets/Sounds/Effects/sello.ogg');
 
 		//Game music
 		game.load.audio('fabric', 'assets/Sounds/Music/Fabric.ogg');
