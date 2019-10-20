@@ -27,7 +27,7 @@ this.scenario = {
 	boxSignLeftText: undefined,
 	boxSignRightText: undefined,
 	//Boxes/
-	gameTime: 2,
+	gameTime: 60,
 	seed: 32748372,
 	eslabonesGroup: undefined,
 	eslabones:[11],
