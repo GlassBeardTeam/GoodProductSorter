@@ -95,7 +95,7 @@ function BoxManager(boxName, boxScale, nBoxes, xleft, xright, ymin, ymax, boxYOf
 			this.boxes[i].image.animations.add('idle',[0], 1, true, true);
 			this.boxes[i].image.animations.add('success',[1,2,3,4], 15, false, true);
 			this.boxes[i].image.animations.add('closing',[5,6,7,8,9], 15, false, true);
-			this.boxes[i].image.animations.add('wrong',[10,11,12,13,14,15,16,17,18,19,20], 15, false, true);
+			this.boxes[i].image.animations.add('wrong',[10,11,12,13,14,15,16,17,18,19,20], 60, false, true);
 			this.boxes[i].image.animations.play('idle');
 			this.boxes[i].image.anchor.setTo(0.5, 0.5);
 			i++;

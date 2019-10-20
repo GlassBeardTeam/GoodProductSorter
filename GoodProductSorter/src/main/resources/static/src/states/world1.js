@@ -121,7 +121,7 @@ GoodProductSorter.world1State.prototype = {
 		let ymin = game.world._height * 0.5;	let ymax = game.world._height * 0.5;
 		let yOffset = game.world._height * 0.1;
 
-		game.global.gameParams.boxManager = new BoxManager('cajaAcierto', boxScale, 2, xleft, xright,
+		game.global.gameParams.boxManager = new BoxManager('sscaja', boxScale, 2, xleft, xright,
 									ymin, ymax, yOffset);
 		console.log("Width height: " + game.world._width + ", " + game.world._height);
 	},
