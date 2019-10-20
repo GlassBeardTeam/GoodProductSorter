@@ -16,7 +16,7 @@ GoodProductSorter.employeeSate.prototype = {
 	},
 
 	create : function() {
-
+        fontResize = scaleFont(100, game.width);
         var style1 = {	
             font: "Acme",
             fill: "White",
@@ -36,6 +36,7 @@ GoodProductSorter.employeeSate.prototype = {
         else{
             text1 = "And the employee of the month is..."
             text2 = "Employee of the month"
+            style2.fontSize = scaleFont(70, game.width);
         }
 
         var image = game.add.image(0, 0, 'empleadoDelMes');
@@ -46,7 +47,6 @@ GoodProductSorter.employeeSate.prototype = {
         var cartelText= game.add.text(game.world._width*0.28, game.world.height*0.58, text2, style2)
         cartelText.alpha = 0;
 
-        fontResize = scaleFont(60, game.width);
         
         var text = game.add.text(0, 0,text1, style1)
         text.alpha = 0;
