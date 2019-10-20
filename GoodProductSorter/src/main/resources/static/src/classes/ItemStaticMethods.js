@@ -238,9 +238,9 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
 				if(isCorrect)
 				{
-					box_sprite.animations.play('success').onComplete.add(()=>{box_sprite.animations.play('idle')},this);;
+					box_sprite.animations.play('success').onComplete.add(()=>{box_sprite.animations.play('idle')},this);
 				}else{
-					//box_sprite.animations.play('wrong');
+					box_sprite.animations.play('wrong').onComplete.add(()=>{box_sprite.animations.play('idle')},this);
 				}
 
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);

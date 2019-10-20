@@ -41,9 +41,13 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bocadillo", 'assets/images/Bocadillo.png');
+		
+		//Products 
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
+		this.load.image("tarroBebe", 'assets/items/hosptal/tarro_bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
+		this.load.image("bisturiSangre", 'assets/items/hosptal/BisturiSangre.png');
 		this.load.image("condon", 'assets/items/hosptal/condon.png');
 		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
 		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
@@ -65,9 +69,14 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("tarroBebe" , 'assets/items/hosptal/tarro_bebe.png');
 		game.load.image("testEmbarazo" , 'assets/items/hosptal/test_embarazo.png');
 		game.load.image("tijerasSangre" , 'assets/items/hosptal/tijeras_sangre.png');
+		game.load.image("tijeras" , 'assets/items/hosptal/tijeras.png');
 		game.load.image("veneno" , 'assets/items/hosptal/Veneno.png');
 		game.load.image("viagra" , 'assets/items/hosptal/viagra.png');
 		game.load.image("voodoo" , 'assets/items/hosptal/VoodooDoll.png');
+		game.load.image("higado" , 'assets/items/hosptal/higado.png');
+		game.load.image("radiografia" , 'assets/items/hosptal/radiografia.png');
+		game.load.image("termometro" , 'assets/items/hosptal/termometro.png');
+		game.load.image("brazoProtesis" , 'assets/items/hosptal/BrazoProtesis.png');
 
 		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
 		
@@ -84,7 +93,7 @@ GoodProductSorter.preloadState.prototype={
 		game.load.spritesheet('mosca', 'assets/images/mosca_spritesheet.png', 1080, 830);
 		game.load.spritesheet('jefe', 'assets/characters/jefe_spritesheet.png', 3940/5, 1200)
 		game.load.spritesheet('cajaAcierto', 'assets/images/scenario/caja_acierto.png', 1540/4, 370, 4);
-		game.load.spritesheet('sscaja', 'assets/images/scenario/SScaja.png', 1925/25, 1850, 25);
+		game.load.spritesheet('sscaja', 'assets/images/scenario/SScaja.png', 385, 370, 23);
 		game.load.spritesheet('ssboton', 'assets/images/interface/SSBotonVerde.png', 1654/2, 377, 2);
 		game.load.spritesheet('ojos', 'assets/images/scenario/SSOjos1.png', 92, 49, 5);
 
