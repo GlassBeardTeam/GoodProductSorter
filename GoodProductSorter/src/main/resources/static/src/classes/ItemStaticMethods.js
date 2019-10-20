@@ -437,6 +437,9 @@ function UpdateStreak(scenario, boardMachine)
 	}
 
 	let updatedVel =  boardMachine.lvlSpeed[scenario.streak] * game.world._height;
+	//Posicion de la flecha
+	console.log("---> "+ scenario.streak);
+	scenario.flecha.y=scenario.boardMachine.image.height/20*scenario.posiciones_flecha[scenario.streak];
 	//Updates de velocidades
 	scenario.eslabonesGroup.forEach((item)=>{item.body.velocity.y = updatedVel});
 

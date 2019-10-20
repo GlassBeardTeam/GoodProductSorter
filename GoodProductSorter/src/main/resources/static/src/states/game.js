@@ -34,6 +34,8 @@ this.scenario = {
 	miss:0,
 	bad:0,
 	well:0,
+	flecha: undefined,
+	posiciones_flecha: [9,7.2,5.6,4.1,2.6],
 	//Ojos
 	eyes: undefined,
 };
@@ -77,6 +79,7 @@ GoodProductSorter.gameState.prototype = {
 		this.scenario.miss=0;
 		this.scenario.bad=0;
 		this.scenario.well=0;
+		this.scenario.successfulItemsInARow=0;
 	},
 
 	preload : function() {
@@ -306,6 +309,14 @@ GoodProductSorter.gameState.prototype = {
 		let text1 = "Desechable";
 		this.scenario.boxSignLeftText = game.add.text(-game.width*0.01, 0, text0, style);
 		this.scenario.boxSignRightText = game.add.text(0, 0, text1, style);
+
+		//Flecha
+		this.scenario.flecha = game.add.sprite(game.width/6*4.1,this.scenario.boardMachine.image.height/20*9, 'ssflecha');
+		this.scenario.flecha.anchor.setTo(0.5,0.5);
+		this.scenario.flecha.width = this.scenario.boardMachine.image.width / 8;
+		this.scenario.flecha.height = this.scenario.boardMachine.image.height / 12;
+		this.scenario.flecha.animations.add('play', [0,1], this.scenario.boardMachine.lvlSpeed[this.scenario.streak]*this.game.world._height, true, true);
+		this.scenario.flecha.animations.play('play');
 
 		//Ojos
 		this.scenario.eyes = game.add.sprite(this.scenario.boardMachine.image.x, this.scenario.boardMachine.image.y + this.scenario.boardMachine.image.height / 4, 'ojos');
