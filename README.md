@@ -119,7 +119,7 @@ E-mail: GlassBeardTeam@gmail.com
 
 Twitter: [@glass_beard](https://twitter.com/glass_beard)
 
-YouTube: [GlassBeard Team](https://www.youtube.com/channel/UCJsIbbIKmbcrgtMvDwL1Ogw/featured?view_as=subscriber)
+Facebook: [Glass BeardTeam](https://www.facebook.com/glass.beardteam.7)
 
 Portfolio: [Glass Beard Team](https://glassbeardteam.github.io/Portfolio/)
 
