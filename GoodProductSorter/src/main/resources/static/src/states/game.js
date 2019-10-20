@@ -53,6 +53,9 @@ GoodProductSorter.gameState.prototype = {
 		{
 			console.log("[DEBUG] Entering **GAME** state");
 		}
+
+		this.scenario.streak = 0;
+		this.scenario.successfulItemsInARow = 0;
 		this.gameParams = game.global.gameParams;
 		this.scenario.itemsInARowToChangeStreak = game.global.gameParams.itemsInARowToChangeStreak,
 		this.scenario.machineSpeed = game.global.gameParams.machineSpeed;
