@@ -123,5 +123,7 @@ YouTube: [GlassBeard Team](https://www.youtube.com/channel/UCJsIbbIKmbcrgtMvDwL1
 
 Portfolio: [Glass Beard Team](https://glassbeardteam.github.io/Portfolio/)
 
+Itch.io: [Good Product Sorter] (https://glassbeard.itch.io/goodproductsorter)
+
 
 © 2019 GitHub, Inc.
