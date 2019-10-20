@@ -150,12 +150,12 @@ GoodProductSorter.endGameState.prototype ={
 		
 		this.stamp = game.add.image(posX, posY, "sello");
 
-		stampScale = 1;
+		stampScale = 0.2;
 
         let stampProp = this.stamp.width/game.world._width;
         
-        boss.width *= stampScale/stampProp;
-        boss.height *= stampScale/stampProp;
+        this.stamp.width *= stampScale/stampProp;
+        this.stamp.height *= stampScale/stampProp;
 
 		this.stampSound.play();
 	},
