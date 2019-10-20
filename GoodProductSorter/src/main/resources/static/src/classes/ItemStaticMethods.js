@@ -238,7 +238,9 @@ var BoardMachine = function(x, y, name, maxItems, levelSpeed , minSpeed, seed, t
 				let isCorrect = CheckItemPlacement(box_sprite, itemCopy, this.scenarioReference, this);
 				if(isCorrect)
 				{
-					box_sprite.animations.play('success');
+					box_sprite.animations.play('success').onComplete.add(()=>{box_sprite.animations.play('idle')},this);;
+				}else{
+					//box_sprite.animations.play('wrong');
 				}
 
 				removeSpawnedItemFromGame(itemCopy, this.mouseP2, this.itemSpawner.itemCollisionGroup ,this.itemSpawner.boardItemCollisionGroup);
@@ -322,8 +324,10 @@ function removeSpawnedItemFromGame(itemCopy, mouseP2, itemCollisionGroup, boardI
 	//Borramos el objeto del grupo de colisiones
 	itemCopy.boardImage.body.clearCollision(true,true);
 	//¿Como borramos el Item?
+	let name = itemCopy.name;
 	delete itemCopy;
 	if(game.global.DEBUG_MODE){
+		console.log("[DEBUG] removed " + name);
 		/*
 		console.log("[DEBUG] image removed from P2 mouse bodies collision array");
 		console.log("[DEBUG] image removed from physics group");
@@ -368,6 +372,7 @@ function CheckItemPlacement(boxSprite, item, scenario,board)
 function CorrectItemPlacement(item, scenario, board)
 {
 	correct.play();
+	scenario.well++;
 	scenario.score +=10;
 	scenario.successfulItemsInARow++;
 	UpdateStreak(scenario, board);
@@ -382,6 +387,7 @@ function CorrectItemPlacement(item, scenario, board)
 function WrongItemPlacement(item, scenario, board)
 {
 	wrong.play();
+	scenario.bad++;
 	if(scenario.score > 0){
 		scenario.score -= 10;
 	}
@@ -397,7 +403,7 @@ function WrongItemPlacement(item, scenario, board)
 
 function ItemOutOfBounds(item, scenario, board)
 {
-	
+	scenario.miss++;
 	scenario.successfulItemsInARow = Math.trunc(scenario.successfulItemsInARow/scenario.itemsInARowToChangeStreak) * scenario.itemsInARowToChangeStreak;
 	scenario.successfulItemsInARow -= scenario.itemsInARowToChangeStreak;
 	if(scenario.successfulItemsInARow < 0){
@@ -431,6 +437,8 @@ function UpdateStreak(scenario, boardMachine)
 	}
 
 	let updatedVel =  boardMachine.lvlSpeed[scenario.streak] * game.world._height;
+	//Posicion de la flecha
+	scenario.flecha.y=scenario.boardMachine.image.height/20*scenario.posiciones_flecha[scenario.streak];
 	//Updates de velocidades
 	scenario.eslabonesGroup.forEach((item)=>{item.body.velocity.y = updatedVel});
 

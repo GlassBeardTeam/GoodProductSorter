@@ -18,7 +18,7 @@ GoodProductSorter.worldsState.prototype = {
 	},
 
 	create : function() {
-		fontResize = scaleFont(70, game.width);
+		fontResize = scaleFont(100, game.width);
         var style = {	font: "Acme",
 						fill: "Black",
 						fontSize: fontResize,
@@ -38,14 +38,16 @@ GoodProductSorter.worldsState.prototype = {
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Boton mundos
-		this.button_world1 = this.add.button(0, 0, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_world1 = this.add.button(0, 0, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_world1.setFrames(1);
 		this.button_world1.stage='world1State';
 
-		this.button_world2 = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_world2 = this.add.button(0, 0, 'botonTipo', this.click_button, this, 1, 2, 0);
 		//this.button_world2.stage='world1State';
 		
 		//Boton Volver
-		this.button_volver = this.add.button(this.world.centerX, 200, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_volver = this.add.button(this.world.centerX, 200, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_volver.setFrames(1);
 		this.button_volver.stage='menuState';
 		
 		//Texto botones y Boton selector de idioma
@@ -58,7 +60,7 @@ GoodProductSorter.worldsState.prototype = {
 			this.button_idioma = this.add.button(this.game.width, 10, 'idioma2', this.cambiar_idioma, this, 2, 0, 0);
 			this.text1=this.game.add.text(0, 0, "World 1",style);
 			this.text2=this.game.add.text(0, 0, "World 2",style);
-			this.text3=this.game.add.text(0, 0, "Return",style);
+			this.text3=this.game.add.text(0, 0, "Back",style);
 		}
 		/*
 		this.text1.setTextBounds(0, 200, this.game.world.width,100);
@@ -88,7 +90,7 @@ GoodProductSorter.worldsState.prototype = {
 			this.button_idioma.loadTexture('idioma2');
 			this.text1.setText("World 1");
 			this.text2.setText('World 2');
-			this.text3.setText('Return');
+			this.text3.setText('Back');
 		}else{
 			this.game.global.IDIOMA='ESP';
 			this.button_idioma.loadTexture('idioma1');

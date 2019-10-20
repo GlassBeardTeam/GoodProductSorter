@@ -21,6 +21,7 @@ GoodProductSorter.menuState.prototype ={
 	},
 
 	create:function(){
+		
 		fontResize = scaleFont(100, game.width);
         var style = {	font: "Acme",
 						fill: "Black",
@@ -40,13 +41,15 @@ GoodProductSorter.menuState.prototype ={
 		this.image_turn =this.add.image(0, 0, "landscape");		
 
 		//Botones del menu
-		this.button_inicio = this.add.button(0, 0, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_inicio = this.add.button(0, 0, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_inicio.setFrames(1);
 		this.button_inicio.stage='worldsState';
 
-		this.button_casa = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
+		this.button_casa = this.add.button(0, 0, 'botonTipo', this.click_button, this, 1, 2, 0);
 		this.button_casa.stage='Casa';
 
-		this.button_contacto = this.add.button(0, 0, 'botonEnable', this.click_button, this, 2, 0, 0);
+		this.button_contacto = this.add.button(0, 0, 'ssboton', this.click_button, this, 1, 2, 1);
+		//this.button_contacto.setFrames(1);
 		this.button_contacto.stage='contactState';
 
 		//animación mosca

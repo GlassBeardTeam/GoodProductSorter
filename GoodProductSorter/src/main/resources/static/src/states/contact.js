@@ -16,7 +16,7 @@ GoodProductSorter.contactState.prototype ={
 	},
 
 	create:function(){
-		fontResize = scaleFont(70, game.width);
+		fontResize = scaleFont(100, game.width);
         var style1 = {	font: "Acme",
 						fill: "Black",
 						fontSize: fontResize,
@@ -56,8 +56,8 @@ GoodProductSorter.contactState.prototype ={
 		this.button_Youtube = this.add.button(0, 0, 'Youtube', this.new_page, this, 2, 0, 0);
 		this.button_Youtube.link='https://m.youtube.com/channel/UCJsIbbIKmbcrgtMvDwL1Ogw?';
 
-		//Boton volver	
-		this.button_volver = this.add.button(0, 0, 'botonTipo', this.click_button, this, 2, 0, 0);
+		//Botones del menu
+		this.button_volver = game.add.button(game.world.centerX, 400, 'ssboton', this.click_button, this, 1, 2, 1);
 		this.button_volver.stage='menuState';
 		
 
@@ -131,15 +131,15 @@ GoodProductSorter.contactState.prototype ={
 		this.button_idioma.y = 0;
 
 		//Botones del "menu"
-		let textYOffset = game.world._height * 0.02;
 		this.button_volver.anchor.setTo(0.5, 0.5);
 		this.button_volver.width=this.world.width*0.3;
 		this.button_volver.height=this.world.height*0.10;
 		this.button_volver.x = game.world._width/2;
-		this.button_volver.y = game.world._height*0.9;
-		this.text1.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- textYOffset,
-			this.button_volver.width, this.button_volver.height);
-		
+		this.button_volver.y = game.world._height*0.9;		
+		this.text1.setTextBounds(this.button_volver.x - this.button_volver.width/2, this.button_volver.y - this.button_volver.height/2- game.world._height * 0.02,
+			this.button_volver.width, this.button_volver.height);	
+
+			
 		//Botones contacto
 		this.button_Youtube.anchor.setTo(0.5, 0.5);
 		this.button_Youtube.width=this.world.width*0.25

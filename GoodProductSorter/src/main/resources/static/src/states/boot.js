@@ -41,6 +41,16 @@ GoodProductSorter.bootState.prototype = {
 		window.addEventListener('resize', function () {  this.game.scale.refresh();});
 		this.game.scale.refresh();
 
+		var data=JSON.parse(window.localStorage.getItem('game_save'));
+		if(data==undefined){
+			window.localStorage.setItem('game_save',JSON.stringify(this.game.global.game_save));
+		}	
+		else{
+			for(i=0;i<data.world1.score.length;i++){
+				this.game.global.game_save.world1.score[i]=data.world1.score[i];
+			}
+		}
+
 		//game.load.crossOrigin = 'anonymous';
 
 

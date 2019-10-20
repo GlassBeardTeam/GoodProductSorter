@@ -12,7 +12,8 @@ GoodProductSorter.level1Cutscene.prototype = {
 
     dialogCount: 0,
 
-	init : function() {
+	init : function(level) {
+		this.level=level;
 		if(this.game.global.DEBUG_MODE)
 		{
 			console.log("[DEBUG] Entering **level 1 cutscene** state");
@@ -31,8 +32,8 @@ GoodProductSorter.level1Cutscene.prototype = {
 
 	create : function() {
 
-        var boss = game.add.sprite(game.world._width*0.2, game.world._height*0.05, 'jefe');
-        boss.scale.setTo(0.5);
+        var boss = game.add.sprite(game.world._width*0.1, game.world._height*0.05, 'jefe');
+        boss.scale.setTo(2.5);
         boss.animations.add('talk');
         boss.animations.play('talk', 30, true);
         this.playBossDialog(this.dialogCount);
@@ -45,7 +46,30 @@ GoodProductSorter.level1Cutscene.prototype = {
             fontSize: fontResize,
         };
 
-        var continueText = game.add.text(game.world._width*0.5, game.world._height*0.02, "Haz click para saltar", style1);
+		if(this.game.global.IDIOMA=='ESP'){
+			var textoContinuar = "Haz click para saltar"
+			var textoJefe = "¡Pensaba que no ibas a llegar nunca!"+ 
+				"\n ¡Jaja! Mira, te voy a explicar" +
+				"\n mi idea millonaria. "
+				+"\n Se trata de recoger los productos de otras "+ 
+				"\n empresas y devolvérselos clasificados. "+
+				"\n ¡Y solo tenemos que pagar el transporte!"
+				+"\n ¡Una ganga! \n Ven aquí, ya verás…"
+		}else{
+			var textoContinuar = "Click here to skip"
+			var textoJefe = " I thought you’d never come!"+ 
+				"\n Haha! Let me tell you " +
+				"\n my million dollar idea. " +
+				"\n It consists of collecting the products"+ 
+				"\n of other companies and returning  "+
+				"\n them back classified."+
+				"\n And we just have to pay the transport!" +
+				"\n It’s a bargain!" +
+				"\n Come here and you’ll see…"
+			
+		}
+		
+        var continueText = game.add.text(game.world._width*0.5, game.world._height*0.02, textoContinuar, style1);
         continueText.anchor.setTo(0.5);
 
         continueText.align = "center";
@@ -66,7 +90,7 @@ GoodProductSorter.level1Cutscene.prototype = {
         };
 
         this.charCount = 0;
-        this.text = "Pensaba que no ibas a llegar nunca!\n¡Jaja Mira te voy a explicar mi\nidea millonaria,\nse trata de recoger y clasificar los objetos \nde otras empresas\ny mandárselos de vuelta,\ny solo tenemos que pagar el transporte!\n¡Una ganga!\nMira ponte ahí ya verás…"
+        this.text = textoJefe;
 
         this.phaserText = game.add.text(bocadillo.x + bocadillo.width*0.1, bocadillo.y + bocadillo.height*0.2, "", style2);
 
@@ -122,7 +146,7 @@ GoodProductSorter.level1Cutscene.prototype = {
 
     goToGame : function(){
         game.camera.fade(0x000000, 1000);
-        game.time.events.add(Phaser.Timer.SECOND * 1, ()=>{game.state.start("gameState");}, this)
+        game.time.events.add(Phaser.Timer.SECOND * 1, ()=>{game.state.start("gameState",true,false,this.level);}, this)
     }
 
 

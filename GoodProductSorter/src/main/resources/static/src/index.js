@@ -1,4 +1,18 @@
 window.onload = function() {
+	
+	//Facebook
+	FBInstant.initializeAsync().then(function () {
+		FBInstant.setLoadingProgress(100);
+		FBInstant.startGameAsync().then(function () {
+			var windowWidth = window.innerWidth;
+			var windowHeight = window.innerHeight;
+			if (windowWidth > windowHeight) {
+				windowWidth = windowHeight / 1.8;
+			}
+			var gameWidth = windowWidth * gameOptions.gameHeight / windowHeight;
+		})
+	})
+	
 	let ww = window.innerWidth;
 	let wh = window.innerHeight;
 	console.log("window inner width: " + ww);
@@ -36,7 +50,12 @@ window.onload = function() {
 			timeForItemSpawn: undefined,
 			boxManager: undefined,
 			gameItems: []
+			},
+		game_save:{
+			world1:{
+				score:[0,0,0]
 			}
+		}
 	}
 
 
