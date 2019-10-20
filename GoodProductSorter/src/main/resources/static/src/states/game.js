@@ -357,7 +357,7 @@ GoodProductSorter.gameState.prototype = {
 
 	finTiempo: function(){
 		this.removeAllItems;
-		game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world,this.scenario.well,this.scenario.bad,this.scenario.miss);
+			game.state.start('endGameState',false, false, this.scenario.score, this.scenario.level,this.scenario.world,this.scenario.well,this.scenario.bad,this.scenario.miss);
 	},
 
 	bandOutCanvas:function(){

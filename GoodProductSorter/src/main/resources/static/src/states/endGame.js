@@ -58,7 +58,10 @@ GoodProductSorter.endGameState.prototype ={
 
 		//Botones del menu
 		this.button_volver = game.add.button(game.world.centerX, 400, 'ssboton', this.click_button, this, 1, 2, 1);
-		this.button_volver.stage='worldsState';
+		if(this.nivel == 3)
+			this.button_volver.stage = 'employeeState';
+		else
+			this.button_volver.stage='worldsState';
 
 		//Texto botones y Boton selector de idioma
 		if(this.game.global.IDIOMA=='ESP'){
