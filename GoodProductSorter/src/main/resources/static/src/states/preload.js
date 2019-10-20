@@ -32,7 +32,7 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("botonEnable", 'assets/images/interface/BotonGenericoVerde.png');
 		this.load.image("idioma1", 'assets/images/interface/FlagSpain.png');
 		this.load.image("idioma2", 'assets/images/interface/FlagUK.png');
-		this.load.images("empleadoDelMes", 'assets/images/interface/EmpleadoDelMesPoster.png')
+		this.load.image("empleadoDelMes", 'assets/images/interface/EmpleadoDelMesPoster.png')
 
 		//Game Images
 		this.load.image("band", 'assets/images/scenario/Eslabon_v4.png');

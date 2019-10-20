@@ -43,7 +43,7 @@ GoodProductSorter.employeeSate.prototype = {
         image.height = game.world._height;
         image.alpha = 0;
 
-        var cartelText= game.add.text(game.world._width*0.4, game.world.height*0.5, text2, style2)
+        var cartelText= game.add.text(game.world._width*0.28, game.world.height*0.58, text2, style2)
         cartelText.alpha = 0;
 
         fontResize = scaleFont(60, game.width);
