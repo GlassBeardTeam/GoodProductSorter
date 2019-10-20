@@ -352,6 +352,7 @@ GoodProductSorter.gameState.prototype = {
 
 	removeAllItems: function()
 	{
+		this.scenario.boardMachine.itemSpawner.boardItemsPhysicsGroup.removeAll();
 		return true;
 	},
 

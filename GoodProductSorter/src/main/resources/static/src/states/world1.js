@@ -10,6 +10,7 @@ GoodProductSorter.world1State.prototype = {
 		{
 			console.log("[DEBUG] Entering **worlds** state");
 		}
+		game.global.gameParams.gameItems=[];
 	},
 
 	preload : function() {
