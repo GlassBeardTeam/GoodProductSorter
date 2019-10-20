@@ -68,7 +68,7 @@ GoodProductSorter.level1Cutscene.prototype = {
         this.charCount = 0;
         this.text = "Pensaba que no ibas a llegar nunca!\n¡Jaja Mira te voy a explicar mi\nidea millonaria,\nse trata de recoger y clasificar los objetos \nde otras empresas\ny mandárselos de vuelta,\ny solo tenemos que pagar el transporte!\n¡Una ganga!\nMira ponte ahí ya verás…"
 
-        this.phaserText = game.add.text(bocadillo.x + bocadillo.width*0.1, bocadillo.y + bocadillo.height*0.1, "", style2);
+        this.phaserText = game.add.text(bocadillo.x + bocadillo.width*0.1, bocadillo.y + bocadillo.height*0.2, "", style2);
 
         game.time.events.add(Phaser.Timer.SECOND * 0.05, this.showLetter, this);
 		
