@@ -40,9 +40,13 @@ GoodProductSorter.preloadState.prototype={
 		this.load.image("BocetoCaja", 'assets/images/scenario/BocetoCaja1.png');
 		this.load.image("SueloFabrica", 'assets/images/scenario/FondoNivel.png');
 		this.load.image("bocadillo", 'assets/images/Bocadillo.png');
+		
+		//Products 
 		this.load.image("bebe", 'assets/items/hosptal/bebe.png');
+		this.load.image("tarroBebe", 'assets/items/hosptal/tarro_bebe.png');
 		this.load.image("alcohol", 'assets/items/hosptal/Alcohol.png');
 		this.load.image("bisturiLimpio", 'assets/items/hosptal/BisturiLimpio.png');
+		this.load.image("bisturiSangre", 'assets/items/hosptal/BisturiSangre.png');
 		this.load.image("condon", 'assets/items/hosptal/condon.png');
 		this.load.image("calavera", 'assets/items/hosptal/calavera.png');
 		this.load.image("corazon", 'assets/items/hosptal/corazon.png');
@@ -64,9 +68,14 @@ GoodProductSorter.preloadState.prototype={
 		game.load.image("tarroBebe" , 'assets/items/hosptal/tarro_bebe.png');
 		game.load.image("testEmbarazo" , 'assets/items/hosptal/test_embarazo.png');
 		game.load.image("tijerasSangre" , 'assets/items/hosptal/tijeras_sangre.png');
+		game.load.image("tijeras" , 'assets/items/hosptal/tijeras.png');
 		game.load.image("veneno" , 'assets/items/hosptal/Veneno.png');
 		game.load.image("viagra" , 'assets/items/hosptal/viagra.png');
 		game.load.image("voodoo" , 'assets/items/hosptal/VoodooDoll.png');
+		game.load.image("higado" , 'assets/items/hosptal/higado.png');
+		game.load.image("radiografia" , 'assets/items/hosptal/radiografia.png');
+		game.load.image("termometro" , 'assets/items/hosptal/termometro.png');
+		game.load.image("brazoProtesis" , 'assets/items/hosptal/BrazoProtesis.png');
 
 		this.load.image("Nomina", 'assets/images/interface/nomina1.png');
 		
